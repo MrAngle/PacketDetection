@@ -1,0 +1,57 @@
+﻿<Page x:Class="Menu_GUI.MenuPackageSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Menu_GUI"
+      mc:Ignorable="d" d:DesignWidth="400"
+      Title="PackageSettings" Height="315">
+
+    <Grid Background="#FF6B9CF3">
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height = "30" />
+            <RowDefinition Height ="35"/>
+            <RowDefinition Height = "35" />
+            <RowDefinition Height = "35" />
+            <RowDefinition Height ="35"/>
+            <RowDefinition Height = "35" />
+            <RowDefinition Height = "35" />
+
+            <RowDefinition />
+
+            <RowDefinition Height="0*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width = "220" />
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+
+
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Poziom zaklocen :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bitow w ramce :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba ramek w pakiecie :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba transmisji :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bitow czesci kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="CRC/Bit Parzystosci/Suma Kontrolna :" Height="31" Margin="0,0,0,0" Grid.RowSpan="2" Width="220"/>
+
+        
+        <TextBox x:Name="_InterferenceLVL" Grid.Row="1" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="_BitsInFrame" Grid.Row="2" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="_FramesInPackage" Grid.Row="3" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="_NumberOfTransmission" Grid.Row="4" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="_BitsControlPart" Grid.Row="5" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+        <CheckBox x:Name="_CRC" Checked="ClickCheckCRC_" Grid.Row="6" Grid.Column="3" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+        <CheckBox x:Name="_ParityBit" Checked="ClickCheckParityBit_" Grid.Row="6" Grid.Column="4" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+        <CheckBox x:Name="_CheckSum" Checked="ClickCheckCheckSum_" Grid.Row="6" Grid.Column="5" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+
+    </Grid>
+</Page>
