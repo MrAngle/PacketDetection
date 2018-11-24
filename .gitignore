@@ -41,6 +41,7 @@ Thumbs.db
 *.DS_Store
 
 #Visual Studio files
+*.lock
 *.[Oo]bj
 *.user
 *.aps
