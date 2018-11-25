@@ -27,18 +27,20 @@
         <StackPanel Orientation="Horizontal" Height="60" VerticalAlignment="Top" Grid.Column ="1" Grid.Row="1" Grid.ColumnSpan="3">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height = "70" />
+                    <RowDefinition Height = "60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="360"/>
-                    <ColumnDefinition Width="360"/>
-                    <ColumnDefinition Width="360"/>
-                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="230"/>
                 </Grid.ColumnDefinitions>
-                <Button Content = "Wybrane Bity" FontSize="19" Grid.Column="0" Grid.Row="0" Width="350" Height="60" Margin="0,0,0,0" Click="Click_bitsCollision"/>
-                <Button Content = "Funkcja Sinus" FontSize="19" Grid.Column="1" Grid.Row="0" Width="350" Height="60" Margin="0,0,0,0" Click="Click_sinusCollision"/>
-                <Button Content = "Losowo" FontSize="19" Grid.Column="2" Grid.Row="0" Width="350" Height="60" Margin="0,0,0,0" Click="Click_randomCollision"/>
-                <Button Content = "Wyjdz" FontSize="19" Grid.Column="3" Grid.Row="0" Width="350" Height="60" Margin="0,0,0,0" Click="Click_MenuExit"/>
+                <Button Content = "Wybrane Bity" FontSize="19" Grid.Column="0" Grid.Row="0"   Margin="0,0,0,0" Click="Click_bitsCollision"/>
+                <Button Content = "Funkcja Sinus" FontSize="19" Grid.Column="1" Grid.Row="0"  Margin="0,0,0,0" Click="Click_sinusCollision"/>
+                <Button Content = "Losowo" FontSize="19" Grid.Column="2" Grid.Row="0"  Margin="0,0,0,0" Click="Click_randomCollision"/>
+                <Button Content = "FDjsd" FontSize="19" Grid.Column="3" Grid.Row="0"  Margin="0,0,0,0" Click="Click_transmissionByFile"/>
+                <Button Content = "Wyjdz" FontSize="19" Grid.Column="4" Grid.Row="0"  Margin="0,0,0,0" Click="Click_MenuExit"/>
 
             </Grid>
         </StackPanel>

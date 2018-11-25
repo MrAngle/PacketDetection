@@ -22,8 +22,14 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuBitsCollision : Page
+    public partial class MenuBitsCollision : Page, MenuCollision
     {
+
+        private const string IS_RANDOM_CHECKBOX = "_israndom";
+
+        private const string FIRST_INDEX = "_firstindex";
+
+        private const string FIRST_FRAME = "_firstframe";
 
         private ResultsWindow Results = new ResultsWindow();
         private MenuPackageSettings PSettings = new MenuPackageSettings();
@@ -114,5 +120,27 @@ namespace Menu_GUI
             _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, true);
         }
         #endregion
+
+
+        public void ConfigSetComponentByName(string componentName, string value)
+        {
+            string componentNameL = componentName.ToLower();
+            string valueL = value.ToLower();
+
+
+            switch (componentNameL)
+            {
+                case (IS_RANDOM_CHECKBOX):
+                    _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, valueL.Equals("true") ? true : false);
+                    break;
+                case (FIRST_FRAME):
+                //TODO : Dodac zabezpiecznia
+                    _FirstFrame.Text = value;
+                    break;
+                case (FIRST_INDEX):
+                    _FirstIndex.Text = value;
+                    break;
+            }
+        }
     }
 }

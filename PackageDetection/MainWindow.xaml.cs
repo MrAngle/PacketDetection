@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu_GUI;
 using PackageDetection.Results;
+using Projekt_Kolko;
 
 namespace PackageDetection
 {
@@ -26,15 +27,14 @@ namespace PackageDetection
 
     public partial class MainWindow : Window
     {
-        private MenuBitsCollision bits_Collision;
-        private MenuSineCollision sine_Collision;
-        private MenuRandomCollision random_Collision;
+        //private MenuBitsCollision bits_Collision;
+        //private MenuSineCollision sine_Collision;
+        //private MenuRandomCollision random_Collision;
+        
 
-        private const int BIT_COLLISION = 0;
-        private const int SINE_COLLISION = 1;
-        private const int RANDOM_COLLISION = 2;
+        private static MenuCollision menuCollision;
 
-        private MenuCollision menuCollision;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,50 +42,33 @@ namespace PackageDetection
 
         private void Click_bitsCollision(object sender, RoutedEventArgs e)
         {
-            if(sine_Collision != null ) sine_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle
-            if (random_Collision != null)  random_Collision.SClose();
-
-            bits_Collision = new MenuBitsCollision();
-            menu_collision.Content = bits_Collision;
-            bits_Collision.SetResultsPage(ref Results_frame);
-            bits_Collision.SetPackageSettingsPage(ref menu_package);
+            InitializeNewCollisionPage(Helpers.BIT_COLLISION);
         }
 
         private void Click_sinusCollision(object sender, RoutedEventArgs e)
         {
-            if (bits_Collision != null) bits_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle
-            if (random_Collision != null) random_Collision.SClose();
-
-            sine_Collision = new MenuSineCollision();
-            menu_collision.Content = sine_Collision;
-            sine_Collision.SetResultsPage(ref Results_frame);
-            sine_Collision.SetPackageSettingsPage(ref menu_package);
-
-
+            InitializeNewCollisionPage(Helpers.SINE_COLLISION);
         }
 
         private void Click_randomCollision(object sender, RoutedEventArgs e)
         {
-            if (random_Collision != null) bits_Collision.SClose();// zabepieczenie przed dzialaniem niechcianych watkow w tle
-            if (sine_Collision != null) sine_Collision.SClose();
-
-            random_Collision = new MenuRandomCollision();
-            menu_collision.Content = random_Collision;
-            random_Collision.SetResultsPage(ref Results_frame);
-            random_Collision.SetPackageSettingsPage(ref menu_package);
-
-
+            InitializeNewCollisionPage(Helpers.RANDOM_COLLISION);
         }
 
-        private void InitializeNewCollisionPage()
+
+        public void InitializeNewCollisionPage(int menuCollisionType)
         {
+
             if (menuCollision != null)
                 menuCollision.SClose();
 
-            bits_Collision = new MenuBitsCollision();
-            menu_collision.Content = bits_Collision;
-            bits_Collision.SetResultsPage(ref Results_frame);
-            bits_Collision.SetPackageSettingsPage(ref menu_package);
+            menuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
+
+            menu_collision.Content = menuCollision;
+            menuCollision.SetResultsPage(ref Results_frame);
+            menuCollision.SetPackageSettingsPage(ref menu_package);
+
+
         }
 
         //przycisk Wyjdz
@@ -112,7 +95,12 @@ namespace PackageDetection
             base.OnClosing(e);
         }
 
+        private void Click_transmissionByFile(object sender, RoutedEventArgs e)
+        {
+            InitializeNewCollisionPage(Helpers.BIT_COLLISION);
 
+
+        }
     }
 
 }

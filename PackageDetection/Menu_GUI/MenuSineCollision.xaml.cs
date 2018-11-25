@@ -18,7 +18,7 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuSineCollision : Page
+    public partial class MenuSineCollision : Page, MenuCollision
     {
 
         private ResultsWindow Results = new ResultsWindow();
@@ -104,6 +104,11 @@ namespace Menu_GUI
             n.Text = Data_verification.Check(n.Text, 10000, 0, 5);
         }
         #endregion
+
+        public void ConfigSetComponentByName(string componentName, string value)
+        {
+
+        }
 
     }
 }

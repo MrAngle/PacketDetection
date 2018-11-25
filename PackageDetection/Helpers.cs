@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Menu_GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 namespace Projekt_Kolko
 {
 
-    public static class Functions
+    public static class Helpers
     {
-
-
+        public const int BIT_COLLISION = 0;
+        public const int SINE_COLLISION = 1;
+        public const int RANDOM_COLLISION = 2;
         //
         public const int FLEXIBLE = 0;
 
@@ -72,10 +74,27 @@ namespace Projekt_Kolko
 
         public static void AddElements(List<byte> nlst, int number)
         {
-            foreach (var item in Functions.ConvertDecToByteList(number))
+            foreach (var item in Helpers.ConvertDecToByteList(number))
             {
                 nlst.Add(item);
             }
+        }
+
+
+        public static MenuCollision MenuCollisionFactory(int menuCollisionType)
+        {
+            switch (menuCollisionType)
+            {
+                case (BIT_COLLISION):
+                    return new MenuBitsCollision();
+                case (SINE_COLLISION):
+                    return new MenuSineCollision();
+                case (RANDOM_COLLISION):
+                    return new MenuRandomCollision();
+            }
+            Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
+            return new MenuBitsCollision();
+
         }
     }
 }

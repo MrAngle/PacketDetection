@@ -21,6 +21,9 @@ namespace Projekt_Kolko
         int size_control_part;
         ResultsStorage ResultsS = new ResultsStorage(); // przechowuje wyniki
         ResultsWindow RWindow;
+
+        private bool active = false; // flaga sprawdzajaca czy Transmisja jest wlaczona
+        public bool Active { get => active; set => active = value; }
         public enum Data
         {
             noError = 0,
@@ -39,8 +42,7 @@ namespace Projekt_Kolko
         ulong[] frame_results = new ulong[5] { 0, 0, 0, 0, 0 };
         ulong[] package_results = new ulong[5] { 0, 0, 0, 0, 0 };
 
-        private bool active = false; // flaga sprawdzajaca czy Transmisja jest wlaczona
-        public bool Active { get => active; set => active = value; }
+        
 
         public void SetResultsPage(ref ResultsWindow r)
         {
@@ -49,7 +51,7 @@ namespace Projekt_Kolko
 
         public TransmissionType(ulong _number_of_transsmision, IControl control_type,
             ICollision collision_type, int interference_level = 1000,
-            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Functions.FLEXIBLE)
+            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE)
         {
             Console.WriteLine(this._number_of_transsmision = _number_of_transsmision);
             Console.WriteLine(this.control_type = control_type);

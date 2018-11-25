@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Menu_GUI
 {
-    interface MenuCollision
+    public interface MenuCollision
     {
+        
+
         void SClose();
 
         void SetResultsPage(ref System.Windows.Controls.Frame Results_frame);
 
         void SetPackageSettingsPage(ref System.Windows.Controls.Frame menu_package);
+
+        void ConfigSetComponentByName(string componentName, string value);
     }
 
     //if(sine_Collision != null ) sine_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle

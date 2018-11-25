@@ -54,10 +54,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfigurationModule\Class1.cs" />
     <Compile Include="ControlType\CheckSumControl.cs" />
     <Compile Include="ControlType\CRCControl.cs" />
     <Compile Include="ControlType\Enum.cs" />
     <Compile Include="Menu_GUI\Data_verification.cs" />
+    <Compile Include="Menu_GUI\MenuCollision.cs" />
     <Compile Include="Menu_GUI\MenuBitsCollision.xaml.cs">
       <DependentUpon>MenuBitsCollision.xaml</DependentUpon>
     </Compile>
@@ -74,7 +76,7 @@
     <Compile Include="FrameAndPackage\ControlElements.cs" />
     <Compile Include="FrameAndPackage\Frame.cs" />
     <Compile Include="ControlType\IControl.cs" />
-    <Compile Include="Functions.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Results\InfiniteNumber.cs" />
     <Compile Include="InterferenceType\RandomCollision.cs" />
     <Compile Include="InterferenceType\SineCollision.cs" />
@@ -147,5 +149,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,7 +18,7 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuRandomCollision : Page
+    public partial class MenuRandomCollision : Page, MenuCollision
     {
 
         private ResultsWindow Results = new ResultsWindow();
@@ -71,7 +71,10 @@ namespace Menu_GUI
             }
         }
 
+        public void ConfigSetComponentByName(string componentName, string value)
+        {
 
+        }
 
     }
 }
