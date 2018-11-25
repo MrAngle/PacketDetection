@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using PackageDetection.Menu_GUI;
 using PackageDetection.Results;
 using Projekt_Kolko;
 //using Projekt_Kolko;
@@ -31,37 +31,53 @@ namespace Menu_GUI
 
         private const string FIRST_FRAME = "_firstframe";
 
-        private ResultsWindow Results = new ResultsWindow();
-        private MenuPackageSettings PSettings = new MenuPackageSettings();
+        //private ResultsWindow Results = new ResultsWindow();
+        //private MenuPackageSettings PSettings = new MenuPackageSettings();
+
+        private MenuHandler menuHandler;
+
         private BitsCollision BC;
 
 
-        public MenuBitsCollision()
+        public MenuBitsCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
-            InitializeComponent();
+            try
+            {
+                
+
+                //this.SetResultsPage(ref resultWindow);
+                //this.SetPackageSettingsPage(ref pSettings);
+                InitializeComponent();
+                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Blad przy inicjalizacji danych");
+            }
+
         }
 
-        #region SetPages
-        public void SetResultsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = Results;
-        }
+        //#region SetPages
+        //public void SetResultsPage(ref System.Windows.Controls.Frame pa)
+        //{
+        //    pa.Content = Results;
+        //}
 
-        public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = PSettings;
-        }
-        #endregion
+        //public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
+        //{
+        //    pa.Content = PSettings;
+        //}
+        //#endregion
 
 
         #region Stop/exit
         public void SClose()
         {
-            PSettings.Stop();
+            menuHandler.SClose();
         }
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
-            PSettings.Stop();
+            menuHandler.StopTransmission();
         }
         #endregion
 
@@ -90,7 +106,7 @@ namespace Menu_GUI
                 {
                     BC = CreateBitsCollision(_IsRandom.IsChecked == true, _FirstIndex.Text, _FirstFrame.Text);
                 }
-                PSettings.Start_transsmision(BC, Results);
+                menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow());
             }
             catch (FormatException )
             {
@@ -122,7 +138,7 @@ namespace Menu_GUI
         #endregion
 
 
-        public void ConfigSetComponentByName(string componentName, string value)
+        public void SetComponentByName(string componentName, string value)
         {
             string componentNameL = componentName.ToLower();
             string valueL = value.ToLower();
@@ -142,5 +158,11 @@ namespace Menu_GUI
                     break;
             }
         }
+
+        public MenuHandler GetMenuHandler()
+        {
+            return menuHandler;
+        }
+
     }
 }

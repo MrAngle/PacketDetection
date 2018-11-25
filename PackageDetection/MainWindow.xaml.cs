@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu_GUI;
+using PackageDetection.ConfigurationModule;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -62,11 +63,11 @@ namespace PackageDetection
             if (menuCollision != null)
                 menuCollision.SClose();
 
-            menuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
+            menuCollision = Helpers.MenuCollisionFactory(menuCollisionType, ref Results_frame, ref menu_package);
 
             menu_collision.Content = menuCollision;
-            menuCollision.SetResultsPage(ref Results_frame);
-            menuCollision.SetPackageSettingsPage(ref menu_package);
+            //menuCollision.SetResultsPage(ref Results_frame);
+            //menuCollision.SetPackageSettingsPage(ref menu_package);
 
 
         }
@@ -80,8 +81,7 @@ namespace PackageDetection
         //Override the onClose method in the Application Main window
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz zakonczyc?", "",
-                                                  MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz zakonczyc?", "", MessageBoxButton.OKCancel);
             
             if (result == MessageBoxResult.Cancel)
             {
@@ -97,9 +97,18 @@ namespace PackageDetection
 
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
-            InitializeNewCollisionPage(Helpers.BIT_COLLISION);
 
+            if (menuCollision != null)
+                menuCollision.SClose();
 
+            TransmissionByFile transmissionByFile = new TransmissionByFile("test");
+
+            transmissionByFile.NextTransmission(ref Results_frame, ref menu_package);
+            menu_collision.Content = transmissionByFile.GetMenuCollision();
+
+            
+            //menuCollision.SetResultsPage(ref Results_frame);
+            //menuCollision.SetPackageSettingsPage(ref menu_package);
         }
     }
 

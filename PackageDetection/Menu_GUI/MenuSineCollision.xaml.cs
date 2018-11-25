@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PackageDetection.Menu_GUI;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -21,15 +22,15 @@ namespace Menu_GUI
     public partial class MenuSineCollision : Page, MenuCollision
     {
 
-        private ResultsWindow Results = new ResultsWindow();
-        private MenuPackageSettings PSettings = new MenuPackageSettings();
+        private MenuHandler menuHandler;
+
         private SineCollision SC;
-        public MenuSineCollision()
+        public MenuSineCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             try
             {
-
                 InitializeComponent();
+                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
             }
             catch (Exception)
             {
@@ -38,26 +39,15 @@ namespace Menu_GUI
 
         }
 
-        #region SetPages
-        public void SetResultsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = Results;
-        }
-
-        public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = PSettings;
-        }
-        #endregion
 
         #region Stop/exit
         public void SClose()
         {
-            PSettings.Stop();
+            menuHandler.SClose();
         }
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
-            PSettings.Stop();
+            menuHandler.StopTransmission();
         }
         #endregion
 
@@ -70,7 +60,7 @@ namespace Menu_GUI
                 {
                     SC = CreateBitsCollision(_XStart.Text, _XEnd.Text);
                 }
-                PSettings.Start_transsmision(SC, Results);
+                menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow());
             }
             catch (FormatException)
             {
@@ -105,10 +95,15 @@ namespace Menu_GUI
         }
         #endregion
 
-        public void ConfigSetComponentByName(string componentName, string value)
-        {
 
+        public void SetComponentByName(string componentName, string value)
+        {
+            throw new NotImplementedException();
         }
 
+        public MenuHandler GetMenuHandler()
+        {
+            return menuHandler;
+        }
     }
 }

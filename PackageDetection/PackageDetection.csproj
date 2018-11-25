@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConfigurationModule\Class1.cs" />
+    <Compile Include="ConfigurationModule\TransmissionByFile.cs" />
     <Compile Include="ControlType\CheckSumControl.cs" />
     <Compile Include="ControlType\CRCControl.cs" />
     <Compile Include="ControlType\Enum.cs" />
@@ -63,6 +63,7 @@
     <Compile Include="Menu_GUI\MenuBitsCollision.xaml.cs">
       <DependentUpon>MenuBitsCollision.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Menu_GUI\MenuHandler.cs" />
     <Compile Include="Menu_GUI\MenuPackageSettings.xaml.cs">
       <DependentUpon>MenuPackageSettings.xaml</DependentUpon>
     </Compile>

@@ -124,5 +124,56 @@ namespace Menu_GUI
         }
 
         #endregion
+
+
+        #region SetValues
+        //int toInt(string str) // zamiana na Int
+        //{ return Convert.ToInt32(str); }
+
+        //ulong numOfT = Convert.ToUInt64(_NumberOfTransmission.Text);
+        //IControl contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu
+        //    if (_CRC.IsChecked == true)
+        //        contType = new CRCControl();
+        //    else if (_CheckSum.IsChecked == true)
+        //        contType = new CheckSumControl();
+        //    else if (_ParityBit.IsChecked == true)
+        //        contType = new ParityBitControl();
+
+        //int intLvl = toInt(_InterferenceLVL.Text);
+        //int sizeOfFra = toInt(_BitsInFrame.Text);
+        //int numFraInPac = toInt(_FramesInPackage.Text);
+        //int sizeOfControl = toInt(_BitsControlPart.Text);
+        public void SetNumberOfTransmission(string str)
+        {
+            _NumberOfTransmission.Text = str;
+        }
+
+        public void SetInterferenceLVL(string str)
+        {
+            _InterferenceLVL.Text = str;
+        }
+
+        public void SetBitsInFrame(string str)
+        {
+            _BitsInFrame.Text = str;
+        }
+
+        public void SetFramesInPackage(string str)
+        {
+            _FramesInPackage.Text = str;
+        }
+
+        public void SetBitsControlPart(string str)
+        {
+            _BitsControlPart.Text = str;
+        }
+
+        public void SetControlType(bool str)
+        {
+            _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, str);
+        }
+
+
+        #endregion
     }
 }

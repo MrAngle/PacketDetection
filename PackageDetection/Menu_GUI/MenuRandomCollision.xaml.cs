@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PackageDetection.Menu_GUI;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -20,40 +21,37 @@ namespace Menu_GUI
 
     public partial class MenuRandomCollision : Page, MenuCollision
     {
+        private MenuHandler menuHandler;
 
-        private ResultsWindow Results = new ResultsWindow();
-        private MenuPackageSettings PSettings = new MenuPackageSettings();
         private RandomCollision RC;
-        public MenuRandomCollision()
+        public MenuRandomCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Blad przy inicjalizacji danych");
+            }
+
         }
 
-        #region SetPages
-        public void SetResultsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = Results;
-        }
-
-        public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
-        {
-            pa.Content = PSettings;
-        }
-        #endregion
 
         #region Stop/exit
         public void SClose()
         {
-            PSettings.Stop();
+            menuHandler.SClose();
         }
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
-            PSettings.Stop();
+            menuHandler.StopTransmission();
         }
         #endregion
 
 
-        
+
         private void Button_Start(object sender, RoutedEventArgs e)
         {
             try
@@ -62,7 +60,7 @@ namespace Menu_GUI
                 {
                     RC = new RandomCollision();
                 }
-                PSettings.Start_transsmision(RC, Results);
+                menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow());
             }
             catch (FormatException)
             {
@@ -71,10 +69,15 @@ namespace Menu_GUI
             }
         }
 
-        public void ConfigSetComponentByName(string componentName, string value)
-        {
 
+        public void SetComponentByName(string componentName, string value)
+        {
+            throw new NotImplementedException();
         }
 
+        public MenuHandler GetMenuHandler()
+        {
+            return menuHandler;
+        }
     }
 }

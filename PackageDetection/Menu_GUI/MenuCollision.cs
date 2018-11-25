@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PackageDetection.Menu_GUI;
+using PackageDetection.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +15,15 @@ namespace Menu_GUI
 
         void SClose();
 
-        void SetResultsPage(ref System.Windows.Controls.Frame Results_frame);
+        //void SetResultsPage(ref System.Windows.Controls.Frame Results_frame);
 
-        void SetPackageSettingsPage(ref System.Windows.Controls.Frame menu_package);
+        //void SetPackageSettingsPage(ref System.Windows.Controls.Frame menu_package);
 
-        void ConfigSetComponentByName(string componentName, string value);
+        void SetComponentByName(string componentName, string value);
+
+        MenuHandler GetMenuHandler();
+
+
     }
 
     //if(sine_Collision != null ) sine_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle

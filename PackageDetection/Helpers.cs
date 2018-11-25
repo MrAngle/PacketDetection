@@ -81,19 +81,19 @@ namespace Projekt_Kolko
         }
 
 
-        public static MenuCollision MenuCollisionFactory(int menuCollisionType)
+        public static MenuCollision MenuCollisionFactory(int menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             switch (menuCollisionType)
             {
                 case (BIT_COLLISION):
-                    return new MenuBitsCollision();
+                    return new MenuBitsCollision(ref resultWindow, ref pSettings);
                 case (SINE_COLLISION):
-                    return new MenuSineCollision();
+                    return new MenuSineCollision(ref resultWindow, ref pSettings);
                 case (RANDOM_COLLISION):
-                    return new MenuRandomCollision();
+                    return new MenuRandomCollision(ref resultWindow, ref pSettings);
             }
             Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
-            return new MenuBitsCollision();
+            return new MenuBitsCollision(ref resultWindow, ref pSettings);
 
         }
     }
