@@ -89,7 +89,7 @@ namespace Projekt_Kolko
         /// <param name="controlType">Typ kontroli ( domyslnie ustawiony na ParityBitControl )</param>
         /// <param name="sizeOfControlPart">Okresla dlugosc czesci kontrolnej w bitach</param>
         /// <param name="random">#NIE DZIALA# Domyslnie tworzy losowe elementy w ramkach. </param>
-        public void GenerateFrameList(int numberOfFrames, int size, IControl _controlType = null, int sizeOfControlPart = Functions.FLEXIBLE, bool random = true)
+        public void GenerateFrameList(int numberOfFrames, int size, IControl _controlType = null, int sizeOfControlPart = Helpers.FLEXIBLE, bool random = true)
         {
             if (_controlType == null)
             {
@@ -160,7 +160,7 @@ namespace Projekt_Kolko
         /// Wylicza czesc kontrolna Pakietu ze wzgledu na typ kontroli
         /// </summary>
         /// <param name="sizeOfControlPart">Okresla liczbe bitow czesci kontrolnej</param>
-        public void SetControlPartByType(int sizeOfControlPart = Functions.FLEXIBLE)
+        public void SetControlPartByType(int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             try
             {

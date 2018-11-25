@@ -17,14 +17,14 @@ namespace Projekt_Kolko
         /// <param name="nFrame"></param>
         /// <param name="sizeOfControlPart">Okresla dlugosc czesci kontrolnej. FLEXIBLE automatycznie okresla dlugosc czesci kontrolnej</param>
         /// <returns></returns>
-        List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Functions.FLEXIBLE);
+        List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Helpers.FLEXIBLE);
         /// <summary>
         /// Obliczanie czesci kontrolnej dla Pakietu
         /// </summary>
         /// <param name="nFrame"></param>
         /// <param name="sizeOfControlPart">Okresla dlugosc czesci kontrolnej. FLEXIBLE automatycznie okresla dlugosc czesci kontrolnej</param>
         /// <returns></returns>
-        List<byte> CalculateControlPart(Package nPakiet, int sizeOfControlPart = Functions.FLEXIBLE);
+        List<byte> CalculateControlPart(Package nPakiet, int sizeOfControlPart = Helpers.FLEXIBLE);
 
         /// <summary>
         /// Wykrywanie przeklaman w ramce

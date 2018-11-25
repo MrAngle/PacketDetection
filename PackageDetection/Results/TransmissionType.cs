@@ -51,13 +51,13 @@ namespace Projekt_Kolko
             ICollision collision_type, int interference_level = 1000,
             int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Functions.FLEXIBLE)
         {
-            this._number_of_transsmision = _number_of_transsmision;
-            this.control_type = control_type;
-            this.collision_type = collision_type;
-            this.interference_level = interference_level;
-            this.size_of_frame = size_of_frame;
-            this.numbers_of_frame_in_package = numbers_of_frame_in_package;
-            this.size_control_part = size_control_part;
+            Console.WriteLine(this._number_of_transsmision = _number_of_transsmision);
+            Console.WriteLine(this.control_type = control_type);
+            Console.WriteLine(this.collision_type = collision_type);
+            Console.WriteLine(this.interference_level = interference_level);
+            Console.WriteLine(this.size_of_frame = size_of_frame);
+            Console.WriteLine(this.numbers_of_frame_in_package = numbers_of_frame_in_package);
+            Console.WriteLine(this.size_control_part = size_control_part);
         }
 
 
@@ -98,7 +98,7 @@ namespace Projekt_Kolko
 
         public void UserStop()
         {
-
+            Console.WriteLine("jestem tutaj");
             BackgroundWorker worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true

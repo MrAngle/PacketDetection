@@ -12,7 +12,7 @@ namespace Projekt_Kolko
         {
             for (int i = 0; i < nFrame.GetInformationPart().Count; i++)
             {
-                if (interference_level > Functions.GenerateRandomNumber(0, 10000)) // losuje liczbe z przedzialu 0,9999. Im 
+                if (interference_level > Helpers.GenerateRandomNumber(0, 10000)) // losuje liczbe z przedzialu 0,9999. Im 
                                                                                    // im wieksze zaklocenia (interference_lvl)
                                                                                    // tym wieksza szansa na przeklamanie
                 {
@@ -30,7 +30,7 @@ namespace Projekt_Kolko
         {
             for (int i = 0; i < ce.GetList().Count; i++)
             {
-                if (interference_level > Functions.GenerateRandomNumber(0, 10000))
+                if (interference_level > Helpers.GenerateRandomNumber(0, 10000))
                 {
                     if (ce[i] == 0)
                         ce[i] = 1;

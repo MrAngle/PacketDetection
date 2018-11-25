@@ -8,7 +8,7 @@ namespace Projekt_Kolko
 {
     public class CRCControl : IControl
     {
-        public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Functions.FLEXIBLE)
+        public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
 
             int control_size = CalculateControlPartSize(nFrame.GetInformationPart().Count, sizeOfControlPart); //okresla dlugosc
@@ -22,7 +22,8 @@ namespace Projekt_Kolko
             nFrame.GetControlPart().SetCRCDivider(CRC_divider); // Dodaje CRCDivider do ramki
             return CalculateCRCControlPart(control_size, CRC_divider, information_part); 
         }
-        public List<byte> CalculateControlPart(Package nPackage, int sizeOfControlPart = Functions.FLEXIBLE)
+
+        public List<byte> CalculateControlPart(Package nPackage, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             List<byte> NewPacket = new List<byte>();
             foreach (Frame frame in nPackage.GetFrames()) // tworzy kopie poszczegolnych ramek w postaci listy
@@ -46,6 +47,7 @@ namespace Projekt_Kolko
 
             return CalculateCRCControlPart(control_size, CRC_divider, NewPacket);
         }
+
         private List<byte> CalculateCRCControlPart(int size, List<byte> CRC_divider, List<byte> information_part)
         {
             for (int i = 0; i < information_part.Count - size; i++)
@@ -81,7 +83,7 @@ namespace Projekt_Kolko
         private int CalculateControlPartSize(int size_of_information_part,int sizeOfControlPart)
         {
             
-            if (sizeOfControlPart != Functions.FLEXIBLE)
+            if (sizeOfControlPart != Helpers.FLEXIBLE)
                 return sizeOfControlPart; // ? Jesli okreslona jest dlugosc czesci kontrolnej
 
             int control_size = 1;
@@ -103,7 +105,7 @@ namespace Projekt_Kolko
                 }
                 else
                 {
-                    CRC_divider.Add(Functions.GenerateRandomByte());
+                    CRC_divider.Add(Helpers.GenerateRandomByte());
                 }
             }
             return CRC_divider;

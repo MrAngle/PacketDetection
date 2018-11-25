@@ -29,6 +29,12 @@ namespace PackageDetection
         private MenuBitsCollision bits_Collision;
         private MenuSineCollision sine_Collision;
         private MenuRandomCollision random_Collision;
+
+        private const int BIT_COLLISION = 0;
+        private const int SINE_COLLISION = 1;
+        private const int RANDOM_COLLISION = 2;
+
+        private MenuCollision menuCollision;
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +53,7 @@ namespace PackageDetection
 
         private void Click_sinusCollision(object sender, RoutedEventArgs e)
         {
-            if (random_Collision != null) bits_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle
+            if (bits_Collision != null) bits_Collision.SClose(); // zabepieczenie przed dzialaniem niechcianych watkow w tle
             if (random_Collision != null) random_Collision.SClose();
 
             sine_Collision = new MenuSineCollision();
@@ -69,6 +75,17 @@ namespace PackageDetection
             random_Collision.SetPackageSettingsPage(ref menu_package);
 
 
+        }
+
+        private void InitializeNewCollisionPage()
+        {
+            if (menuCollision != null)
+                menuCollision.SClose();
+
+            bits_Collision = new MenuBitsCollision();
+            menu_collision.Content = bits_Collision;
+            bits_Collision.SetResultsPage(ref Results_frame);
+            bits_Collision.SetPackageSettingsPage(ref menu_package);
         }
 
         //przycisk Wyjdz

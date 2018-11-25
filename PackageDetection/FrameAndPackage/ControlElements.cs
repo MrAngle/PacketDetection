@@ -37,7 +37,7 @@ namespace Projekt_Kolko
         public void SetControlPart(int number)
         {
             control_holder.RemoveAll(item => true == true); //kasuje wszystkie elementy, zawsze
-            Functions.AddElements(control_holder, number);
+            Helpers.AddElements(control_holder, number);
         }
 
         public void SetControlPart(List<byte> nList)
@@ -71,7 +71,7 @@ namespace Projekt_Kolko
         }
         public ulong GetControlPartInDec()
         {
-            return Functions.GetPartInDec(control_holder);
+            return Helpers.GetPartInDec(control_holder);
         }
         public List<byte> GetList()
         {

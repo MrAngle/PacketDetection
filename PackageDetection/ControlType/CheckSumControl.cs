@@ -15,13 +15,13 @@ namespace Projekt_Kolko
         /// <param name="nFrame"></param>
         /// <param name="sizeOfControlPart"></param>
         /// <returns></returns>
-        public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Functions.FLEXIBLE)
+        public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             int results = nFrame.GetInformationPart().Sum(x => Convert.ToInt32(x));     // zlicza jedynki w ramce
-            List<byte> CheckSum = Functions.ConvertDecToByteList(results);              // tworzy czesc kontrolna na 
+            List<byte> CheckSum = Helpers.ConvertDecToByteList(results);              // tworzy czesc kontrolna na 
                                                                                         // podstawie wyliczonej sumy
 
-            if (sizeOfControlPart != Functions.FLEXIBLE)        // sprawdza czy czesc kontrolna ma miec okreslona dlugosc        
+            if (sizeOfControlPart != Helpers.FLEXIBLE)        // sprawdza czy czesc kontrolna ma miec okreslona dlugosc        
                 SetSizeOfList(ref CheckSum, sizeOfControlPart); // ? ustawia czesc kontrolna na konkretna dlugosc
 
             return CheckSum;
@@ -33,16 +33,16 @@ namespace Projekt_Kolko
         /// <param name="nPackage"></param>
         /// <param name="sizeOfControlPart"></param>
         /// <returns></returns>
-        public List<byte> CalculateControlPart(Package nPackage, int sizeOfControlPart = Functions.FLEXIBLE)
+        public List<byte> CalculateControlPart(Package nPackage, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             int sum = 0; 
             foreach (var item in nPackage.GetFrames()) 
             {
                 sum += (int)item.GetControlPart().GetControlPartInDec(); // sumuje czesci kontrolne wszystkich ramek
             }
-            List<byte> CheckSum = Functions.ConvertDecToByteList(sum);   // tworzy czesc kontrolna na podstawie wyliczonej sumy
+            List<byte> CheckSum = Helpers.ConvertDecToByteList(sum);   // tworzy czesc kontrolna na podstawie wyliczonej sumy
             //Console.WriteLine(CheckSum);
-            if (sizeOfControlPart != Functions.FLEXIBLE)                 // sprawdza czy czesc kontrolna ma miec okreslona dlugosc
+            if (sizeOfControlPart != Helpers.FLEXIBLE)                 // sprawdza czy czesc kontrolna ma miec okreslona dlugosc
                 SetSizeOfList(ref CheckSum, sizeOfControlPart); // ? ustawia czesc kontrolna na konkretna dlugosc
 
             return CheckSum;

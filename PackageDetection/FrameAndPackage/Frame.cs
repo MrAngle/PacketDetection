@@ -111,7 +111,7 @@ namespace Projekt_Kolko
             /// </summary> 
             /// <param name="number">Liczba okreslajaca kontrolna czesc ramki</param>
             /// <param name="sizeOfControlPart">Okresla rozmiar czesci kontrolnej (0 okresla dostosowanie rozmiaru czesci kontrolnej w zaleznosci od dlugosci ramki)</param>
-            public Builder SetControlType(IControl control_type, int sizeOfControlPart = Functions.FLEXIBLE)
+            public Builder SetControlType(IControl control_type, int sizeOfControlPart = Helpers.FLEXIBLE)
             {
                 fra.SetControlType(control_type);
                 fra.SetControlPartByType(sizeOfControlPart);
@@ -135,7 +135,7 @@ namespace Projekt_Kolko
         public void CreateRandomInformationPart(int size)
         {
             for (int i = 0; i < size; i++)
-                frame_holder.Add(Functions.GenerateRandomByte());
+                frame_holder.Add(Helpers.GenerateRandomByte());
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Projekt_Kolko
         /// <returns></returns>
         public ulong GetInformationPartInDec()
         {
-            return Functions.GetPartInDec(this.GetInformationPart());
+            return Helpers.GetPartInDec(this.GetInformationPart());
         }
         public ControlElements GetControlPart()
         {
@@ -232,11 +232,11 @@ namespace Projekt_Kolko
         public void SetInformationPart(int number)
         {
             frame_holder.RemoveAll(item => true == true);
-            Functions.AddElements(control_part.GetList(), number);
+            Helpers.AddElements(control_part.GetList(), number);
         }
         
 
-        public void SetControlPartByType(int sizeOfControlPart = Functions.FLEXIBLE)
+        public void SetControlPartByType(int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             try
             {
