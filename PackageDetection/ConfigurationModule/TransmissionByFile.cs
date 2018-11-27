@@ -1,4 +1,5 @@
 ﻿using Menu_GUI;
+using PackageDetection.ConfigurationModule.TransmissionDataClass;
 using Projekt_Kolko;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,14 @@ namespace PackageDetection.ConfigurationModule
     public class TransmissionByFile
     {
         MenuCollision menuCollision;
-        List<TransmissionData> transmissionList;
+        TransmissionData transmissionList;
         int currentId;
+        string fileName;
 
         public TransmissionByFile(string fileName)
         {
+            this.fileName = fileName;
+            this.currentId = 0;
             // Loading from a file, you can also load from a stream
             //var xml = XDocument.Load(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\contacts.xml");
 
@@ -39,26 +43,7 @@ namespace PackageDetection.ConfigurationModule
             //public ulong numberOfTranssmision;
             //public int sizeControlPart;
 
-            transmissionList = (from e in XDocument.Load(fileName).Root.Elements("transmission")
-                                    //where (int)e.Element("id") < 22222
-                                select new TransmissionData
-                                {
-                                    interferenceLevel = (int)e.Element("interference_level"),
-                                    sizeOfFrame = (int)e.Element("size_of_frame"),
-                                    numbersOfFrameInPackage = (int)e.Element("numbers_of_frames_in_package"),
-                                    numberOfTranssmision = (ulong)e.Element("number_of_transsmisions"),
-                                    sizeControlPart = test(e) //(int)e.Element("size_control_part")',
-                                    
-                            }).ToList();
-
-            foreach (var name in transmissionList)
-            {
-                Console.WriteLine(name.interferenceLevel);
-                Console.WriteLine(name.sizeOfFrame);
-                Console.WriteLine(name.numbersOfFrameInPackage);
-                Console.WriteLine(name.numberOfTranssmision);
-                Console.WriteLine(name.sizeControlPart);
-            }
+           
             //StringBuilder result = new StringBuilder();
 
             ////Load xml
@@ -84,9 +69,11 @@ namespace PackageDetection.ConfigurationModule
             //Console.WriteLine(result);
         }
 
-        int test(XElement sd)
+        CollisionData getCollisionType(XElement reader)
         {
-            return (int)sd.Element("size_control_part");
+            CollisionData cd = Helpers.CollisionDataFactory((string)reader.Element("collisionType").Element("name"));
+            cd.SetComponentsByXML(reader);
+            return cd;
         }
 
         public MenuCollision GetMenuCollision()
@@ -96,16 +83,37 @@ namespace PackageDetection.ConfigurationModule
 
         public int NextTransmission(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
+            transmissionList = (from e in XDocument.Load(fileName).Root.Elements("transmission")
+                                where (int)e.Element("id") == this.currentId
+                                select new TransmissionData
+                                {
+                                    interferenceLevel = (int)e.Element("interference_level"),
+                                    sizeOfFrame = (int)e.Element("size_of_frame"),
+                                    numbersOfFrameInPackage = (int)e.Element("numbers_of_frames_in_package"),
+                                    numberOfTranssmision = (ulong)e.Element("number_of_transsmisions"),
+                                    sizeControlPart = (int)e.Element("size_control_part"),
+                                    collisionType = this.getCollisionType(e)
+
+                                }).ToList()[0];
+
+            //foreach (var name in transmissionList)
+            //{
+            //    Console.WriteLine(name.interferenceLevel);
+            //    Console.WriteLine(name.sizeOfFrame);
+            //    Console.WriteLine(name.numbersOfFrameInPackage);
+            //    Console.WriteLine(name.numberOfTranssmision);
+            //    Console.WriteLine(name.sizeControlPart);
+            //}
+
             menuCollision = Helpers.MenuCollisionFactory(Helpers.BIT_COLLISION, ref resultWindow, ref pSettings);
-            menuCollision.SetComponentByName("_firstindex", "2");
-            menuCollision.SetComponentByName("_firstframe", "2");
+            menuCollision.SetComponentsByDictionary(transmissionList.collisionType.Args);
             SetPackageSettings();
             return 1;
         }
 
         private void SetPackageSettings()
         {
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsControlPart(transmissionList[0].sizeControlPart);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsControlPart(transmissionList.sizeControlPart);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsInFrame(43);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetFramesInPackage(342);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(234);

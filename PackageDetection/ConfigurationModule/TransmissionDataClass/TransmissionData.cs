@@ -1,11 +1,12 @@
-﻿using Projekt_Kolko;
+﻿
+using Projekt_Kolko;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PackageDetection.ConfigurationModule
+namespace PackageDetection.ConfigurationModule.TransmissionDataClass
 {
     public struct TransmissionData
     {
@@ -15,6 +16,11 @@ namespace PackageDetection.ConfigurationModule
         public ulong numberOfTranssmision;
         public int sizeControlPart;
         //public IControl controlType;
-        //public ICollision collisionType;
+        public CollisionData collisionType;
     }
+
+
+   
+
+    
 }

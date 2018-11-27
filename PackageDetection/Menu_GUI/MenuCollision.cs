@@ -21,6 +21,8 @@ namespace Menu_GUI
 
         void SetComponentByName(string componentName, string value);
 
+        void SetComponentsByDictionary(Dictionary<string, int> d);
+
         void StartTransmission();
 
         MenuHandler GetMenuHandler();

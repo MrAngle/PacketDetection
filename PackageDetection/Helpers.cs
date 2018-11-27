@@ -1,4 +1,5 @@
 ﻿using Menu_GUI;
+using PackageDetection.ConfigurationModule.TransmissionDataClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +95,26 @@ namespace Projekt_Kolko
             }
             Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
             return new MenuBitsCollision(ref resultWindow, ref pSettings);
+
+        }
+
+
+        public static CollisionData CollisionDataFactory(string CollisionName)
+        {
+
+            switch (CollisionName)
+            {
+                case (BitsCollisionData.NAME):
+                    return new BitsCollisionData();
+                //case (SINE_COLLISION):
+                //    return new MenuSineCollision(ref resultWindow, ref pSettings);
+                //case (RANDOM_COLLISION):
+                //    return new MenuRandomCollision(ref resultWindow, ref pSettings);
+            }
+            
+            Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
+            return null;
+            //return new CollisionTypeData(ref resultWindow, ref pSettings);
 
         }
     }

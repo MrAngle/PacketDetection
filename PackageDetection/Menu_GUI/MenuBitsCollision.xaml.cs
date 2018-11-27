@@ -170,5 +170,11 @@ namespace Menu_GUI
             return menuHandler;
         }
 
+        public void SetComponentsByDictionary(Dictionary<string, int> d)
+        {
+            _FirstFrame.Text = d[FIRST_FRAME].ToString();
+            _FirstIndex.Text = d[FIRST_INDEX].ToString();
+            _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, d[IS_RANDOM_CHECKBOX] > 0 ? true : false);
+    }
     }
 }

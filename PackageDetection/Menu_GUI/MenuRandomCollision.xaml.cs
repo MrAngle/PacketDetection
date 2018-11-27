@@ -84,5 +84,10 @@ namespace Menu_GUI
         {
             return menuHandler;
         }
+
+        public void SetComponentsByDictionary(Dictionary<string, int> d)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
