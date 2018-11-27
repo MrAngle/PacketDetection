@@ -7,6 +7,7 @@
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
     <number_of_transsmisions>32</number_of_transsmisions>
     <size_control_part>12</size_control_part>
+    <control_type>check_suM</control_type>
     <collisionType>
       <name>bits_collision</name>
       <_firstindex>23</_firstindex>
@@ -18,16 +19,29 @@
 
   <transmission>
     <id>1</id>
-    <interference_level>12</interference_level>
+    <interference_level>122</interference_level>
     <size_of_frame>32</size_of_frame>
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
     <number_of_transsmisions>32</number_of_transsmisions>
     <size_control_part>12</size_control_part>
+    <control_type>crc</control_type>
     <collisionType>
-      <name>bits_collision</name>
-      <_firstindex>323</_firstindex>
-      <_firstframe>12</_firstframe>
-      <_israndom>1</_israndom>
+      <name>sine_collision</name>
+      <_XStart>323</_XStart>
+      <_XEnd>12</_XEnd>
+    </collisionType>
+  </transmission>
+
+  <transmission>
+    <id>2</id>
+    <interference_level>122</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>12</size_control_part>
+    <control_type>check_suM</control_type>
+    <collisionType>
+      <name>Random_collision</name>
     </collisionType>
   </transmission>
 

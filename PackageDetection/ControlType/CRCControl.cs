@@ -8,6 +8,8 @@ namespace Projekt_Kolko
 {
     public class CRCControl : IControl
     {
+        public const string NAME = "crc";
+
         public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
 

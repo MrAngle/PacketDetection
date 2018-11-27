@@ -57,13 +57,15 @@ namespace Menu_GUI
             { return Convert.ToInt32(str); }
 
             ulong numOfT = Convert.ToUInt64(_NumberOfTransmission.Text);
-            IControl contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu
+            IControl contType;
             if (_CRC.IsChecked == true)
                 contType = new CRCControl();
             else if (_CheckSum.IsChecked == true)
                 contType = new CheckSumControl();
             else if (_ParityBit.IsChecked == true)
-                contType = new ParityBitControl();
+                contType = new ParityBitControl(); 
+            else
+                contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu TODO: zeby obslugiwalo to jakos sensownie
 
             int intLvl = toInt(_InterferenceLVL.Text);
             int sizeOfFra = toInt(_BitsInFrame.Text);
@@ -109,16 +111,36 @@ namespace Menu_GUI
         // Prosty sposob na uniemozliwienie zaznaczenia wiecej niz 1 checkbox 
         private void ClickCheckCRC_(object sender, RoutedEventArgs e)
         {
-            _CheckSum.SetCurrentValue(CheckBox.IsCheckedProperty, false);
-            _ParityBit.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+            SetCRC_();
         }
         private void ClickCheckCheckSum_(object sender, RoutedEventArgs e)
         {
-            _ParityBit.SetCurrentValue(CheckBox.IsCheckedProperty, false);
-            _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+            SetCheckSum_();
         }
         private void ClickCheckParityBit_(object sender, RoutedEventArgs e)
         {
+            SetParityBit_();
+        }
+
+        private void SetCRC_()
+        {
+            _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, true);
+
+            _CheckSum.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+            _ParityBit.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+        }
+        private void SetCheckSum_()
+        {
+            _CheckSum.SetCurrentValue(CheckBox.IsCheckedProperty, true);
+
+            _ParityBit.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+            _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, false);
+        }
+
+        private void SetParityBit_()
+        {
+            _ParityBit.SetCurrentValue(CheckBox.IsCheckedProperty, true);
+
             _CheckSum.SetCurrentValue(CheckBox.IsCheckedProperty, false);
             _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, false);
         }
@@ -168,9 +190,22 @@ namespace Menu_GUI
             _BitsControlPart.Text = str.ToString();
         }
 
-        public void SetControlType(bool str)
+        public void SetControlType(string controlName)
         {
-            _CRC.SetCurrentValue(CheckBox.IsCheckedProperty, str);
+            controlName = controlName.ToLower();
+            switch (controlName)
+            {
+                case (CheckSumControl.NAME):
+                    SetCheckSum_();
+                    break;
+                case (ParityBitControl.NAME):
+                    SetParityBit_();
+                    break;
+                case (CRCControl.NAME):
+                    SetCRC_();
+                    break;
+            }
+            //Console.WriteLine("***** Something wrong in - MenuPackageSettings.SetControlType : ");
         }
 
 

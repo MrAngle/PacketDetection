@@ -11,6 +11,8 @@ namespace Projekt_Kolko
     // bardziej wyrafinowanych postaci kontroli bazujacej na bicie parzystosci
     public class ParityBitControl : IControl
     {
+        public const string NAME = "parity_bit";
+
         public List<byte> CalculateControlPart(Frame nFrame, int sizeOfControlPart = Helpers.FLEXIBLE)
         {
             ulong results = (ulong)nFrame.GetInformationPart().Sum(x => Convert.ToInt32(x));

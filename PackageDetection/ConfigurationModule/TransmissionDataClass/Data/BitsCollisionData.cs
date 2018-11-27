@@ -24,31 +24,9 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
             this.args[FIRST_FRAME] = 0;
         }
 
-        public override void SetComponentByName(string componentName, string value)
-        {
-            
-            string componentNameL = componentName.ToLower();
-            string valueL = value.ToLower();
-
-            var match = ArgsNames.FirstOrDefault(stringToCheck => stringToCheck.Contains(componentName));
-
-            //switch (componentNameL)
-            //{
-            //    case (IS_RANDOM_CHECKBOX):
-            //        _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, valueL.Equals("true") ? true : false);
-            //        break;
-            //    case (FIRST_FRAME):
-            //        //TODO : Dodac zabezpiecznia
-            //        _FirstFrame.Text = value;
-            //        break;
-            //    case (FIRST_INDEX):
-            //        _FirstIndex.Text = value;
-            //        break;
-            //}
-        }
-
         public override void SetComponentsByXML(XElement reader)
         {
+            this.name = NAME;
             this.args = (
                 from p in reader.Elements("collisionType")
                 select new Dictionary<string, int>

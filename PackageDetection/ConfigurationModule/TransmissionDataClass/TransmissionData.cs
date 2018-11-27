@@ -15,7 +15,7 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
         public int numbersOfFrameInPackage;
         public ulong numberOfTranssmision;
         public int sizeControlPart;
-        //public IControl controlType;
+        public string controlType; //TODO: zmienic na IControl
         public CollisionData collisionType;
     }
 

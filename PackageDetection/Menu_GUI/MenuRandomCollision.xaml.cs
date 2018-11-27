@@ -87,7 +87,9 @@ namespace Menu_GUI
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
-            throw new NotImplementedException();
+            /*
+             * Nothing to set
+             */
         }
     }
 }

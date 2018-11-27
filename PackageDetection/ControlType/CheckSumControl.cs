@@ -8,6 +8,7 @@ namespace Projekt_Kolko
 {
     public class CheckSumControl : IControl
     {
+        public const string NAME = "check_sum";
         
         /// <summary>
         /// Oblicza czesc kontrolna dla ramki

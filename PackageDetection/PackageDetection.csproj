@@ -55,8 +55,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConfigurationModule\TransmissionByFile.cs" />
-    <Compile Include="ConfigurationModule\TransmissionDataClass\BitsCollisionData.cs" />
+    <Compile Include="ConfigurationModule\TransmissionDataClass\Data\BitsCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\CollisionData.cs" />
+    <Compile Include="ConfigurationModule\TransmissionDataClass\Data\RandomCollisionData.cs" />
+    <Compile Include="ConfigurationModule\TransmissionDataClass\Data\SineCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\TransmissionData.cs" />
     <Compile Include="ControlType\CheckSumControl.cs" />
     <Compile Include="ControlType\CRCControl.cs" />
@@ -155,7 +157,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="XMLFiles\contacts.xml" />
+    <Resource Include="XMLFiles\transmissions.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

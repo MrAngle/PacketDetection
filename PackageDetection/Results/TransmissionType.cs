@@ -100,7 +100,7 @@ namespace Projekt_Kolko
 
         public void UserStop()
         {
-            Console.WriteLine("jestem tutaj");
+            //Console.WriteLine("jestem tutaj");
             BackgroundWorker worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true

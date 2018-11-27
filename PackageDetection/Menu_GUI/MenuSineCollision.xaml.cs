@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PackageDetection.ConfigurationModule.TransmissionDataClass;
 using PackageDetection.Menu_GUI;
 using PackageDetection.Results;
 using Projekt_Kolko;
@@ -113,7 +114,8 @@ namespace Menu_GUI
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
-            throw new NotImplementedException();
+            _XStart.Text =  d[SineCollisionData.X_Start].ToString();
+            _XEnd.Text =    d[SineCollisionData.X_End].ToString();
         }
     }
 }

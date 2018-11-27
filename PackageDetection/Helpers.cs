@@ -98,21 +98,55 @@ namespace Projekt_Kolko
 
         }
 
-
-        public static CollisionData CollisionDataFactory(string CollisionName)
+        public static MenuCollision MenuCollisionFactory(string menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
+            menuCollisionType = menuCollisionType.ToLower();
+            switch (menuCollisionType)
+            {
+                case (BitsCollisionData.NAME):
+                    return new MenuBitsCollision(ref resultWindow, ref pSettings);
+                case (SineCollisionData.NAME):
+                    return new MenuSineCollision(ref resultWindow, ref pSettings);
+                case (RandomCollisionData.NAME):
+                    return new MenuRandomCollision(ref resultWindow, ref pSettings);
+            }
+            Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
+            return null;
 
-            switch (CollisionName)
+        }
+
+
+        public static CollisionData CollisionDataFactory(string collisionName)
+        {
+            collisionName = collisionName.ToLower();
+            switch (collisionName)
             {
                 case (BitsCollisionData.NAME):
                     return new BitsCollisionData();
-                //case (SINE_COLLISION):
-                //    return new MenuSineCollision(ref resultWindow, ref pSettings);
-                //case (RANDOM_COLLISION):
-                //    return new MenuRandomCollision(ref resultWindow, ref pSettings);
+                case (SineCollisionData.NAME):
+                    return new SineCollisionData();
+                case (RandomCollisionData.NAME):
+                    return new RandomCollisionData();
             }
-            
-            Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
+            Console.WriteLine("***** Something wrong in - HELPERS.CollisionDataFactory");
+            return null;
+            //return new CollisionTypeData(ref resultWindow, ref pSettings);
+
+        }
+
+        public static IControl ControlDataFactory(string controlName)
+        {
+            controlName = controlName.ToLower();
+            switch (controlName)
+            {
+                case (CheckSumControl.NAME):
+                    return new CheckSumControl();
+                case (ParityBitControl.NAME):
+                    return new ParityBitControl();
+                case (CRCControl.NAME):
+                    return new CRCControl();
+            }
+            Console.WriteLine("***** Something wrong in - HELPERS.CollisionDataFactory");
             return null;
             //return new CollisionTypeData(ref resultWindow, ref pSettings);
 
