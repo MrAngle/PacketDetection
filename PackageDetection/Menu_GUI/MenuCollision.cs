@@ -21,6 +21,8 @@ namespace Menu_GUI
 
         void SetComponentByName(string componentName, string value);
 
+        void StartTransmission();
+
         MenuHandler GetMenuHandler();
 
 

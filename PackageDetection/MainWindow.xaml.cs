@@ -101,10 +101,11 @@ namespace PackageDetection
             if (menuCollision != null)
                 menuCollision.SClose();
 
-            TransmissionByFile transmissionByFile = new TransmissionByFile("test");
+            TransmissionByFile transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\contacts.xml");
 
             transmissionByFile.NextTransmission(ref Results_frame, ref menu_package);
             menu_collision.Content = transmissionByFile.GetMenuCollision();
+            transmissionByFile.StartTransmission();
 
             
             //menuCollision.SetResultsPage(ref Results_frame);

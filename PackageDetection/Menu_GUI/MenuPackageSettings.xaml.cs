@@ -143,29 +143,29 @@ namespace Menu_GUI
         //int sizeOfFra = toInt(_BitsInFrame.Text);
         //int numFraInPac = toInt(_FramesInPackage.Text);
         //int sizeOfControl = toInt(_BitsControlPart.Text);
-        public void SetNumberOfTransmission(string str)
+        public void SetNumberOfTransmission(ulong str)
         {
-            _NumberOfTransmission.Text = str;
+            _NumberOfTransmission.Text = str.ToString();
         }
 
-        public void SetInterferenceLVL(string str)
+        public void SetInterferenceLVL(int str)
         {
-            _InterferenceLVL.Text = str;
+            _InterferenceLVL.Text = str.ToString();
         }
 
-        public void SetBitsInFrame(string str)
+        public void SetBitsInFrame(int str)
         {
-            _BitsInFrame.Text = str;
+            _BitsInFrame.Text = str.ToString();
         }
 
-        public void SetFramesInPackage(string str)
+        public void SetFramesInPackage(int str)
         {
-            _FramesInPackage.Text = str;
+            _FramesInPackage.Text = str.ToString();
         }
 
-        public void SetBitsControlPart(string str)
+        public void SetBitsControlPart(int str)
         {
-            _BitsControlPart.Text = str;
+            _BitsControlPart.Text = str.ToString();
         }
 
         public void SetControlType(bool str)

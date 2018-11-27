@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <transmission>
+    <id>1001</id>
+    <interference_level>12</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>12</size_control_part>
+
+    <projects>
+      <project>
+        <code>Orlando</code>
+        <budget>1000</budget>
+      </project>
+      <project>
+        <code>Rocket</code>
+        <budget>7000</budget>
+      </project>
+    </projects>
+  </transmission>
+
+
+
+</root>

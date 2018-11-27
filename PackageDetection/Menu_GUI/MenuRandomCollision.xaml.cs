@@ -54,6 +54,11 @@ namespace Menu_GUI
 
         private void Button_Start(object sender, RoutedEventArgs e)
         {
+            StartTransmission();
+        }
+
+        public void StartTransmission()
+        {
             try
             {
                 if (RC == null)

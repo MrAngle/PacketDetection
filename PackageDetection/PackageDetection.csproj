@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConfigurationModule\TransmissionByFile.cs" />
+    <Compile Include="ConfigurationModule\TransmissionData.cs" />
     <Compile Include="ControlType\CheckSumControl.cs" />
     <Compile Include="ControlType\CRCControl.cs" />
     <Compile Include="ControlType\Enum.cs" />
@@ -151,5 +152,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="XMLFiles\contacts.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -100,6 +100,11 @@ namespace Menu_GUI
 
         private void Button_Start(object sender, RoutedEventArgs e)
         {
+            StartTransmission();
+        }
+        
+        public void StartTransmission()
+        {
             try
             {
                 if (BC == null)
@@ -108,12 +113,13 @@ namespace Menu_GUI
                 }
                 menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow());
             }
-            catch (FormatException )
+            catch (FormatException)
             {
                 BC = null;
                 MessageBox.Show("Wprowadz dane");
             }
         }
+
 
         #region DataInBox And Checkbox
         private void DataInBox_(object sender, TextChangedEventArgs e)
