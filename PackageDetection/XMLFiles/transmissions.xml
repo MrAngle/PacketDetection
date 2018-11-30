@@ -1,5 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
+  
+  <!-- EXAMPLE TRANSMISSION
+  <transmission>           
+    <id>0</id> - program start transmission with id 0 
+    <interference_level>12</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>12</size_control_part>
+    
+    <control_type>check_suM</control_type>    available types: check_sum/crc/check_sum
+
+    <collisionType>
+                                      available types: bits_collision/sine_collision/random_collision
+                                          if bits_collision   - need to define _firstindex, _firstframe, _israndom(1-true, 0-false)
+                                          if sine_collision   - need to define _XStart, _XEnd
+                                          if random_collision - nothing to define
+    
+      <name>bits_collision</name>             
+      <_firstindex>23</_firstindex>
+      <_firstframe>12</_firstframe>
+      <_israndom>1</_israndom>
+    </collisionType>
+  </transmission>
+  -->
+  
+  
   <transmission>
     <id>0</id>
     <interference_level>12</interference_level>
@@ -12,10 +39,10 @@
       <name>bits_collision</name>
       <_firstindex>23</_firstindex>
       <_firstframe>12</_firstframe>
-      <_israndom>1</_israndom>
+      <_israndom>0</_israndom>
     </collisionType>
+    <number_of_packages_to_end></number_of_packages_to_end>
   </transmission>
-
 
   <transmission>
     <id>1</id>

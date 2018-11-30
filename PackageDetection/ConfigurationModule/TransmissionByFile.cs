@@ -21,7 +21,7 @@ namespace PackageDetection.ConfigurationModule
         public TransmissionByFile(string fileName)
         {
             this.fileName = fileName;
-            this.currentId = 0;
+            this.currentId = 1;
         }
 
         CollisionData getCollisionType(XElement reader)
@@ -74,6 +74,7 @@ namespace PackageDetection.ConfigurationModule
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(transmissionList.interferenceLevel);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetNumberOfTransmission(transmissionList.numberOfTranssmision);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetControlType(transmissionList.controlType);
+
             menuCollision.SetComponentsByDictionary(transmissionList.collisionType.Args);
         }
 

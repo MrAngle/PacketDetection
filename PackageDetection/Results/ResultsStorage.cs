@@ -24,15 +24,27 @@ namespace Projekt_Kolko
         // 4 - number_of_transmission
 
         const int COUNT = 5;
-        InfiniteNumber[] P_results = new InfiniteNumber[COUNT];
-        InfiniteNumber[] F_results = new InfiniteNumber[COUNT];
+        //InfiniteNumber[] p_results = new InfiniteNumber[COUNT];
+        //InfiniteNumber[] f_results = new InfiniteNumber[COUNT];
+
+        ulong[] p_results;
+        ulong[] f_results;
+
+        public ulong[] P_results { get => p_results; set => p_results = value; }
+        public ulong[] F_results { get => f_results; set => f_results = value; }
+
+        //public InfiniteNumber[] P_results { get => p_results; set => p_results = value; }
+        //public InfiniteNumber[] F_results { get => f_results; set => f_results = value; }
 
         public ResultsStorage()
         {
             for (int i = 0; i < COUNT; i++)
             {
-                P_results[i] = new InfiniteNumber();
-                F_results[i] = new InfiniteNumber();
+                P_results = new ulong[COUNT];
+                F_results = new ulong[COUNT];
+
+                //p_results[i] = new InfiniteNumber();
+                //f_results[i] = new InfiniteNumber();
             }
         }
         public void AddResults(ulong[] packageLst, ulong[] frameLst)
@@ -44,12 +56,14 @@ namespace Projekt_Kolko
         public void PackageAddResults(ulong[] lst)
         {
             for (int i = 0; i < COUNT; i++)
-                P_results[i].O_Add(lst[i]);
+                P_results[i] += lst[i];
+                //p_results[i].O_Add(lst[i]);
         }
         public void FrameAddResults(ulong[] lst)
         {
             for (int i = 0; i < COUNT; i++)
-                F_results[i].O_Add(lst[i]);
+                F_results[i] += lst[i];
+                //F_results[i].O_Add(lst[i]);
         }
 
         //public void ShowResults()
@@ -57,17 +71,17 @@ namespace Projekt_Kolko
         //    Console.Clear();
         //    Console.WriteLine("------------------------------WYNIKI-------------------------------------");
         //    Console.WriteLine("------------------------------Pakiet-------------------------------------");
-        //    Console.WriteLine("|Liczba pakietow bez bledu :                        " + P_results[(int)Data.noError]);
-        //    Console.WriteLine("|Liczba wykrytych blednych pakietow :               " + P_results[(int)Data.Detected]);
-        //    Console.WriteLine("|Liczba niewykrytych blednych pakietow :            " + P_results[(int)Data.unDetected]);
-        //    Console.WriteLine("|Liczba wykrytych bledow, przy poprawnych danych:   " + P_results[(int)Data.detectedNoError]);
-        //    Console.WriteLine("|Liczba transmisji -                                " + P_results[(int)Data.number_of_transmission]);
+        //    Console.WriteLine("|Liczba pakietow bez bledu :                        " + p_results[(int)Data.noError]);
+        //    Console.WriteLine("|Liczba wykrytych blednych pakietow :               " + p_results[(int)Data.Detected]);
+        //    Console.WriteLine("|Liczba niewykrytych blednych pakietow :            " + p_results[(int)Data.unDetected]);
+        //    Console.WriteLine("|Liczba wykrytych bledow, przy poprawnych danych:   " + p_results[(int)Data.detectedNoError]);
+        //    Console.WriteLine("|Liczba transmisji -                                " + p_results[(int)Data.number_of_transmission]);
         //    Console.WriteLine("------------------------------Ramki--------------------------------------");
-        //    Console.WriteLine("|Liczba ramek bez bledu :                           " + F_results[(int)Data.noError]);
-        //    Console.WriteLine("|Liczba wykrytych blednych ramek :                  " + F_results[(int)Data.Detected]);
-        //    Console.WriteLine("|Liczba niewykrytych blednych ramek :               " + F_results[(int)Data.unDetected]);
-        //    Console.WriteLine("|Liczba wykrytych bledow, przy poprawnych danych:   " + F_results[(int)Data.detectedNoError]);
-        //    Console.WriteLine("|Liczba transmisji -                                " + F_results[(int)Data.number_of_transmission]);
+        //    Console.WriteLine("|Liczba ramek bez bledu :                           " + f_results[(int)Data.noError]);
+        //    Console.WriteLine("|Liczba wykrytych blednych ramek :                  " + f_results[(int)Data.Detected]);
+        //    Console.WriteLine("|Liczba niewykrytych blednych ramek :               " + f_results[(int)Data.unDetected]);
+        //    Console.WriteLine("|Liczba wykrytych bledow, przy poprawnych danych:   " + f_results[(int)Data.detectedNoError]);
+        //    Console.WriteLine("|Liczba transmisji -                                " + f_results[(int)Data.number_of_transmission]);
         //    Console.WriteLine("-------------------------------------------------------------------------");
         //}
 

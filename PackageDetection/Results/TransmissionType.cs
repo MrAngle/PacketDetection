@@ -89,7 +89,7 @@ namespace Projekt_Kolko
             this.package_results[(int)Data.number_of_transmission] = _number_of_transsmision;
             this.frame_results[(int)Data.number_of_transmission] = _number_of_transsmision * (ulong)numbers_of_frame_in_package;
             ResultsS.AddResults(package_results, frame_results);
-           ResultsS.ShowResults(ref RWindow);
+            ResultsS.ShowResults(ref RWindow);
             //Task.Delay(100000);
 
 
@@ -98,27 +98,37 @@ namespace Projekt_Kolko
 
         
 
-        public void UserStop()
+        public void UserStop(long numberOfPackagesToEnd = 0)
         {
             //Console.WriteLine("jestem tutaj");
             BackgroundWorker worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true
             };
-            worker.DoWork += Stop;
+            if (numberOfPackagesToEnd <= 0)
+                worker.DoWork += DoWorkAllTime;
+            else
+                worker.DoWork += DoWorkPackagesLimit; 
 
 
-            worker.RunWorkerAsync(1);
+            worker.RunWorkerAsync(numberOfPackagesToEnd);
 
         }
 
-        public void Stop(object sender, DoWorkEventArgs e)
+        public void DoWorkAllTime(object sender, DoWorkEventArgs e)
         {
             while(Active != false)
                 this.Normal();
-
         }
-        
+
+        public void DoWorkPackagesLimit(object sender, DoWorkEventArgs e)
+        {
+            long numberOfPackagesToEnd = (long)e.Argument;
+            Console.WriteLine(numberOfPackagesToEnd);
+            //while (numberOfPackagesToEnd <= ResultsS.P_results.ge)
+                //this.Normal(result);
+        }
+
 
         private void ClearResults()
         {
