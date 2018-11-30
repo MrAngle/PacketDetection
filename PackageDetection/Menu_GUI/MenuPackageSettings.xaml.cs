@@ -49,7 +49,7 @@ namespace Menu_GUI
 
       
 
-        public TransmissionType CreateTransmission(ICollision Collision)
+        public TransmissionType CreateTransmission(ICollision Collision, bool setConfigurationByFile = false)
         {
 
 
@@ -72,17 +72,17 @@ namespace Menu_GUI
             int numFraInPac = toInt(_FramesInPackage.Text);
             int sizeOfControl = toInt(_BitsControlPart.Text);
 
-            return new TransmissionType(numOfT, contType, Collision, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
+            return new TransmissionType(numOfT, contType, Collision, intLvl, sizeOfFra, numFraInPac, sizeOfControl, setConfigurationByFile);
         }
 
-        public void Start_transsmision(ICollision Collision, ResultsWindow Results, ulong numberOfPackagesToEnd = 50000)
+        public void Start_transsmision(ICollision Collision, ResultsWindow Results, ulong numberOfPackagesToEnd = 0, bool setConfigurationByFile = false)
         {
 
             try
             {
                 if (newTranssmision == null)
                 {
-                    newTranssmision = CreateTransmission(Collision);
+                    newTranssmision = CreateTransmission(Collision, setConfigurationByFile);
                     newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
                 }
                 if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu_GUI;
 using PackageDetection.ConfigurationModule;
+using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -63,7 +64,7 @@ namespace PackageDetection
         public void InitializeNewCollisionPage(int menuCollisionType)
         {
             transmissionByFile.SClose();
-            transmissionByFile = null;
+            //transmissionByFile = null;
 
             if (menuCollision != null)
                 menuCollision.SClose();
@@ -104,6 +105,8 @@ namespace PackageDetection
         [STAThread]
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
+            MessageBuilder.AddInfoMessage("czesc");
+
 
             if (menuCollision != null)
                 menuCollision.SClose();
@@ -122,7 +125,7 @@ namespace PackageDetection
             }
             else
             {
-                Console.WriteLine("Skonczylem");
+                //Console.WriteLine("Skonczylem");
             }
                 
         }

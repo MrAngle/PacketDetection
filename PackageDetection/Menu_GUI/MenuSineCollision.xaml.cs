@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PackageDetection.ConfigurationModule.TransmissionDataClass;
 using PackageDetection.Menu_GUI;
+using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -58,7 +59,7 @@ namespace Menu_GUI
             StartTransmission();
         }
 
-        public void StartTransmission()
+        public void StartTransmission(bool setConfigurationByFile = false)
         {
             try
             {
@@ -66,7 +67,7 @@ namespace Menu_GUI
                 {
                     SC = CreateBitsCollision(_XStart.Text, _XEnd.Text);
                 }
-                menuHandler.StartTranssmision(SC);
+                menuHandler.StartTranssmision(SC, setConfigurationByFile);
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
@@ -115,8 +116,11 @@ namespace Menu_GUI
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
+            MessageBuilder.AddTitleMessage("SINE COLLISION");
             _XStart.Text =  d[SineCollisionData.X_Start].ToString();
+            MessageBuilder.AddInfoMessage("Set x axis start: " + _XStart.Text);
             _XEnd.Text =    d[SineCollisionData.X_End].ToString();
+            MessageBuilder.AddInfoMessage("Set x axis end: " + _XEnd.Text);
         }
     }
 }

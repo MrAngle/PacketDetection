@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PackageDetection.Menu_GUI;
+using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using Projekt_Kolko;
 //using Projekt_Kolko;
@@ -102,7 +103,7 @@ namespace Menu_GUI
             StartTransmission();
         }
         
-        public void StartTransmission()
+        public void StartTransmission(bool setConfigurationByFile = false)
         {
             try
             {
@@ -110,7 +111,7 @@ namespace Menu_GUI
                 {
                     BC = CreateBitsCollision(_IsRandom.IsChecked == true, _FirstIndex.Text, _FirstFrame.Text);
                 }
-                menuHandler.StartTranssmision(BC);
+                menuHandler.StartTranssmision(BC, setConfigurationByFile);
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
             catch (FormatException)
@@ -172,9 +173,13 @@ namespace Menu_GUI
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
+            MessageBuilder.AddTitleMessage("BITS COLLISION");
             _FirstFrame.Text = d[FIRST_FRAME].ToString();
+            MessageBuilder.AddInfoMessage("Set first frame: " + _FirstFrame.Text);
             _FirstIndex.Text = d[FIRST_INDEX].ToString();
+            MessageBuilder.AddInfoMessage("Set first index: " + _FirstIndex.Text);
             _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, d[IS_RANDOM_CHECKBOX] > 0 ? true : false);
-    }
+            MessageBuilder.AddInfoMessage("Set first index: " + _IsRandom.IsChecked.Value);
+        }
     }
 }

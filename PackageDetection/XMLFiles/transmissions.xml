@@ -28,6 +28,7 @@
   
   
   <transmission>
+    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
     <id>0</id>
     <interference_level>12</interference_level>
     <size_of_frame>32</size_of_frame>
@@ -45,6 +46,7 @@
   </transmission>
 
   <transmission>
+    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
     <id>1</id>
     <interference_level>122</interference_level>
     <size_of_frame>32</size_of_frame>
@@ -61,6 +63,7 @@
   </transmission>
 
   <transmission>
+    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
     <id>2</id>
     <interference_level>122</interference_level>
     <size_of_frame>32</size_of_frame>

@@ -35,12 +35,6 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
                     { FIRST_FRAME,          (int)p.Element(FIRST_FRAME) },
                     { IS_RANDOM_CHECKBOX,   (int)p.Element(IS_RANDOM_CHECKBOX)}
                 }).ElementAt(0);
-
-            foreach (var item in Args)
-            {
-                Console.WriteLine(item.Key);
-                Console.WriteLine(item.Value);
-            }
         }
 
     }

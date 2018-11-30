@@ -1,4 +1,5 @@
 ﻿using PackageDetection;
+using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace Projekt_Kolko
         int size_of_frame = 10;
         int numbers_of_frame_in_package = 10;
         int size_control_part;
+        bool setConfigurationByFile;
+        string fileName;
+
         ResultsStorage ResultsS = new ResultsStorage(); // przechowuje wyniki
         ResultsWindow RWindow;
 
@@ -30,6 +34,9 @@ namespace Projekt_Kolko
         public bool Active { get => active; set => active = value; }
         public BackgroundWorker Worker { get => worker; set => worker = value; }
         public AutoResetEvent ResetEvent { get => _resetEvent; set => _resetEvent = value; }
+        public string FileName { get => fileName; set => fileName = value; }
+
+        public const int DATALENGHT = 5;
 
         public enum Data
         {
@@ -58,7 +65,7 @@ namespace Projekt_Kolko
 
         public TransmissionType(ulong _number_of_transsmision, IControl control_type,
             ICollision collision_type, int interference_level = 1000,
-            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE)
+            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE,bool setConfigurationByFile = false)
         {
             this._number_of_transsmision = _number_of_transsmision;
             this.control_type = control_type;
@@ -67,6 +74,7 @@ namespace Projekt_Kolko
             this.size_of_frame = size_of_frame;
             this.numbers_of_frame_in_package = numbers_of_frame_in_package;
             this.size_control_part = size_control_part;
+            this.setConfigurationByFile = setConfigurationByFile;
         }
 
 
@@ -116,7 +124,9 @@ namespace Projekt_Kolko
                 worker.DoWork += DoWorkAllTime;
             else
                 worker.DoWork += DoWorkPackagesLimit;
-            worker.RunWorkerCompleted += (obj, e) => FinishExecution();
+
+            if(setConfigurationByFile)
+                worker.RunWorkerCompleted += (obj, e) => FinishExecution();
 
             worker.RunWorkerAsync(numberOfPackagesToEnd);
             
@@ -124,6 +134,10 @@ namespace Projekt_Kolko
 
         private void FinishExecution()
         {
+            MessageBuilder.AddInfoMessage("END");
+            Console.WriteLine(MessageBuilder.GetMessage());
+            MessageBuilder.WriteMessageToFile("test");
+            MessageBuilder.ClearMessage();
             //System.Threading.Thread.Sleep(5000);
             MainWindow.CreateTransmissions(new object(), new System.Windows.RoutedEventArgs());
         }
@@ -140,9 +154,30 @@ namespace Projekt_Kolko
         public void DoWorkPackagesLimit(object sender, DoWorkEventArgs e)
         {
             ulong numberOfPackagesToEnd = (ulong)e.Argument;
-            Console.WriteLine(numberOfPackagesToEnd);
+
+            MessageBuilder.AddMainTitleMessage("START TRANSMISSIONS");
             while (numberOfPackagesToEnd >= ResultsS.P_results[(int)Data.number_of_transmission] && Active != false)
                 this.Normal();
+
+            AddResultInfoToMessageBuilder();
+        }
+
+        private void AddResultInfoToMessageBuilder()
+        {
+            MessageBuilder.AddTitleMessage("RESULTS");
+            MessageBuilder.AddTitleMessage("Packages");
+            MessageBuilder.AddInfoMessage("Detected errors: "+this.package_results[(int)Data.Detected]);
+            MessageBuilder.AddInfoMessage("Undetected errors: " + this.package_results[(int)Data.unDetected]);
+            MessageBuilder.AddInfoMessage("No errors in the package: " + this.package_results[(int)Data.noError]);
+            MessageBuilder.AddInfoMessage("Detected error in clear package : " + this.package_results[(int)Data.detectedNoError]);
+            MessageBuilder.AddInfoMessage("Number of packages sent: " + this.package_results[(int)Data.number_of_transmission]);
+
+            MessageBuilder.AddTitleMessage("Frames");
+            MessageBuilder.AddInfoMessage("Detected error: " + this.frame_results[(int)Data.Detected]);
+            MessageBuilder.AddInfoMessage("Undetected errors: " + this.frame_results[(int)Data.unDetected]);
+            MessageBuilder.AddInfoMessage("No errors in the package: " + this.frame_results[(int)Data.noError]);
+            MessageBuilder.AddInfoMessage("Detected error in clear package : " + this.frame_results[(int)Data.detectedNoError]);
+            MessageBuilder.AddInfoMessage("Number of packages sent: " + this.frame_results[(int)Data.number_of_transmission]);
         }
 
 

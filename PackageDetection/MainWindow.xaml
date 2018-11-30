@@ -39,7 +39,7 @@
                 <Button Content = "Wybrane Bity" FontSize="19" Grid.Column="0" Grid.Row="0"   Margin="0,0,0,0" Click="Click_bitsCollision"/>
                 <Button Content = "Funkcja Sinus" FontSize="19" Grid.Column="1" Grid.Row="0"  Margin="0,0,0,0" Click="Click_sinusCollision"/>
                 <Button Content = "Losowo" FontSize="19" Grid.Column="2" Grid.Row="0"  Margin="0,0,0,0" Click="Click_randomCollision"/>
-                <Button Content = "FDjsd" FontSize="19" Grid.Column="3" Grid.Row="0"  Margin="0,0,0,0" Click="Click_transmissionByFile"/>
+                <Button Content = "Czytaj Z Pliku" FontSize="19" Grid.Column="3" Grid.Row="0"  Margin="0,0,0,0" Click="Click_transmissionByFile"/>
                 <Button Content = "Wyjdz" FontSize="19" Grid.Column="4" Grid.Row="0"  Margin="0,0,0,0" Click="Click_MenuExit"/>
 
             </Grid>

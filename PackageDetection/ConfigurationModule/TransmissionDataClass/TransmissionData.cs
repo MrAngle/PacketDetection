@@ -18,6 +18,7 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
         public string controlType; //TODO: zmienic na IControl
         public ulong numberOfPackagesToEnd;
         public CollisionData collisionType;
+        public string name;
     }
 
 

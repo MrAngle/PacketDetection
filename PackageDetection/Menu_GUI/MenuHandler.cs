@@ -26,10 +26,10 @@ namespace PackageDetection.Menu_GUI
             this.NumberOfPackagesToEnd = 0;
         }
 
-        public void StartTranssmision(ICollision collision)
+        public void StartTranssmision(ICollision collision, bool setConfigurationByFile = false)
         {
             //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
-            PSettings.Start_transsmision(collision, Results, numberOfPackagesToEnd);
+            PSettings.Start_transsmision(collision, Results, numberOfPackagesToEnd, setConfigurationByFile);
         }
         
 

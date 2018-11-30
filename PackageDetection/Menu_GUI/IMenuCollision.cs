@@ -23,7 +23,7 @@ namespace Menu_GUI
 
         void SetComponentsByDictionary(Dictionary<string, int> d);
 
-        void StartTransmission();
+        void StartTransmission(bool setConfigurationByFile = false);
 
         MenuHandler GetMenuHandler();
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PackageDetection.Menu_GUI;
+using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using Projekt_Kolko;
 
@@ -57,7 +58,7 @@ namespace Menu_GUI
             StartTransmission();
         }
 
-        public void StartTransmission()
+        public void StartTransmission(bool setConfigurationByFile = false)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace Menu_GUI
                 {
                     RC = new RandomCollision();
                 }
-                menuHandler.StartTranssmision(RC);
+                menuHandler.StartTranssmision(RC, setConfigurationByFile);
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
@@ -88,6 +89,7 @@ namespace Menu_GUI
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
+            MessageBuilder.AddTitleMessage("RANDOM COLLISION");
             /*
              * Nothing to set
              */

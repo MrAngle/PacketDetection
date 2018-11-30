@@ -78,6 +78,7 @@
     <Compile Include="Menu_GUI\MenuSineCollision.xaml.cs">
       <DependentUpon>MenuSineCollision.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageBuilder\MessageBuilder.cs" />
     <Compile Include="Results\EnumA.cs" />
     <Compile Include="FrameAndPackage\ControlElements.cs" />
     <Compile Include="FrameAndPackage\Frame.cs" />
@@ -155,7 +156,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ResultsTxt\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="XMLFiles\transmissions.xml" />
   </ItemGroup>
