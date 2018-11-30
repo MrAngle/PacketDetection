@@ -1,4 +1,5 @@
-﻿using PackageDetection.Results;
+﻿using PackageDetection;
+using PackageDetection.Results;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,9 @@ namespace Projekt_Kolko
 {
     public class TransmissionType
     {
+        private BackgroundWorker worker = new BackgroundWorker();
+        private AutoResetEvent _resetEvent = new AutoResetEvent(false);
+
         ulong _number_of_transsmision;
         IControl control_type;
         ICollision collision_type;
@@ -24,6 +28,9 @@ namespace Projekt_Kolko
 
         private bool active = false; // flaga sprawdzajaca czy Transmisja jest wlaczona
         public bool Active { get => active; set => active = value; }
+        public BackgroundWorker Worker { get => worker; set => worker = value; }
+        public AutoResetEvent ResetEvent { get => _resetEvent; set => _resetEvent = value; }
+
         public enum Data
         {
             noError = 0,
@@ -96,37 +103,46 @@ namespace Projekt_Kolko
 
         }
 
-        
 
-        public void UserStop(long numberOfPackagesToEnd = 0)
+        [STAThread]
+        public void UserStop(ulong numberOfPackagesToEnd = 0)
         {
             //Console.WriteLine("jestem tutaj");
-            BackgroundWorker worker = new BackgroundWorker
+            worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true
             };
             if (numberOfPackagesToEnd <= 0)
                 worker.DoWork += DoWorkAllTime;
             else
-                worker.DoWork += DoWorkPackagesLimit; 
-
+                worker.DoWork += DoWorkPackagesLimit;
+            worker.RunWorkerCompleted += (obj, e) => FinishExecution();
 
             worker.RunWorkerAsync(numberOfPackagesToEnd);
+            
+        }
 
+        private void FinishExecution()
+        {
+            //System.Threading.Thread.Sleep(5000);
+            MainWindow.CreateTransmissions(new object(), new System.Windows.RoutedEventArgs());
         }
 
         public void DoWorkAllTime(object sender, DoWorkEventArgs e)
         {
             while(Active != false)
                 this.Normal();
+
+            //_resetEvent.Set();
         }
 
+        [STAThread]
         public void DoWorkPackagesLimit(object sender, DoWorkEventArgs e)
         {
-            long numberOfPackagesToEnd = (long)e.Argument;
+            ulong numberOfPackagesToEnd = (ulong)e.Argument;
             Console.WriteLine(numberOfPackagesToEnd);
-            //while (numberOfPackagesToEnd <= ResultsS.P_results.ge)
-                //this.Normal(result);
+            while (numberOfPackagesToEnd >= ResultsS.P_results[(int)Data.number_of_transmission] && Active != false)
+                this.Normal();
         }
 
 

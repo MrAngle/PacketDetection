@@ -20,7 +20,7 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuSineCollision : Page, MenuCollision
+    public partial class MenuSineCollision : Page, IMenuCollision
     {
 
         private MenuHandler menuHandler;
@@ -66,7 +66,8 @@ namespace Menu_GUI
                 {
                     SC = CreateBitsCollision(_XStart.Text, _XEnd.Text);
                 }
-                menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow());
+                menuHandler.StartTranssmision(SC);
+                //menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
             {

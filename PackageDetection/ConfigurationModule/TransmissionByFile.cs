@@ -1,5 +1,6 @@
 ﻿using Menu_GUI;
 using PackageDetection.ConfigurationModule.TransmissionDataClass;
+using PackageDetection.Menu_GUI;
 using Projekt_Kolko;
 using System;
 using System.Collections.Generic;
@@ -11,34 +12,39 @@ using System.Xml.Linq;
 
 namespace PackageDetection.ConfigurationModule
 {
-    public class TransmissionByFile
+    public class TransmissionByFile : IMenuCollision
     {
-        MenuCollision menuCollision;
-        TransmissionData transmissionList;
+        IMenuCollision menuCollision;
+        TransmissionData transmissionData;
         int currentId;
         string fileName;
 
-        public TransmissionByFile(string fileName)
+        System.Windows.Controls.Frame pSettings;
+        System.Windows.Controls.Frame resultWindow;
+
+        public TransmissionByFile(string fileName, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             this.fileName = fileName;
-            this.currentId = 1;
+            this.currentId = 0;
+            this.pSettings = pSettings;
+            this.resultWindow = resultWindow;
         }
 
-        CollisionData getCollisionType(XElement reader)
+        CollisionData GetCollisionType(XElement reader)
         {
             CollisionData cd = Helpers.CollisionDataFactory(((string)reader.Element("collisionType").Element("name")).ToLower());
             cd.SetComponentsByXML(reader);
             return cd;
         }
 
-        public MenuCollision GetMenuCollision()
+        public IMenuCollision GetMenuCollision()
         {
             return menuCollision;
         }
 
-        public int NextTransmission(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public bool NextTransmission()
         {
-            transmissionList = (from e in XDocument.Load(fileName).Root.Elements("transmission")
+            List<TransmissionData> transmissionLists =  (from e in XDocument.Load(fileName).Root.Elements("transmission")
                                 where (int)e.Element("id") == this.currentId
                                 select new TransmissionData
                                 {
@@ -48,34 +54,41 @@ namespace PackageDetection.ConfigurationModule
                                     numberOfTranssmision = (ulong)e.Element("number_of_transsmisions"),
                                     sizeControlPart = (int)e.Element("size_control_part"),
                                     controlType = (string)e.Element("control_type"),
-                                    collisionType = this.getCollisionType(e)
+                                    collisionType = this.GetCollisionType(e),
+                                    numberOfPackagesToEnd = (ulong)e.Element("number_of_packages_to_end")
 
-                                }).ToList()[0];
+                                }).ToList();
+            if (!(transmissionLists.Count < 1))
+                transmissionData = transmissionLists[0];
+            else
+                return false;
 
-            menuCollision = Helpers.MenuCollisionFactory(transmissionList.collisionType.Name, ref resultWindow, ref pSettings);
+            menuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name, ref resultWindow, ref pSettings);
 
-                Console.WriteLine(transmissionList.interferenceLevel);
-                Console.WriteLine(transmissionList.sizeOfFrame);
-                Console.WriteLine(transmissionList.numbersOfFrameInPackage);
-                Console.WriteLine(transmissionList.numberOfTranssmision);
-                Console.WriteLine(transmissionList.sizeControlPart);
+                Console.WriteLine(transmissionData.interferenceLevel);
+                Console.WriteLine(transmissionData.sizeOfFrame);
+                Console.WriteLine(transmissionData.numbersOfFrameInPackage);
+                Console.WriteLine(transmissionData.numberOfTranssmision);
+                Console.WriteLine(transmissionData.sizeControlPart);
 
 
 
             SetPackageSettings();
-            return 1;
+            currentId++;
+            return true;
         }
 
         private void SetPackageSettings()
         {
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsControlPart(transmissionList.sizeControlPart);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsInFrame(transmissionList.sizeOfFrame);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetFramesInPackage(transmissionList.numbersOfFrameInPackage);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(transmissionList.interferenceLevel);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetNumberOfTransmission(transmissionList.numberOfTranssmision);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetControlType(transmissionList.controlType);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsControlPart(transmissionData.sizeControlPart);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsInFrame(transmissionData.sizeOfFrame);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetFramesInPackage(transmissionData.numbersOfFrameInPackage);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
+            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetControlType(transmissionData.controlType);
+            menuCollision.GetMenuHandler().NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
 
-            menuCollision.SetComponentsByDictionary(transmissionList.collisionType.Args);
+            menuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
         }
 
         public void ConfigSetComponentByName(string componentName, string value)
@@ -93,6 +106,20 @@ namespace PackageDetection.ConfigurationModule
             menuCollision.StartTransmission();
         }
 
+        public void SetComponentByName(string componentName, string value)
+        {
+            menuCollision.SetComponentByName(componentName, value);
+        }
+
+        public void SetComponentsByDictionary(Dictionary<string, int> d)
+        {
+            menuCollision.SetComponentsByDictionary(d);
+        }
+
+        public MenuHandler GetMenuHandler()
+        {
+            return menuCollision.GetMenuHandler();
+        }
     }
 }
 //moja klasa, to jest dobra baza

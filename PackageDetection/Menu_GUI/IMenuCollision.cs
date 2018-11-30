@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Menu_GUI
 {
-    public interface MenuCollision
+    public interface IMenuCollision
     {
         
 

@@ -75,7 +75,7 @@ namespace Menu_GUI
             return new TransmissionType(numOfT, contType, Collision, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
         }
 
-        public void Start_transsmision(ICollision Collision, ResultsWindow Results, long numberOfPackagesToEnd = 0)
+        public void Start_transsmision(ICollision Collision, ResultsWindow Results, ulong numberOfPackagesToEnd = 50000)
         {
 
             try
@@ -88,10 +88,7 @@ namespace Menu_GUI
                 if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
                 {
                     newTranssmision.Active = true;
-                    if(numberOfPackagesToEnd <= 0)
-                        newTranssmision.UserStop();
-                    else
-                        newTranssmision.UserStop(numberOfPackagesToEnd);
+                    newTranssmision.UserStop(numberOfPackagesToEnd);
                 }
 
             }

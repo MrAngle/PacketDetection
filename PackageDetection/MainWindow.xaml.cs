@@ -33,12 +33,15 @@ namespace PackageDetection
         //private MenuRandomCollision random_Collision;
         
 
-        private static MenuCollision menuCollision;
+        private static IMenuCollision menuCollision;
+        public static TransmissionByFile transmissionByFile;
+        public static System.Windows.Controls.Frame menu_collisions;
 
-
+        
         public MainWindow()
         {
             InitializeComponent();
+            menu_collisions = menu_collision;
         }
 
         private void Click_bitsCollision(object sender, RoutedEventArgs e)
@@ -59,13 +62,15 @@ namespace PackageDetection
 
         public void InitializeNewCollisionPage(int menuCollisionType)
         {
+            transmissionByFile.SClose();
+            transmissionByFile = null;
 
             if (menuCollision != null)
                 menuCollision.SClose();
 
             menuCollision = Helpers.MenuCollisionFactory(menuCollisionType, ref Results_frame, ref menu_package);
 
-            menu_collision.Content = menuCollision;
+            menu_collisions.Content = menuCollision;
             //menuCollision.SetResultsPage(ref Results_frame);
             //menuCollision.SetPackageSettingsPage(ref menu_package);
 
@@ -95,21 +100,31 @@ namespace PackageDetection
             base.OnClosing(e);
         }
 
+
+        [STAThread]
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
 
             if (menuCollision != null)
                 menuCollision.SClose();
 
-            TransmissionByFile transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml");
+            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml", ref Results_frame, ref menu_package);
+            CreateTransmissions(sender, e);
+        }
 
-            transmissionByFile.NextTransmission(ref Results_frame, ref menu_package);
-            menu_collision.Content = transmissionByFile.GetMenuCollision();
-            transmissionByFile.StartTransmission();
-
-            
-            //menuCollision.SetResultsPage(ref Results_frame);
-            //menuCollision.SetPackageSettingsPage(ref menu_package);
+        [STAThread]
+        public static void CreateTransmissions(object sender, RoutedEventArgs e)
+        {
+            if (transmissionByFile.NextTransmission())
+            {
+                menu_collisions.Content = transmissionByFile.GetMenuCollision();
+                transmissionByFile.StartTransmission();
+            }
+            else
+            {
+                Console.WriteLine("Skonczylem");
+            }
+                
         }
     }
 

@@ -82,7 +82,7 @@ namespace Projekt_Kolko
         }
 
 
-        public static MenuCollision MenuCollisionFactory(int menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public static IMenuCollision MenuCollisionFactory(int menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             switch (menuCollisionType)
             {
@@ -98,7 +98,7 @@ namespace Projekt_Kolko
 
         }
 
-        public static MenuCollision MenuCollisionFactory(string menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public static IMenuCollision MenuCollisionFactory(string menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             menuCollisionType = menuCollisionType.ToLower();
             switch (menuCollisionType)

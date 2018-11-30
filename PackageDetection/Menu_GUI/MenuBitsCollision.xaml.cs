@@ -22,7 +22,7 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuBitsCollision : Page, MenuCollision
+    public partial class MenuBitsCollision : Page, IMenuCollision
     {
 
         private const string IS_RANDOM_CHECKBOX = "_israndom";
@@ -37,7 +37,6 @@ namespace Menu_GUI
         private MenuHandler menuHandler;
 
         private BitsCollision BC;
-
 
         public MenuBitsCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
@@ -111,7 +110,8 @@ namespace Menu_GUI
                 {
                     BC = CreateBitsCollision(_IsRandom.IsChecked == true, _FirstIndex.Text, _FirstFrame.Text);
                 }
-                menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow());
+                menuHandler.StartTranssmision(BC);
+                //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
             catch (FormatException)
             {

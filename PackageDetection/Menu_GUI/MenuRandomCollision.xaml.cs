@@ -19,7 +19,7 @@ using Projekt_Kolko;
 namespace Menu_GUI
 {
 
-    public partial class MenuRandomCollision : Page, MenuCollision
+    public partial class MenuRandomCollision : Page, IMenuCollision
     {
         private MenuHandler menuHandler;
 
@@ -65,7 +65,8 @@ namespace Menu_GUI
                 {
                     RC = new RandomCollision();
                 }
-                menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow());
+                menuHandler.StartTranssmision(RC);
+                //menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
             {

@@ -64,7 +64,7 @@
     <Compile Include="ControlType\CRCControl.cs" />
     <Compile Include="ControlType\Enum.cs" />
     <Compile Include="Menu_GUI\Data_verification.cs" />
-    <Compile Include="Menu_GUI\MenuCollision.cs" />
+    <Compile Include="Menu_GUI\IMenuCollision.cs" />
     <Compile Include="Menu_GUI\MenuBitsCollision.xaml.cs">
       <DependentUpon>MenuBitsCollision.xaml</DependentUpon>
     </Compile>
