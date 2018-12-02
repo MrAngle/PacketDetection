@@ -67,7 +67,7 @@ namespace Projekt_Kolko
 
         public TransmissionType(ulong _number_of_transsmision, IControl control_type,
             int interference_level = 1000,
-            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE,bool setConfigurationByFile = false)
+            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE)
         {
             this._number_of_transsmision = _number_of_transsmision;
             this.control_type = control_type;
@@ -75,7 +75,8 @@ namespace Projekt_Kolko
             this.size_of_frame = size_of_frame;
             this.numbers_of_frame_in_package = numbers_of_frame_in_package;
             this.size_control_part = size_control_part;
-            this.setConfigurationByFile = setConfigurationByFile;
+            this.setConfigurationByFile = false;
+            //Console.WriteLine("TWORZE"+ setConfigurationByFile);
         }
 
 

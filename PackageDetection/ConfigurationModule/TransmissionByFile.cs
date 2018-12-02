@@ -16,7 +16,7 @@ namespace PackageDetection.ConfigurationModule
 {
     public class TransmissionByFile
     {
-        MenuHandler menuHandler;
+        //MenuHandler menuHandler;
         TransmissionData transmissionData;
         int currentId;
         string fileName;
@@ -24,12 +24,11 @@ namespace PackageDetection.ConfigurationModule
         //System.Windows.Controls.Frame pSettings;
         //System.Windows.Controls.Frame resultWindow;
 
-        public TransmissionByFile(string fileName, ref MenuHandler menuHandler)
+        public TransmissionByFile(string fileName)
         {
             this.fileName = fileName;
             this.currentId = 0;
 
-            this.menuHandler = menuHandler;
         }
 
         CollisionData GetCollisionType(XElement reader)
@@ -56,7 +55,7 @@ namespace PackageDetection.ConfigurationModule
                                     numberOfPackagesToEnd = (ulong)e.Element("number_of_packages_to_end"),
                                     name = "_" + (int)e.Element("id") + "_" + (string)e.Element("transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture)
 
-        }).ToList();
+            }).ToList();
             if (!(transmissionLists.Count < 1))
                 transmissionData = transmissionLists[0];
             else
@@ -64,7 +63,7 @@ namespace PackageDetection.ConfigurationModule
 
             MessageBuilder.AddTitleMessage("++++" + transmissionData.name + "++++");
 
-            this.menuHandler.MenuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name);
+            MenuHandler.MenuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name);
 
 
             SetPackageSettings();
@@ -75,48 +74,44 @@ namespace PackageDetection.ConfigurationModule
         private void SetPackageSettings()
         {
             MessageBuilder.AddInfoMessage("Set size of control part : " + transmissionData.sizeControlPart);
-            this.menuHandler.GetMenuPackageSettings().SetBitsControlPart(transmissionData.sizeControlPart);
+            MenuHandler.GetMenuPackageSettings().SetBitsControlPart(transmissionData.sizeControlPart);
 
             MessageBuilder.AddInfoMessage("Set size of frame : " + transmissionData.sizeOfFrame);
-            this.menuHandler.GetMenuPackageSettings().SetBitsInFrame(transmissionData.sizeOfFrame);
+            MenuHandler.GetMenuPackageSettings().SetBitsInFrame(transmissionData.sizeOfFrame);
 
             MessageBuilder.AddInfoMessage("Set number of frames in package : " + transmissionData.numbersOfFrameInPackage);
-            this.menuHandler.GetMenuPackageSettings().SetFramesInPackage(transmissionData.numbersOfFrameInPackage);
+            MenuHandler.GetMenuPackageSettings().SetFramesInPackage(transmissionData.numbersOfFrameInPackage);
 
             MessageBuilder.AddInfoMessage("Set interference level : " + transmissionData.interferenceLevel);
-            this.menuHandler.GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
+            MenuHandler.GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
 
             MessageBuilder.AddInfoMessage("Set number of transmissions : " + transmissionData.numberOfTranssmision);
-            this.menuHandler.GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
+            MenuHandler.GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
 
             MessageBuilder.AddInfoMessage("Set control type : " + transmissionData.controlType);
-            this.menuHandler.GetMenuPackageSettings().SetControlType(transmissionData.controlType);
+            MenuHandler.GetMenuPackageSettings().SetControlType(transmissionData.controlType);
 
             MessageBuilder.AddInfoMessage("Set number of packages to end : " + transmissionData.numberOfPackagesToEnd);
-            this.menuHandler.NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
+            MenuHandler.NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
 
             //menuCollision.GetMenuHandler().GetResultsWindow.F
 
 
-            this.menuHandler.MenuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
+            MenuHandler.MenuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
         }
 
         public void ConfigSetComponentByName(string componentName, string value)
         {
-            this.menuHandler.MenuCollision.SetComponentByName(componentName, value);
+            MenuHandler.MenuCollision.SetComponentByName(componentName, value);
         }
 
-        public void SClose()
-        {
-            this.menuHandler.SClose();
-        }
 
         public void StartTransmission()
         {
             try
             {
-                this.menuHandler.Collision = this.menuHandler.MenuCollision.CreateCollision();
-                this.menuHandler.StartTransmission(transmissionData.name);
+                MenuHandler.Collision = MenuHandler.MenuCollision.CreateCollision();
+                MenuHandler.StartTransmission(transmissionData.name);
                 //menuCollision.GetMenuHandler().StartTranssmision(setConfigurationByFile);
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
@@ -129,18 +124,14 @@ namespace PackageDetection.ConfigurationModule
 
         public void SetComponentByName(string componentName, string value)
         {
-            this.menuHandler.MenuCollision.SetComponentByName(componentName, value);
+            MenuHandler.MenuCollision.SetComponentByName(componentName, value);
         }
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
-            this.menuHandler.MenuCollision.SetComponentsByDictionary(d);
+            MenuHandler.MenuCollision.SetComponentsByDictionary(d);
         }
 
-        public MenuHandler GetMenuHandler()
-        {
-            return this.menuHandler;
-        }
     }
 }
 //moja klasa, to jest dobra baza

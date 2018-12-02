@@ -39,8 +39,6 @@ namespace Menu_GUI
 
         public TransmissionType CreateTransmission()
         {
-
-
             int toInt(string str) // zamiana na Int
             { return Convert.ToInt32(str); }
 
@@ -51,7 +49,7 @@ namespace Menu_GUI
             else if (_CheckSum.IsChecked == true)
                 contType = new CheckSumControl();
             else if (_ParityBit.IsChecked == true)
-                contType = new ParityBitControl(); 
+                contType = new ParityBitControl();
             else
                 contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu TODO: zeby obslugiwalo to jakos sensownie
 
@@ -59,6 +57,7 @@ namespace Menu_GUI
             int sizeOfFra = toInt(_BitsInFrame.Text);
             int numFraInPac = toInt(_FramesInPackage.Text);
             int sizeOfControl = toInt(_BitsControlPart.Text);
+
 
             return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
         }

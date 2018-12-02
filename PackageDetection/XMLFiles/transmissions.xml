@@ -79,7 +79,7 @@
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>50000</number_of_packages_to_end>
+    <number_of_packages_to_end>5000</number_of_packages_to_end>
   </transmission>
 
   <transmission>
@@ -96,7 +96,7 @@
       <_XStart>323</_XStart>
       <_XEnd>12</_XEnd>
     </collisionType>
-  <number_of_packages_to_end>50000</number_of_packages_to_end>
+  <number_of_packages_to_end>5000</number_of_packages_to_end>
   </transmission>
 
   <transmission>
@@ -111,7 +111,7 @@
     <collisionType>
       <name>Random_collision</name>
     </collisionType>
-  <number_of_packages_to_end>50000</number_of_packages_to_end>
+  <number_of_packages_to_end>10000</number_of_packages_to_end>
   </transmission>
 
 

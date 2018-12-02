@@ -13,104 +13,106 @@ namespace PackageDetection.Menu_GUI
     public class MenuHandler
     {
 
-        private ResultsWindow Results = new ResultsWindow();
-        private MenuPackageSettings PSettings = new MenuPackageSettings();
-        private IMenuCollision menuCollision;
-        private ICollision collision;
-        private TransmissionType newTranssmision;
+        private static ResultsWindow Results = new ResultsWindow();
+        private static MenuPackageSettings PSettings = new MenuPackageSettings();
+        private static IMenuCollision menuCollision;
+        private static ICollision collision;
+        private static TransmissionType newTranssmision;
 
-        private ulong numberOfPackagesToEnd;
+        private static ulong numberOfPackagesToEnd;
 
-        public ulong NumberOfPackagesToEnd { get => numberOfPackagesToEnd; set => numberOfPackagesToEnd = value; }
-        public ICollision Collision { get => collision; set => collision = value; }
-        public IMenuCollision MenuCollision { get => menuCollision; set => menuCollision = value; }
+        public static ulong NumberOfPackagesToEnd { get => numberOfPackagesToEnd; set => numberOfPackagesToEnd = value; }
+        public static ICollision Collision { get => collision; set => collision = value; }
+        public static IMenuCollision MenuCollision { get => menuCollision; set => menuCollision = value; }
+        public static TransmissionType NewTranssmision { get => newTranssmision; set => newTranssmision = value; }
 
-        public MenuHandler(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public static void InitMenuHandler(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
-            this.SetResultsPage(ref resultWindow);
-            this.SetPackageSettingsPage(ref pSettings);
-            this.NumberOfPackagesToEnd = 0;
+            SetResultsPage(ref resultWindow);
+            SetPackageSettingsPage(ref pSettings);
+            NumberOfPackagesToEnd = 0;
         }
 
-        private void InitTransmission()
+        private static void InitTransmission()
         {
             //PSettings.NewTranssmision = new TransmissionType();
             collision = menuCollision.CreateCollision();
-            newTranssmision = PSettings.CreateTransmission();
-            newTranssmision.Collision_type = collision;
+            NewTranssmision = PSettings.CreateTransmission();
+            NewTranssmision.Collision_type = collision;
             PSettings.EnabledButtons(false);
             menuCollision.EnabledButtons(false);
         }
 
-        public void StartTransmission()
+        public static void StartTransmission()
         {
             
             //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             InitTransmission();
-            Start_transsmision(Results, numberOfPackagesToEnd);
+            Start_transsmision(Results);
         }
 
-        public void StartTransmission(string fileName)
+        public static void StartTransmission(string fileName)
         {
             InitTransmission();
-            newTranssmision.FileName = fileName;
+            NewTranssmision.FileName = fileName;
             Start_transsmision(Results, numberOfPackagesToEnd);
         }
 
 
         #region SetPages
-        public void SetResultsPage(ref System.Windows.Controls.Frame pa)
+        public static void SetResultsPage(ref System.Windows.Controls.Frame pa)
         {
             pa.Content = Results;
         }
 
-        public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
+        public static void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
         {
             pa.Content = PSettings;
         }
         #endregion
 
-        public ResultsWindow GetResultsWindow()
+        public static ResultsWindow GetResultsWindow()
         {
             return Results;
         }
 
-        public MenuPackageSettings GetMenuPackageSettings()
+        public static MenuPackageSettings GetMenuPackageSettings()
         {
             return PSettings;
         }
 
         #region Stop/exit
-        public void SClose()
+        //public static void SClose()
+        //{
+        //    Stop();
+        //    PSettings.EnabledButtons(true);
+        //    menuCollision.EnabledButtons(true);
+        //}
+        public static void StopTransmission()
         {
             Stop();
             PSettings.EnabledButtons(true);
-            menuCollision.EnabledButtons(true);
-        }
-        public void StopTransmission()
-        {
-            Stop();
-            PSettings.EnabledButtons(true);
-            menuCollision.EnabledButtons(true);
+            if(menuCollision != null)
+                menuCollision.EnabledButtons(true);
         }
         #endregion
 
-        public void Stop()
+        public static void Stop()
         {
-            if (newTranssmision != null)
-                newTranssmision.Active = false;
+            if (NewTranssmision != null)
+                NewTranssmision.Active = false;
         }
 
-        public void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
+        public static void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
         {
 
             try
             {
-                newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
-                if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
+                NewTranssmision.SetResultsPage(ref Results); //tu moze byc blad
+                if (NewTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
                 {
-                    newTranssmision.Active = true;
-                    newTranssmision.UserStop(numberOfPackagesToEnd);
+                    NewTranssmision.Active = true;
+                    NewTranssmision.UserStop(numberOfPackagesToEnd);
                 }
 
             }

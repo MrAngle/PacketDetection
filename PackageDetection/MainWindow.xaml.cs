@@ -34,7 +34,7 @@ namespace PackageDetection
         //private MenuSineCollision sine_Collision;
         //private MenuRandomCollision random_Collision;
 
-        MenuHandler menuHandler;
+        //MenuHandler menuHandler;
         //private static IMenuCollision menuCollision;
         public static TransmissionByFile transmissionByFile;
         public static System.Windows.Controls.Frame _menu_collision;
@@ -44,7 +44,7 @@ namespace PackageDetection
         {
             InitializeComponent();
             MainWindow._menu_collision = menu_collision;
-            menuHandler = new MenuHandler(ref Results_frame, ref menu_package);
+            MenuHandler.InitMenuHandler(ref Results_frame, ref menu_package);
         }
 
         private void Click_bitsCollision(object sender, RoutedEventArgs e)
@@ -65,15 +65,14 @@ namespace PackageDetection
 
         public void InitializeNewCollisionPage(int menuCollisionType)
         {
-            //transmissionByFile.SClose();
-            //transmissionByFile = null;
+            _read_from_file_button.IsEnabled = true;
+            _start_button.IsEnabled = true;
 
-            if (menuHandler.MenuCollision != null)
-                menuHandler.SClose();
+            MenuHandler.StopTransmission();
 
-            menuHandler.MenuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
+            MenuHandler.MenuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
 
-            MainWindow._menu_collision.Content = menuHandler.MenuCollision;
+            MainWindow._menu_collision.Content = MenuHandler.MenuCollision;
             //menuCollision.SetResultsPage(ref Results_frame);
             //menuCollision.SetPackageSettingsPage(ref menu_package);
 
@@ -88,12 +87,17 @@ namespace PackageDetection
 
         private void Button_Start(object sender, RoutedEventArgs e)
         {
-            menuHandler.StartTransmission();
+            _read_from_file_button.IsEnabled = false;
+            _start_button.IsEnabled = false;
+            MenuHandler.StartTransmission();
         }
 
         private void Button_Stop(object sender, RoutedEventArgs e)
         {
-            menuHandler.StopTransmission();
+            
+            MenuHandler.StopTransmission();
+            _start_button.IsEnabled = true;
+            _read_from_file_button.IsEnabled = true;
         }
 
         //Override the onClose method in the Application Main window
@@ -117,26 +121,33 @@ namespace PackageDetection
         [STAThread]
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
-            if (menuHandler.MenuCollision != null)
-                menuHandler.SClose();
+            MenuHandler.StopTransmission();
+            _start_button.IsEnabled = false;
+            _read_from_file_button.IsEnabled = false;
+            //Console.WriteLine();
 
-            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml", ref menuHandler);
-            CreateTransmissions(sender, e);
+            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml");
+            if (MenuHandler.NewTranssmision != null )
+                MenuHandler.NewTranssmision.Active = true;
+            CreateTransmissions(sender, e);   
         }
 
         [STAThread]
         public static void CreateTransmissions(object sender, RoutedEventArgs e)
         {
-            if (transmissionByFile.NextTransmission())
-            {
-                MainWindow._menu_collision.Content = transmissionByFile.GetMenuHandler().MenuCollision;
-                transmissionByFile.StartTransmission();
+            if(MenuHandler.NewTranssmision == null || MenuHandler.NewTranssmision.Active == true)
+            { 
+                if (transmissionByFile.NextTransmission())
+                {
+                    MainWindow._menu_collision.Content = MenuHandler.MenuCollision;
+                    transmissionByFile.StartTransmission();
+                }
+                else
+                {
+                    MenuHandler.StopTransmission();
+                }
             }
-            else
-            {
-                //Console.WriteLine("Skonczylem");
-            }
-                
+            //_start_button.IsEnabled = true;
         }
     }
 
