@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu_GUI;
 using PackageDetection.ConfigurationModule;
+using PackageDetection.Menu_GUI;
 using PackageDetection.MessageBuilderPackage;
 using PackageDetection.Results;
 using Projekt_Kolko;
@@ -32,17 +33,18 @@ namespace PackageDetection
         //private MenuBitsCollision bits_Collision;
         //private MenuSineCollision sine_Collision;
         //private MenuRandomCollision random_Collision;
-        
 
-        private static IMenuCollision menuCollision;
+        MenuHandler menuHandler;
+        //private static IMenuCollision menuCollision;
         public static TransmissionByFile transmissionByFile;
-        public static System.Windows.Controls.Frame menu_collisions;
+        public static System.Windows.Controls.Frame _menu_collision;
 
         
         public MainWindow()
         {
             InitializeComponent();
-            menu_collisions = menu_collision;
+            MainWindow._menu_collision = menu_collision;
+            menuHandler = new MenuHandler(ref Results_frame, ref menu_package);
         }
 
         private void Click_bitsCollision(object sender, RoutedEventArgs e)
@@ -66,12 +68,12 @@ namespace PackageDetection
             //transmissionByFile.SClose();
             //transmissionByFile = null;
 
-            if (menuCollision != null)
-                menuCollision.SClose();
+            if (menuHandler.MenuCollision != null)
+                menuHandler.SClose();
 
-            menuCollision = Helpers.MenuCollisionFactory(menuCollisionType, ref Results_frame, ref menu_package);
+            menuHandler.MenuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
 
-            menu_collisions.Content = menuCollision;
+            MainWindow._menu_collision.Content = menuHandler.MenuCollision;
             //menuCollision.SetResultsPage(ref Results_frame);
             //menuCollision.SetPackageSettingsPage(ref menu_package);
 
@@ -82,6 +84,16 @@ namespace PackageDetection
         private void Click_MenuExit(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.MainWindow.Close();
+        }
+
+        private void Button_Start(object sender, RoutedEventArgs e)
+        {
+            menuHandler.StartTransmission();
+        }
+
+        private void Button_Stop(object sender, RoutedEventArgs e)
+        {
+            menuHandler.StopTransmission();
         }
 
         //Override the onClose method in the Application Main window
@@ -105,10 +117,10 @@ namespace PackageDetection
         [STAThread]
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
-            if (menuCollision != null)
-                menuCollision.SClose();
+            if (menuHandler.MenuCollision != null)
+                menuHandler.SClose();
 
-            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml", ref Results_frame, ref menu_package);
+            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml", ref menuHandler);
             CreateTransmissions(sender, e);
         }
 
@@ -117,7 +129,7 @@ namespace PackageDetection
         {
             if (transmissionByFile.NextTransmission())
             {
-                menu_collisions.Content = transmissionByFile.GetMenuCollision();
+                MainWindow._menu_collision.Content = transmissionByFile.GetMenuHandler().MenuCollision;
                 transmissionByFile.StartTransmission();
             }
             else

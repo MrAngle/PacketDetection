@@ -24,14 +24,14 @@ namespace Menu_GUI
     public partial class MenuSineCollision : Page, IMenuCollision
     {
 
-        private MenuHandler menuHandler;
+        //private MenuHandler menuHandler;
 
-        public MenuSineCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public MenuSineCollision()
         {
             try
             {
                 InitializeComponent();
-                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
+                //menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
             }
             catch (Exception)
             {
@@ -40,37 +40,19 @@ namespace Menu_GUI
 
         }
 
-
-        #region Stop/exit
-        public void SClose()
-        {
-            menuHandler.SClose();
-        }
-        private void Button_Stop(object sender, RoutedEventArgs e)
-        {
-            menuHandler.StopTransmission();
-        }
-        #endregion
-
-
-        private void Button_Start(object sender, RoutedEventArgs e)
-        {
-            StartTransmission();
-        }
-
-        public void StartTransmission()
-        {
-            try
-            {
-                menuHandler.Collision = CreateCollision();
-                menuHandler.StartTranssmision();
-                //menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Wprowadz dane");
-            }
-        }
+        //public void StartTransmission()
+        //{
+        //    try
+        //    {
+        //        menuHandler.Collision = CreateCollision();
+        //        menuHandler.StartTranssmision();
+        //        //menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
+        //    }
+        //    catch (FormatException)
+        //    {
+        //        MessageBox.Show("Wprowadz dane");
+        //    }
+        //}
 
         public ICollision CreateCollision()
         {
@@ -102,10 +84,6 @@ namespace Menu_GUI
             throw new NotImplementedException();
         }
 
-        public MenuHandler GetMenuHandler()
-        {
-            return menuHandler;
-        }
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
@@ -114,6 +92,12 @@ namespace Menu_GUI
             MessageBuilder.AddInfoMessage("Set x axis start: " + _XStart.Text);
             _XEnd.Text =    d[SineCollisionData.X_End].ToString();
             MessageBuilder.AddInfoMessage("Set x axis end: " + _XEnd.Text);
+        }
+
+        public void EnabledButtons(bool enable)
+        {
+            _XStart.IsEnabled = enable;
+            _XEnd.IsEnabled = enable;
         }
     }
 }

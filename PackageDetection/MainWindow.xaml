@@ -13,7 +13,8 @@
             <RowDefinition Height = "30" />
             <RowDefinition Height ="280"/>
             <RowDefinition Height = "35" />
-            <RowDefinition Height ="205"/>
+            <RowDefinition Height ="175"/>
+            <RowDefinition Height ="35"/>
             <RowDefinition Height = "30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions >
@@ -43,11 +44,15 @@
                 <Button Content = "Wyjdz" FontSize="19" Grid.Column="4" Grid.Row="0"  Margin="0,0,0,0" Click="Click_MenuExit"/>
 
             </Grid>
+
         </StackPanel>
 
         <Frame x:Name="menu_package"    Grid.Column="1" Grid.Row="3" NavigationUIVisibility="Hidden" Background="#FF6B9CF3" />
         <Frame x:Name="menu_collision"  Grid.Column="1" Grid.Row="5" NavigationUIVisibility="Hidden" Background="#FF6B9CF3" />
-        <Frame x:Name="Results_frame"   Grid.Column="3" Grid.Row="3"  NavigationUIVisibility="Hidden" Background="#FF6B9CF3" Grid.RowSpan="3" />
+        <Frame x:Name="Results_frame"   Grid.Column="3" Grid.Row="3"  NavigationUIVisibility="Hidden" Background="#FF6B9CF3" Grid.RowSpan="4" />
+        <Button Grid.Column="1" Grid.Row="6" Content="Start" HorizontalAlignment="Left"  Height="35" Width="130" Click="Button_Start"   />
+        <Button Grid.Column="1" Grid.Row="6" Content="Stop"  HorizontalAlignment="Right"  Height="35" Width="130" Click="Button_Stop"  />
+        
 
     </Grid>
 </Window>

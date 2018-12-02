@@ -22,9 +22,9 @@ namespace Menu_GUI
     /// </summary>
     public partial class MenuPackageSettings : Page
     {
-        private TransmissionType newTranssmision;
+        //private TransmissionType newTranssmision;
 
-        public TransmissionType NewTranssmision { get => newTranssmision; set => newTranssmision = value; }
+        //public TransmissionType NewTranssmision { get => newTranssmision; set => newTranssmision = value; }
 
         public MenuPackageSettings()
         {
@@ -33,19 +33,7 @@ namespace Menu_GUI
 
 
 
-        public void Stop()
-        {
-            if (NewTranssmision != null)
-                NewTranssmision.Active = false;
-        }
-        public void SClose()
-        {
-            Stop();
-        }
-        private void Button_Stop(object sender, RoutedEventArgs e)
-        {
-            Stop();
-        }
+        
 
       
 
@@ -75,39 +63,38 @@ namespace Menu_GUI
             return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
         }
 
-        public void LoadDataToTransmission()
-        {
-            newTranssmision = CreateTransmission();
-        }
-        public void SetCollisionType(ICollision collision)
-        {
-            newTranssmision.Collision_type = collision;
-        }
+        //public void LoadDataToTransmission()
+        //{
+        //    newTranssmision = CreateTransmission();
+        //}
+        //public void SetCollisionType(ICollision collision)
+        //{
+        //    newTranssmision.Collision_type = collision;
+        //}
 
-        public void SetResultFileName(string fileName)
-        {
-            newTranssmision.FileName = fileName;
-        }
+        //public void SetResultFileName(string fileName)
+        //{
+        //    newTranssmision.FileName = fileName;
+        //}
 
-        public void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
-        {
+        //public void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
+        //{
 
-            try
-            {
-                EnabledButtons(false);
-                newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
-                if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
-                {
-                    newTranssmision.Active = true;
-                    newTranssmision.UserStop(numberOfPackagesToEnd);
-                }
+        //    try
+        //    {
+        //        newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
+        //        if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
+        //        {
+        //            newTranssmision.Active = true;
+        //            newTranssmision.UserStop(numberOfPackagesToEnd);
+        //        }
 
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Wprowadz dane");
-            }
-        }
+        //    }
+        //    catch (FormatException)
+        //    {
+        //        MessageBox.Show("Wprowadz dane");
+        //    }
+        //}
 
         //Ochrona przed wpisywaniem niepoparwnych danych
         #region DataInBox And Checkbox

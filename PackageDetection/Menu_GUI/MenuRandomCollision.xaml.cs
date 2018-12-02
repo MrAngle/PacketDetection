@@ -22,14 +22,14 @@ namespace Menu_GUI
 
     public partial class MenuRandomCollision : Page, IMenuCollision
     {
-        private MenuHandler menuHandler;
+        //private MenuHandler menuHandler;
 
-        public MenuRandomCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public MenuRandomCollision()
         {
             try
             {
                 InitializeComponent();
-                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
+                //menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
             }
             catch (Exception)
             {
@@ -39,24 +39,6 @@ namespace Menu_GUI
         }
 
 
-        #region Stop/exit
-        public void SClose()
-        {
-            menuHandler.SClose();
-        }
-        private void Button_Stop(object sender, RoutedEventArgs e)
-        {
-            menuHandler.StopTransmission();
-        }
-        #endregion
-
-
-
-        private void Button_Start(object sender, RoutedEventArgs e)
-        {
-            StartTransmission();
-        }
-
 
 
         public ICollision CreateCollision()
@@ -64,19 +46,6 @@ namespace Menu_GUI
             return new RandomCollision(); 
         }
 
-        public void StartTransmission()
-        {
-            try
-            {
-                menuHandler.Collision = CreateCollision();
-                menuHandler.StartTranssmision();
-                //menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Wprowadz dane");
-            }
-        }
 
 
         public void SetComponentByName(string componentName, string value)
@@ -84,10 +53,7 @@ namespace Menu_GUI
             throw new NotImplementedException();
         }
 
-        public MenuHandler GetMenuHandler()
-        {
-            return menuHandler;
-        }
+
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
@@ -97,6 +63,13 @@ namespace Menu_GUI
              */
         }
 
-       
+        public void EnabledButtons(bool enable)
+        {
+            /*
+             * Nothing to enable
+             */
+        }
+
+
     }
 }

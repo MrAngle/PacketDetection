@@ -16,20 +16,20 @@ namespace PackageDetection.ConfigurationModule
 {
     public class TransmissionByFile
     {
-        IMenuCollision menuCollision;
+        MenuHandler menuHandler;
         TransmissionData transmissionData;
         int currentId;
         string fileName;
 
-        System.Windows.Controls.Frame pSettings;
-        System.Windows.Controls.Frame resultWindow;
+        //System.Windows.Controls.Frame pSettings;
+        //System.Windows.Controls.Frame resultWindow;
 
-        public TransmissionByFile(string fileName, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public TransmissionByFile(string fileName, ref MenuHandler menuHandler)
         {
             this.fileName = fileName;
             this.currentId = 0;
-            this.pSettings = pSettings;
-            this.resultWindow = resultWindow;
+
+            this.menuHandler = menuHandler;
         }
 
         CollisionData GetCollisionType(XElement reader)
@@ -39,10 +39,6 @@ namespace PackageDetection.ConfigurationModule
             return cd;
         }
 
-        public IMenuCollision GetMenuCollision()
-        {
-            return menuCollision;
-        }
 
         public bool NextTransmission()
         {
@@ -68,7 +64,7 @@ namespace PackageDetection.ConfigurationModule
 
             MessageBuilder.AddTitleMessage("++++" + transmissionData.name + "++++");
 
-            menuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name, ref resultWindow, ref pSettings);
+            this.menuHandler.MenuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name);
 
 
             SetPackageSettings();
@@ -79,48 +75,48 @@ namespace PackageDetection.ConfigurationModule
         private void SetPackageSettings()
         {
             MessageBuilder.AddInfoMessage("Set size of control part : " + transmissionData.sizeControlPart);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsControlPart(transmissionData.sizeControlPart);
+            this.menuHandler.GetMenuPackageSettings().SetBitsControlPart(transmissionData.sizeControlPart);
 
             MessageBuilder.AddInfoMessage("Set size of frame : " + transmissionData.sizeOfFrame);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetBitsInFrame(transmissionData.sizeOfFrame);
+            this.menuHandler.GetMenuPackageSettings().SetBitsInFrame(transmissionData.sizeOfFrame);
 
             MessageBuilder.AddInfoMessage("Set number of frames in package : " + transmissionData.numbersOfFrameInPackage);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetFramesInPackage(transmissionData.numbersOfFrameInPackage);
+            this.menuHandler.GetMenuPackageSettings().SetFramesInPackage(transmissionData.numbersOfFrameInPackage);
 
             MessageBuilder.AddInfoMessage("Set interference level : " + transmissionData.interferenceLevel);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
+            this.menuHandler.GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
 
             MessageBuilder.AddInfoMessage("Set number of transmissions : " + transmissionData.numberOfTranssmision);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
+            this.menuHandler.GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
 
             MessageBuilder.AddInfoMessage("Set control type : " + transmissionData.controlType);
-            menuCollision.GetMenuHandler().GetMenuPackageSettings().SetControlType(transmissionData.controlType);
+            this.menuHandler.GetMenuPackageSettings().SetControlType(transmissionData.controlType);
 
             MessageBuilder.AddInfoMessage("Set number of packages to end : " + transmissionData.numberOfPackagesToEnd);
-            menuCollision.GetMenuHandler().NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
+            this.menuHandler.NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
 
             //menuCollision.GetMenuHandler().GetResultsWindow.F
 
-            
-            menuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
+
+            this.menuHandler.MenuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
         }
 
         public void ConfigSetComponentByName(string componentName, string value)
         {
-            menuCollision.SetComponentByName(componentName, value);
+            this.menuHandler.MenuCollision.SetComponentByName(componentName, value);
         }
 
         public void SClose()
         {
-            menuCollision.SClose();
+            this.menuHandler.SClose();
         }
 
         public void StartTransmission()
         {
             try
             {
-                menuCollision.GetMenuHandler().Collision = menuCollision.CreateCollision();
-                menuCollision.GetMenuHandler().StartTranssmision(transmissionData.name);
+                this.menuHandler.Collision = this.menuHandler.MenuCollision.CreateCollision();
+                this.menuHandler.StartTransmission(transmissionData.name);
                 //menuCollision.GetMenuHandler().StartTranssmision(setConfigurationByFile);
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
@@ -133,17 +129,17 @@ namespace PackageDetection.ConfigurationModule
 
         public void SetComponentByName(string componentName, string value)
         {
-            menuCollision.SetComponentByName(componentName, value);
+            this.menuHandler.MenuCollision.SetComponentByName(componentName, value);
         }
 
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
-            menuCollision.SetComponentsByDictionary(d);
+            this.menuHandler.MenuCollision.SetComponentsByDictionary(d);
         }
 
         public MenuHandler GetMenuHandler()
         {
-            return menuCollision.GetMenuHandler();
+            return this.menuHandler;
         }
     }
 }

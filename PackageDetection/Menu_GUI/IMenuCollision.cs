@@ -14,7 +14,6 @@ namespace Menu_GUI
     {
         
 
-        void SClose();
 
         //void SetResultsPage(ref System.Windows.Controls.Frame Results_frame);
 
@@ -24,11 +23,10 @@ namespace Menu_GUI
 
         void SetComponentsByDictionary(Dictionary<string, int> d);
 
-        void StartTransmission();
+        void EnabledButtons(bool enable);
 
         ICollision CreateCollision();
 
-        MenuHandler GetMenuHandler();
 
 
     }

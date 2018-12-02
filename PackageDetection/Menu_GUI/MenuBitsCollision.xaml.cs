@@ -35,16 +35,15 @@ namespace Menu_GUI
         //private ResultsWindow Results = new ResultsWindow();
         //private MenuPackageSettings PSettings = new MenuPackageSettings();
 
-        private MenuHandler menuHandler;
+        //private MenuHandler menuHandler;
 
-        public MenuBitsCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public MenuBitsCollision()
         {
             try
             {
                 //this.SetResultsPage(ref resultWindow);
                 //this.SetPackageSettingsPage(ref pSettings);
                 InitializeComponent();
-                menuHandler = new MenuHandler(ref resultWindow, ref pSettings);
             }
             catch (Exception)
             {
@@ -53,16 +52,7 @@ namespace Menu_GUI
 
         }
 
-        #region Stop/exit
-        public void SClose()
-        {
-            menuHandler.SClose();
-        }
-        private void Button_Stop(object sender, RoutedEventArgs e)
-        {
-            menuHandler.StopTransmission();
-        }
-        #endregion
+
 
         public ICollision CreateCollision()
         {
@@ -85,24 +75,6 @@ namespace Menu_GUI
                 return new BitsCollision.Builder().SetBasedOnPackage(isBasedPackage, firstFrameInt).ChangeGroupOfBits(firstIndexInt).Create();
         }
 
-        private void Button_Start(object sender, RoutedEventArgs e)
-        {
-            StartTransmission();
-        }
-        
-        public void StartTransmission()
-        {
-            try
-            {
-                menuHandler.Collision = CreateCollision();
-                menuHandler.StartTranssmision();
-                //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Wprowadz dane");
-            }
-        }
 
 
         #region DataInBox And Checkbox
@@ -149,11 +121,6 @@ namespace Menu_GUI
             }
         }
 
-        public MenuHandler GetMenuHandler()
-        {
-            return menuHandler;
-        }
-
         public void SetComponentsByDictionary(Dictionary<string, int> d)
         {
             MessageBuilder.AddTitleMessage("BITS COLLISION");
@@ -163,6 +130,14 @@ namespace Menu_GUI
             MessageBuilder.AddInfoMessage("Set first index: " + _FirstIndex.Text);
             _IsRandom.SetCurrentValue(CheckBox.IsCheckedProperty, d[IS_RANDOM_CHECKBOX] > 0 ? true : false);
             MessageBuilder.AddInfoMessage("Set first index: " + _IsRandom.IsChecked.Value);
+        }
+
+        public void EnabledButtons(bool enable)
+        {
+            _FirstFrame.IsEnabled = enable;
+            _FirstIndex.IsEnabled = enable;
+            _IsRandom.IsEnabled = enable;
+
         }
     }
 }

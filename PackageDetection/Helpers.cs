@@ -82,33 +82,33 @@ namespace Projekt_Kolko
         }
 
 
-        public static IMenuCollision MenuCollisionFactory(int menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public static IMenuCollision MenuCollisionFactory(int menuCollisionType)
         {
             switch (menuCollisionType)
             {
                 case (BIT_COLLISION):
-                    return new MenuBitsCollision(ref resultWindow, ref pSettings);
+                    return new MenuBitsCollision();
                 case (SINE_COLLISION):
-                    return new MenuSineCollision(ref resultWindow, ref pSettings);
+                    return new MenuSineCollision();
                 case (RANDOM_COLLISION):
-                    return new MenuRandomCollision(ref resultWindow, ref pSettings);
+                    return new MenuRandomCollision();
             }
             Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
-            return new MenuBitsCollision(ref resultWindow, ref pSettings);
+            return new MenuBitsCollision();
 
         }
 
-        public static IMenuCollision MenuCollisionFactory(string menuCollisionType, ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
+        public static IMenuCollision MenuCollisionFactory(string menuCollisionType)
         {
             menuCollisionType = menuCollisionType.ToLower();
             switch (menuCollisionType)
             {
                 case (BitsCollisionData.NAME):
-                    return new MenuBitsCollision(ref resultWindow, ref pSettings);
+                    return new MenuBitsCollision();
                 case (SineCollisionData.NAME):
-                    return new MenuSineCollision(ref resultWindow, ref pSettings);
+                    return new MenuSineCollision();
                 case (RandomCollisionData.NAME):
-                    return new MenuRandomCollision(ref resultWindow, ref pSettings);
+                    return new MenuRandomCollision();
             }
             Console.WriteLine("***** Something wrong in - HELPERS.MENUCOLLISIONFACTORY");
             return null;
