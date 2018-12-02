@@ -137,7 +137,7 @@ namespace Projekt_Kolko
         private void FinishExecution()
         {
             MessageBuilder.AddInfoMessage("END");
-            Console.WriteLine(MessageBuilder.GetMessage());
+            //Console.WriteLine(MessageBuilder.GetMessage());
             MessageBuilder.WriteMessageToFile(fileName);
             MessageBuilder.ClearMessage();
             //System.Threading.Thread.Sleep(5000);

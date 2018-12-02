@@ -38,6 +38,84 @@ namespace PackageDetection.ConfigurationModule
             return cd;
         }
 
+        //private int checkInterferenceLevelElement(XElement reader)
+        //{
+        //    int returnValue = 50;
+        //    //XElement value = reader.Element("interference_level");
+        //    if (reader == null)
+        //    {
+        //        MessageBuilder.AddWarnMessage("interference_level has not been set. The default value has been set(50)");
+        //    }
+        //    else
+        //    {
+        //        if ((int)reader < 10000 || (int)reader >= 0)
+        //            returnValue = (int)reader;
+        //        else
+        //            MessageBuilder.AddWarnMessage("interference_level - the set number is not in the range (0-10000). The default value has been set(50)");
+        //    }
+        //    return returnValue;
+        //}
+
+        public static T ConvertValue<T, U>(U value) where U : IConvertible
+        {
+            return (T)Convert.ChangeType(value, typeof(T));
+        }
+
+
+        private T CheckNumberElement<T>(XElement reader, T maxNumber, T minNumber, T defaultValue, string name)
+        {
+            T returnValue = (T)Convert.ChangeType(defaultValue, typeof(T));
+            //XElement value = reader.Element("interference_level");
+            if (reader == null)
+            {
+                MessageBuilder.AddWarnMessage(name + " has not been set. The default value has been set("+ defaultValue +")");
+            }
+            else
+            {
+                dynamic tempValue;
+                try
+                {
+                    tempValue = ConvertValue<T, string>(reader.Value);
+                    if (tempValue > minNumber && tempValue < maxNumber)
+                        returnValue = (T)tempValue;
+                    else
+                        MessageBuilder.AddWarnMessage(reader.Name + " - the set number is not in the range (" + minNumber + "- " + maxNumber + "). The default value has been set(" + defaultValue + ")");
+                }
+                catch(FormatException)
+                {
+                    MessageBuilder.AddWarnMessage(reader.Name + " - Wrong value("+ reader.Value+ "). Available values: " + minNumber + "- " + maxNumber + ". The default value has been set(" + defaultValue + ")");
+                } 
+            }
+            return returnValue;
+        }
+
+        private string CheckControl(XElement reader, string name)
+        {
+            string returnValue = ParityBitControl.NAME;
+            if (reader == null)
+            {
+                MessageBuilder.AddWarnMessage(name + " has not been set. The default value has been set("+ ParityBitControl.NAME+ ")");
+            }
+            else
+            {
+                try
+                {
+                    string tempValue = reader.Value.ToLower();
+                    if (tempValue.Equals(CheckSumControl.NAME) || tempValue.Equals(ParityBitControl.NAME) || tempValue.Equals(CRCControl.NAME))
+                        returnValue = tempValue;
+                    else
+                        MessageBuilder.AddWarnMessage(reader.Name + " - the set control type (" + reader.Value + ") doesnt exist ( available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                            ", " + CRCControl.NAME + "). The default value has been set(" + ParityBitControl.NAME + ")");
+                }
+                catch (FormatException)
+                {
+                    MessageBuilder.AddWarnMessage(reader.Name + " - Wrong value(" + reader.Value + "). Available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                            ", " + CRCControl.NAME + "). The default value has been set(" + returnValue + ")");
+                }
+            }
+            return returnValue;
+        }
+
 
         public bool NextTransmission()
         {
@@ -45,12 +123,12 @@ namespace PackageDetection.ConfigurationModule
                                 where (int)e.Element("id") == this.currentId
                                 select new TransmissionData
                                 {
-                                    interferenceLevel = (int)e.Element("interference_level"),
-                                    sizeOfFrame = (int)e.Element("size_of_frame"),
-                                    numbersOfFrameInPackage = (int)e.Element("numbers_of_frames_in_package"),
-                                    numberOfTranssmision = (ulong)e.Element("number_of_transsmisions"),
-                                    sizeControlPart = (int)e.Element("size_control_part"),
-                                    controlType = (string)e.Element("control_type"),
+                                    interferenceLevel = CheckNumberElement<int>(e.Element("interference_level"), 10000, 0, 50, "interference_level"),
+                                    sizeOfFrame = CheckNumberElement<int>(e.Element("size_of_frame"), 1024, 4, 32, "size_of_frame"),
+                                    numbersOfFrameInPackage = CheckNumberElement<int>(e.Element("numbers_of_frames_in_package"), 1024, 4, 32, "numbers_of_frames_in_package"),
+                                    numberOfTranssmision = CheckNumberElement<ulong>(e.Element("number_of_transsmisions"), 1024, 1, 32, "number_of_transsmisions"),
+                                    sizeControlPart = CheckNumberElement<int>(e.Element("size_control_part"), 256, 1, 8, "size_control_part"),
+                                    controlType = CheckControl(e.Element("control_type"), "control_type"),
                                     collisionType = this.GetCollisionType(e),
                                     numberOfPackagesToEnd = (ulong)e.Element("number_of_packages_to_end"),
                                     name = "_" + (int)e.Element("id") + "_" + (string)e.Element("transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture)
@@ -70,6 +148,8 @@ namespace PackageDetection.ConfigurationModule
             currentId++;
             return true;
         }
+
+        
 
         private void SetPackageSettings()
         {
