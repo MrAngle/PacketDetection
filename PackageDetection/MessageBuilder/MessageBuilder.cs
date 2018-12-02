@@ -61,7 +61,7 @@ namespace PackageDetection.MessageBuilderPackage
 
         }
 
-        private static void example()
+        private static void Example()
         {
             // Create a StringBuilder that expects to hold 50 characters.
             // Initialize the StringBuilder with "ABC".

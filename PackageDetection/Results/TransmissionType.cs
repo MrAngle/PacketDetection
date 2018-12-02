@@ -23,9 +23,9 @@ namespace Projekt_Kolko
         int interference_level = 1000;
         int size_of_frame = 10;
         int numbers_of_frame_in_package = 10;
-        int size_control_part;
-        bool setConfigurationByFile;
-        string fileName;
+        int size_control_part = 4;
+        bool setConfigurationByFile = false;
+        string fileName = "test";
 
         ResultsStorage ResultsS = new ResultsStorage(); // przechowuje wyniki
         ResultsWindow RWindow;
@@ -34,7 +34,8 @@ namespace Projekt_Kolko
         public bool Active { get => active; set => active = value; }
         public BackgroundWorker Worker { get => worker; set => worker = value; }
         public AutoResetEvent ResetEvent { get => _resetEvent; set => _resetEvent = value; }
-        public string FileName { get => fileName; set => fileName = value; }
+        public string FileName { get => fileName; set { fileName = value; setConfigurationByFile = true; }  }
+        public ICollision Collision_type { get => collision_type; set => collision_type = value; }
 
         public const int DATALENGHT = 5;
 
@@ -63,13 +64,13 @@ namespace Projekt_Kolko
             RWindow = r;
         }
 
+
         public TransmissionType(ulong _number_of_transsmision, IControl control_type,
-            ICollision collision_type, int interference_level = 1000,
+            int interference_level = 1000,
             int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE,bool setConfigurationByFile = false)
         {
             this._number_of_transsmision = _number_of_transsmision;
             this.control_type = control_type;
-            this.collision_type = collision_type;
             this.interference_level = interference_level;
             this.size_of_frame = size_of_frame;
             this.numbers_of_frame_in_package = numbers_of_frame_in_package;
@@ -91,7 +92,7 @@ namespace Projekt_Kolko
             {
                 Package pak = new Package();
                 pak.GenerateFrameList(numbers_of_frame_in_package, size_of_frame, control_type, size_control_part);
-                collision_type.DoCollision(pak, this.interference_level);
+                Collision_type.DoCollision(pak, this.interference_level);
                 ResultsSelectorPackage(pak.CheckPackage());
                 foreach (var item in pak.GetFrames())
                 {
@@ -136,7 +137,7 @@ namespace Projekt_Kolko
         {
             MessageBuilder.AddInfoMessage("END");
             Console.WriteLine(MessageBuilder.GetMessage());
-            MessageBuilder.WriteMessageToFile("test");
+            MessageBuilder.WriteMessageToFile(fileName);
             MessageBuilder.ClearMessage();
             //System.Threading.Thread.Sleep(5000);
             MainWindow.CreateTransmissions(new object(), new System.Windows.RoutedEventArgs());
@@ -166,18 +167,18 @@ namespace Projekt_Kolko
         {
             MessageBuilder.AddTitleMessage("RESULTS");
             MessageBuilder.AddTitleMessage("Packages");
-            MessageBuilder.AddInfoMessage("Detected errors: "+this.package_results[(int)Data.Detected]);
-            MessageBuilder.AddInfoMessage("Undetected errors: " + this.package_results[(int)Data.unDetected]);
-            MessageBuilder.AddInfoMessage("No errors in the package: " + this.package_results[(int)Data.noError]);
+            MessageBuilder.AddInfoMessage("No errors in the package: " + ResultsS.P_results[(int)Data.noError]);
+            MessageBuilder.AddInfoMessage("Detected errors: "+ ResultsS.P_results[(int)Data.Detected]);
+            MessageBuilder.AddInfoMessage("Undetected errors: " + ResultsS.P_results[(int)Data.unDetected]);
             MessageBuilder.AddInfoMessage("Detected error in clear package : " + this.package_results[(int)Data.detectedNoError]);
-            MessageBuilder.AddInfoMessage("Number of packages sent: " + this.package_results[(int)Data.number_of_transmission]);
+            MessageBuilder.AddInfoMessage("Number of packages sent: " + ResultsS.P_results[(int)Data.number_of_transmission]);
 
             MessageBuilder.AddTitleMessage("Frames");
-            MessageBuilder.AddInfoMessage("Detected error: " + this.frame_results[(int)Data.Detected]);
-            MessageBuilder.AddInfoMessage("Undetected errors: " + this.frame_results[(int)Data.unDetected]);
-            MessageBuilder.AddInfoMessage("No errors in the package: " + this.frame_results[(int)Data.noError]);
-            MessageBuilder.AddInfoMessage("Detected error in clear package : " + this.frame_results[(int)Data.detectedNoError]);
-            MessageBuilder.AddInfoMessage("Number of packages sent: " + this.frame_results[(int)Data.number_of_transmission]);
+            MessageBuilder.AddInfoMessage("No errors in the frame: " + this.ResultsS.F_results[(int)Data.noError]);
+            MessageBuilder.AddInfoMessage("Detected error: " + this.ResultsS.F_results[(int)Data.Detected]);
+            MessageBuilder.AddInfoMessage("Undetected errors: " + this.ResultsS.F_results[(int)Data.unDetected]);
+            MessageBuilder.AddInfoMessage("Detected error in clear frame : " + this.ResultsS.F_results[(int)Data.detectedNoError]);
+            MessageBuilder.AddInfoMessage("Number of packages sent: " + this.ResultsS.F_results[(int)Data.number_of_transmission]);
         }
 
 

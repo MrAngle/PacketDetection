@@ -37,14 +37,10 @@ namespace Menu_GUI
 
         private MenuHandler menuHandler;
 
-        private BitsCollision BC;
-
         public MenuBitsCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             try
             {
-                
-
                 //this.SetResultsPage(ref resultWindow);
                 //this.SetPackageSettingsPage(ref pSettings);
                 InitializeComponent();
@@ -57,19 +53,6 @@ namespace Menu_GUI
 
         }
 
-        //#region SetPages
-        //public void SetResultsPage(ref System.Windows.Controls.Frame pa)
-        //{
-        //    pa.Content = Results;
-        //}
-
-        //public void SetPackageSettingsPage(ref System.Windows.Controls.Frame pa)
-        //{
-        //    pa.Content = PSettings;
-        //}
-        //#endregion
-
-
         #region Stop/exit
         public void SClose()
         {
@@ -81,8 +64,12 @@ namespace Menu_GUI
         }
         #endregion
 
-        protected BitsCollision CreateBitsCollision(bool isRandom, string firstIndex, string firstFrame)
+        public ICollision CreateCollision()
         {
+            bool isRandom = _IsRandom.IsChecked.Value;
+            string firstIndex = _FirstIndex.Text;
+            string firstFrame = _FirstFrame.Text;
+
             int firstIndexInt;
             int firstFrameInt;
             bool isBasedPackage;
@@ -103,20 +90,16 @@ namespace Menu_GUI
             StartTransmission();
         }
         
-        public void StartTransmission(bool setConfigurationByFile = false)
+        public void StartTransmission()
         {
             try
             {
-                if (BC == null)
-                {
-                    BC = CreateBitsCollision(_IsRandom.IsChecked == true, _FirstIndex.Text, _FirstFrame.Text);
-                }
-                menuHandler.StartTranssmision(BC, setConfigurationByFile);
+                menuHandler.Collision = CreateCollision();
+                menuHandler.StartTranssmision();
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
             catch (FormatException)
             {
-                BC = null;
                 MessageBox.Show("Wprowadz dane");
             }
         }

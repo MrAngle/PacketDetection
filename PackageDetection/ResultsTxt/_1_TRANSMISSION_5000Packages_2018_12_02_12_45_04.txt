@@ -1,0 +1,69 @@
+---------++++_1_TRANSMISSION_5000Packages_2018_12_02_12_45_04++++---------
+
+
+
+[INFO] : Set size of control part : 12
+
+[INFO] : Set size of frame : 32
+
+[INFO] : Set number of frames in package : 12
+
+[INFO] : Set interference level : 9
+
+[INFO] : Set number of transmissions : 32
+
+[INFO] : Set control type : check_suM
+
+[INFO] : Set number of packages to end : 50000
+
+---------BITS COLLISION---------
+
+
+
+[INFO] : Set first frame: 0
+
+[INFO] : Set first index: 0
+
+[INFO] : Set first index: False
+
+
+
+|**************START TRANSMISSIONS**************|  
+
+
+
+
+---------RESULTS---------
+
+
+
+---------Packages---------
+
+
+
+[INFO] : No errors in the package: 0
+
+[INFO] : Detected errors: 0
+
+[INFO] : Undetected errors: 50016
+
+[INFO] : Detected error in clear package : 0
+
+[INFO] : Number of packages sent: 50016
+
+---------Frames---------
+
+
+
+[INFO] : No errors in the frame: 550176
+
+[INFO] : Detected error: 50016
+
+[INFO] : Undetected errors: 0
+
+[INFO] : Detected error in clear frame : 0
+
+[INFO] : Number of packages sent: 600192
+
+[INFO] : END
+

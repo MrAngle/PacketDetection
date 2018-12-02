@@ -24,7 +24,6 @@ namespace Menu_GUI
     {
         private MenuHandler menuHandler;
 
-        private RandomCollision RC;
         public MenuRandomCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             try
@@ -58,20 +57,23 @@ namespace Menu_GUI
             StartTransmission();
         }
 
-        public void StartTransmission(bool setConfigurationByFile = false)
+
+
+        public ICollision CreateCollision()
+        {
+            return new RandomCollision(); 
+        }
+
+        public void StartTransmission()
         {
             try
             {
-                if (RC == null)
-                {
-                    RC = new RandomCollision();
-                }
-                menuHandler.StartTranssmision(RC, setConfigurationByFile);
+                menuHandler.Collision = CreateCollision();
+                menuHandler.StartTranssmision();
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(RC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
             {
-                RC = null;
                 MessageBox.Show("Wprowadz dane");
             }
         }
@@ -94,5 +96,7 @@ namespace Menu_GUI
              * Nothing to set
              */
         }
+
+       
     }
 }

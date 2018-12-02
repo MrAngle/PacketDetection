@@ -2,6 +2,25 @@
 <root>
   
   <!-- EXAMPLE TRANSMISSION
+  
+  <transmission>
+    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
+    <id>0</id>
+    <interference_level>12</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>12</size_control_part>
+    <control_type>check_suM</control_type>
+    <collisionType>
+      <name>bits_collision</name>
+      <_firstindex>23</_firstindex>
+      <_firstframe>12</_firstframe>
+      <_israndom>0</_israndom>
+    </collisionType>
+    <number_of_packages_to_end>5000</number_of_packages_to_end>
+  </transmission>
+  
   <transmission>           
     <id>0</id> - program start transmission with id 0 
     <interference_level>12</interference_level>
@@ -21,14 +40,12 @@
       <name>bits_collision</name>             
       <_firstindex>23</_firstindex>
       <_firstframe>12</_firstframe>
-      <_israndom>1</_israndom>
+      <_israndom>1</_israndom>2
     </collisionType>
   </transmission>
   -->
-  
-  
   <transmission>
-    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
+    <transmission_name>TRANSMISSION_5000Packages_check_sum</transmission_name>
     <id>0</id>
     <interference_level>12</interference_level>
     <size_of_frame>32</size_of_frame>
@@ -45,9 +62,29 @@
     <number_of_packages_to_end>5000</number_of_packages_to_end>
   </transmission>
 
+
+
   <transmission>
     <transmission_name>TRANSMISSION_5000Packages</transmission_name>
     <id>1</id>
+    <interference_level>9</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>12</size_control_part>
+    <control_type>check_suM</control_type>
+    <collisionType>
+      <name>bits_collision</name>
+      <_firstindex>0</_firstindex>
+      <_firstframe>0</_firstframe>
+      <_israndom>0</_israndom>
+    </collisionType>
+    <number_of_packages_to_end>50000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_5000Packages</transmission_name>
+    <id>2</id>
     <interference_level>122</interference_level>
     <size_of_frame>32</size_of_frame>
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
@@ -59,22 +96,22 @@
       <_XStart>323</_XStart>
       <_XEnd>12</_XEnd>
     </collisionType>
-  <number_of_packages_to_end>5000</number_of_packages_to_end>
+  <number_of_packages_to_end>50000</number_of_packages_to_end>
   </transmission>
 
   <transmission>
     <transmission_name>TRANSMISSION_5000Packages</transmission_name>
-    <id>2</id>
+    <id>3</id>
     <interference_level>122</interference_level>
     <size_of_frame>32</size_of_frame>
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
     <number_of_transsmisions>32</number_of_transsmisions>
     <size_control_part>12</size_control_part>
-    <control_type>check_suM</control_type>
+    <control_type>parity_bit</control_type>
     <collisionType>
       <name>Random_collision</name>
     </collisionType>
-  <number_of_packages_to_end>5000</number_of_packages_to_end>
+  <number_of_packages_to_end>50000</number_of_packages_to_end>
   </transmission>
 
 

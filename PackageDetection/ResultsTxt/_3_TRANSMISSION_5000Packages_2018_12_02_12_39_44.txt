@@ -1,0 +1,63 @@
+---------++++_3_TRANSMISSION_5000Packages_2018_12_02_12_39_44++++---------
+
+
+
+[INFO] : Set size of control part : 12
+
+[INFO] : Set size of frame : 32
+
+[INFO] : Set number of frames in package : 12
+
+[INFO] : Set interference level : 122
+
+[INFO] : Set number of transmissions : 32
+
+[INFO] : Set control type : parity_bit
+
+[INFO] : Set number of packages to end : 5000
+
+---------RANDOM COLLISION---------
+
+
+
+
+
+|**************START TRANSMISSIONS**************|  
+
+
+
+
+---------RESULTS---------
+
+
+
+---------Packages---------
+
+
+
+[INFO] : No errors in the package: 43
+
+[INFO] : Detected errors: 2484
+
+[INFO] : Undetected errors: 2497
+
+[INFO] : Detected error in clear package : 0
+
+[INFO] : Number of packages sent: 5024
+
+---------Frames---------
+
+
+
+[INFO] : No errors in the frame: 40011
+
+[INFO] : Detected error: 16936
+
+[INFO] : Undetected errors: 3341
+
+[INFO] : Detected error in clear frame : 0
+
+[INFO] : Number of packages sent: 60288
+
+[INFO] : END
+

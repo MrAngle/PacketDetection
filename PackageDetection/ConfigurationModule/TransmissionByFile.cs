@@ -5,6 +5,7 @@ using PackageDetection.MessageBuilderPackage;
 using Projekt_Kolko;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,9 +58,9 @@ namespace PackageDetection.ConfigurationModule
                                     controlType = (string)e.Element("control_type"),
                                     collisionType = this.GetCollisionType(e),
                                     numberOfPackagesToEnd = (ulong)e.Element("number_of_packages_to_end"),
-                                    name = "_" + (int)e.Element("id") + "_" + (string)e.Element("transmission_name")
+                                    name = "_" + (int)e.Element("id") + "_" + (string)e.Element("transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture)
 
-                                }).ToList();
+        }).ToList();
             if (!(transmissionLists.Count < 1))
                 transmissionData = transmissionLists[0];
             else
@@ -89,7 +90,7 @@ namespace PackageDetection.ConfigurationModule
             MessageBuilder.AddInfoMessage("Set interference level : " + transmissionData.interferenceLevel);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetInterferenceLVL(transmissionData.interferenceLevel);
 
-            MessageBuilder.AddInfoMessage("Set namber of transmissions : " + transmissionData.numberOfTranssmision);
+            MessageBuilder.AddInfoMessage("Set number of transmissions : " + transmissionData.numberOfTranssmision);
             menuCollision.GetMenuHandler().GetMenuPackageSettings().SetNumberOfTransmission(transmissionData.numberOfTranssmision);
 
             MessageBuilder.AddInfoMessage("Set control type : " + transmissionData.controlType);
@@ -116,7 +117,18 @@ namespace PackageDetection.ConfigurationModule
 
         public void StartTransmission()
         {
-            menuCollision.StartTransmission(true);
+            try
+            {
+                menuCollision.GetMenuHandler().Collision = menuCollision.CreateCollision();
+                menuCollision.GetMenuHandler().StartTranssmision(transmissionData.name);
+                //menuCollision.GetMenuHandler().StartTranssmision(setConfigurationByFile);
+                //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
+            }
+            catch (FormatException)
+            {
+                //BC = null;
+                //MessageBox.Show("Wprowadz dane");
+            }
         }
 
         public void SetComponentByName(string componentName, string value)

@@ -29,7 +29,7 @@ namespace PackageDetection.Results
         {
 
             void act()
-            { _PnoError.Text = " "; }
+            { _PDetected.Text = " "; }
 
             _PnoError.Dispatcher.Invoke(act);
             _PDetected.Dispatcher.Invoke(act);

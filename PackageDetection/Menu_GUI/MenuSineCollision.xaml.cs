@@ -26,7 +26,6 @@ namespace Menu_GUI
 
         private MenuHandler menuHandler;
 
-        private SineCollision SC;
         public MenuSineCollision(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
         {
             try
@@ -59,40 +58,34 @@ namespace Menu_GUI
             StartTransmission();
         }
 
-        public void StartTransmission(bool setConfigurationByFile = false)
+        public void StartTransmission()
         {
             try
             {
-                if (SC == null)
-                {
-                    SC = CreateBitsCollision(_XStart.Text, _XEnd.Text);
-                }
-                menuHandler.StartTranssmision(SC, setConfigurationByFile);
+                menuHandler.Collision = CreateCollision();
+                menuHandler.StartTranssmision();
                 //menuHandler.GetMenuPackageSettings().Start_transsmision(SC, menuHandler.GetResultsWindow(), numberOfPackagesToEnd);
             }
             catch (FormatException)
             {
-                SC = null;
                 MessageBox.Show("Wprowadz dane");
             }
         }
 
-        protected SineCollision CreateBitsCollision(string start, string end)
+        public ICollision CreateCollision()
         {
-            double x_start = Convert.ToDouble(start);
-            double x_end = Convert.ToDouble(end);
-
-            
+            double x_start = Convert.ToDouble(_XStart.Text);
+            double x_end = Convert.ToDouble(_XEnd.Text);
 
             if (x_start > x_end)
             {
-                void Swap<T>(ref T x, ref T y) { T t = y; y = x;  x = t; }
-                Swap(ref x_start,ref x_end);
+                void Swap<T>(ref T x, ref T y) { T t = y; y = x; x = t; }
+                Swap(ref x_start, ref x_end);
             }
 
-
-            return  new SineCollision(1, 2, 0, x_start, x_end);
+            return new SineCollision(1, 2, 0, x_start, x_end);
         }
+
 
         //Ochrona przed wpisywaniem niepoparwnych danych
         #region DataInBox And Checkbox 

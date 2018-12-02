@@ -49,7 +49,7 @@ namespace Menu_GUI
 
       
 
-        public TransmissionType CreateTransmission(ICollision Collision, bool setConfigurationByFile = false)
+        public TransmissionType CreateTransmission()
         {
 
 
@@ -72,19 +72,30 @@ namespace Menu_GUI
             int numFraInPac = toInt(_FramesInPackage.Text);
             int sizeOfControl = toInt(_BitsControlPart.Text);
 
-            return new TransmissionType(numOfT, contType, Collision, intLvl, sizeOfFra, numFraInPac, sizeOfControl, setConfigurationByFile);
+            return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
         }
 
-        public void Start_transsmision(ICollision Collision, ResultsWindow Results, ulong numberOfPackagesToEnd = 0, bool setConfigurationByFile = false)
+        public void LoadDataToTransmission()
+        {
+            newTranssmision = CreateTransmission();
+        }
+        public void SetCollisionType(ICollision collision)
+        {
+            newTranssmision.Collision_type = collision;
+        }
+
+        public void SetResultFileName(string fileName)
+        {
+            newTranssmision.FileName = fileName;
+        }
+
+        public void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
         {
 
             try
             {
-                if (newTranssmision == null)
-                {
-                    newTranssmision = CreateTransmission(Collision, setConfigurationByFile);
-                    newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
-                }
+                EnabledButtons(false);
+                newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
                 if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
                 {
                     newTranssmision.Active = true;
@@ -210,5 +221,18 @@ namespace Menu_GUI
 
 
         #endregion
+
+        public void EnabledButtons(bool enable)
+        {
+            _BitsControlPart.IsEnabled = enable;
+            _BitsInFrame.IsEnabled = enable;
+            _CheckSum.IsEnabled = enable;
+            _CRC.IsEnabled = enable;
+            _FramesInPackage.IsEnabled = enable;
+            _InterferenceLVL.IsEnabled = enable;
+            _NumberOfTransmission.IsEnabled = enable;
+            _ParityBit.IsEnabled = enable;
+           
+        }
     }
 }

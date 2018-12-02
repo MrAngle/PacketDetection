@@ -1,5 +1,6 @@
 ﻿using PackageDetection.Menu_GUI;
 using PackageDetection.Results;
+using Projekt_Kolko;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace Menu_GUI
 
         void SetComponentsByDictionary(Dictionary<string, int> d);
 
-        void StartTransmission(bool setConfigurationByFile = false);
+        void StartTransmission();
+
+        ICollision CreateCollision();
 
         MenuHandler GetMenuHandler();
 

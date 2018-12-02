@@ -63,7 +63,7 @@ namespace PackageDetection
 
         public void InitializeNewCollisionPage(int menuCollisionType)
         {
-            transmissionByFile.SClose();
+            //transmissionByFile.SClose();
             //transmissionByFile = null;
 
             if (menuCollision != null)
@@ -105,9 +105,6 @@ namespace PackageDetection
         [STAThread]
         private void Click_transmissionByFile(object sender, RoutedEventArgs e)
         {
-            MessageBuilder.AddInfoMessage("czesc");
-
-
             if (menuCollision != null)
                 menuCollision.SClose();
 
