@@ -74,8 +74,8 @@
     <size_control_part>12</size_control_part>
     <control_type>check_suMsdsa sad</control_type>
     <collisionType>
-      <name>bits_collisionds</name>
-      <_firstindex>0</_firstindex>
+      <name>bits_collision</name>
+      <_firstindex>-100000</_firstindex>
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
@@ -89,10 +89,10 @@
     <size_of_frame>32</size_of_frame>
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
     <number_of_transsmisions>32</number_of_transsmisions>
-    <size_control_part>12</size_control_part>
+    <size_control_part>12</size_control_part>a
     <control_type>crc</control_type>
     <collisionType>
-      <name>sine_collision</name>
+      <name>sine_collision</name>das
       <_XStart>323</_XStart>
       <_XEnd>12</_XEnd>
     </collisionType>
@@ -102,18 +102,34 @@
   <transmission>
     <transmission_name>TRANSMISSION_5000Packages</transmission_name>
     <id>3</id>
-    <interference_level>122</interference_level>
+    <interference_level>122s</interference_level>
     <size_of_frame>32</size_of_frame>
     <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
-    <number_of_transsmisions>32</number_of_transsmisions>
+    <number_of_transsmisions>32as</number_of_transsmisions>
     <size_control_part>12</size_control_part>
     <control_type>parity_bit</control_type>
     <collisionType>
-      <name>Random_collision</name>
+      <name>Random_collisiodsn</name>a
     </collisionType>
   <number_of_packages_to_end>10000</number_of_packages_to_end>
   </transmission>
 
+  <transmission>
+    <transmission_name>AJiO_To_najlepszy_przedmiot</transmission_name>
+    <id>4</id>
+    <interference_level>122</interference_level>
+    <size_of_frame>32</size_of_frame>
+    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
+    <!--<number_of_transsmisions>32</number_of_transsmisions>-->
+    <size_control_part>12</size_control_part>a
+    <control_type>crc</control_type>
+    <collisionType>
+      <name>sine_collision</name>das
+      <_XStart>323</_XStart>
+      <_XEnd>12</_XEnd>
+    </collisionType>
+    <number_of_packages_to_end>5000</number_of_packages_to_end>
+  </transmission>
 
 
 </root>

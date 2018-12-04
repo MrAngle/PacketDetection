@@ -1,5 +1,6 @@
 ﻿using Menu_GUI;
 using PackageDetection.ConfigurationModule.TransmissionDataClass;
+using PackageDetection.ConfigurationModule.TransmissionDataClass.Data;
 using PackageDetection.Menu_GUI;
 using PackageDetection.MessageBuilderPackage;
 using Projekt_Kolko;
@@ -20,6 +21,7 @@ namespace PackageDetection.ConfigurationModule
         TransmissionData transmissionData;
         int currentId;
         string fileName;
+        bool dataIsCorrect;
 
         //System.Windows.Controls.Frame pSettings;
         //System.Windows.Controls.Frame resultWindow;
@@ -33,34 +35,50 @@ namespace PackageDetection.ConfigurationModule
 
         CollisionData GetCollisionType(XElement reader)
         {
-            CollisionData cd = Helpers.CollisionDataFactory(((string)reader.Element("collisionType").Element("name")).ToLower());
-            cd.SetComponentsByXML(reader);
+            CollisionData cd = null;
+            try
+            {
+                if (reader == null) throw new CollisionDataException("collisionType: has not been set.");
+
+                string collisionName = ((string)reader.Element("name")).ToLower();
+                if((cd = Helpers.CollisionDataFactory(collisionName)) == null) throw new CollisionDataException("collisionType.name: wrong name has been set ("+ collisionName +")");
+                try
+                {
+                    cd.SetComponentsByXML(reader);
+                }
+                catch
+                {
+                    throw new CollisionDataException();
+                }
+            }
+            catch(CollisionDataException c){
+                MessageBuilder.AddErrorMessage("Collision type: " + c.Message);
+                dataIsCorrect = false;
+            }
             return cd;
         }
 
-        //private int checkInterferenceLevelElement(XElement reader)
-        //{
-        //    int returnValue = 50;
-        //    //XElement value = reader.Element("interference_level");
-        //    if (reader == null)
-        //    {
-        //        MessageBuilder.AddWarnMessage("interference_level has not been set. The default value has been set(50)");
-        //    }
-        //    else
-        //    {
-        //        if ((int)reader < 10000 || (int)reader >= 0)
-        //            returnValue = (int)reader;
-        //        else
-        //            MessageBuilder.AddWarnMessage("interference_level - the set number is not in the range (0-10000). The default value has been set(50)");
-        //    }
-        //    return returnValue;
-        //}
-
-        public static T ConvertValue<T, U>(U value) where U : IConvertible
-        {
-            return (T)Convert.ChangeType(value, typeof(T));
-        }
-
+//                    else
+//            {
+//                dynamic tempValue;
+//                try
+//                {
+//                    tempValue = ConvertValue<T, string>(reader.Value);
+//                    if (tempValue > minNumber && tempValue<maxNumber)
+//                        returnValue = (T) tempValue;
+//                    else
+//                    {
+//                        MessageBuilder.AddErrorMessage(reader.Name + " - the set number is not in the range (" + minNumber + "- " + maxNumber + ").");
+//                        isCorrect = false;
+//                    }
+//}
+//                catch(FormatException)
+//                {
+//                    MessageBuilder.AddErrorMessage(reader.Name + " - Wrong value("+ reader.Value+ "). Available values: " + minNumber + "- " + maxNumber + ".");
+//                    isCorrect = false;
+//                } 
+//            }
+      
 
         private T CheckNumberElement<T>(XElement reader, T maxNumber, T minNumber, T defaultValue, string name)
         {
@@ -68,84 +86,69 @@ namespace PackageDetection.ConfigurationModule
             //XElement value = reader.Element("interference_level");
             if (reader == null)
             {
-                MessageBuilder.AddWarnMessage(name + " has not been set. The default value has been set("+ defaultValue +")");
-            }
-            else
-            {
-                dynamic tempValue;
-                try
-                {
-                    tempValue = ConvertValue<T, string>(reader.Value);
-                    if (tempValue > minNumber && tempValue < maxNumber)
-                        returnValue = (T)tempValue;
-                    else
-                        MessageBuilder.AddWarnMessage(reader.Name + " - the set number is not in the range (" + minNumber + "- " + maxNumber + "). The default value has been set(" + defaultValue + ")");
-                }
-                catch(FormatException)
-                {
-                    MessageBuilder.AddWarnMessage(reader.Name + " - Wrong value("+ reader.Value+ "). Available values: " + minNumber + "- " + maxNumber + ". The default value has been set(" + defaultValue + ")");
-                } 
-            }
-            return returnValue;
-        }
-
-        private string CheckControl(XElement reader, string name)
-        {
-            string returnValue = ParityBitControl.NAME;
-            if (reader == null)
-            {
-                MessageBuilder.AddWarnMessage(name + " has not been set. The default value has been set("+ ParityBitControl.NAME+ ")");
+                MessageBuilder.AddErrorMessage(name + " has not been set.");
+                MessageBuilder.AddWarnMessage(name + ": The default value has been set(" + defaultValue + ")");
             }
             else
             {
                 try
                 {
-                    string tempValue = reader.Value.ToLower();
-                    if (tempValue.Equals(CheckSumControl.NAME) || tempValue.Equals(ParityBitControl.NAME) || tempValue.Equals(CRCControl.NAME))
-                        returnValue = tempValue;
-                    else
-                        MessageBuilder.AddWarnMessage(reader.Name + " - the set control type (" + reader.Value + ") doesnt exist ( available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
-                            ", " + CRCControl.NAME + "). The default value has been set(" + ParityBitControl.NAME + ")");
+                    return returnValue = Helpers.CheckNumberElement<T>(Helpers.ConvertValue<T, string>(reader.Value), maxNumber, minNumber, defaultValue, name);
                 }
                 catch (FormatException)
                 {
-                    MessageBuilder.AddWarnMessage(reader.Name + " - Wrong value(" + reader.Value + "). Available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
-                            ", " + CRCControl.NAME + "). The default value has been set(" + returnValue + ")");
+                    MessageBuilder.AddErrorMessage(name + " - Wrong value(" + reader.Value + "). Available values: " + minNumber + "- " + maxNumber + ".");
                 }
             }
+            MessageBuilder.AddWarnMessage(name + ": The default value has been set(" + defaultValue + ")");
             return returnValue;
+        }
+
+
+        private List<TransmissionData> GetTransmissionByID(int transmissionID)
+        {
+            return (from e in XDocument.Load(fileName).Root.Elements("transmission")
+                    where (int)e.Element("id") == transmissionID
+                    select new TransmissionData
+                    {
+                        name = "_" + CheckNumberElement<int>(e.Element("id"), 99999, 0, 0, "id") + "_" + CheckName(e.Element("transmission_name"), "transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture),
+                        interferenceLevel = CheckNumberElement<int>(e.Element("interference_level"), 10000, 0, 50, "interference_level"),
+                        sizeOfFrame = CheckNumberElement<int>(e.Element("size_of_frame"), 1024, 4, 32, "size_of_frame"),
+                        numbersOfFrameInPackage = CheckNumberElement<int>(e.Element("numbers_of_frames_in_package"), 1024, 4, 32, "numbers_of_frames_in_package"),
+                        numberOfTranssmision = CheckNumberElement<ulong>(e.Element("number_of_transsmisions"), 1024, 1, 32, "number_of_transsmisions"),
+                        sizeControlPart = CheckNumberElement<int>(e.Element("size_control_part"), 256, 1, 8, "size_control_part"),
+                        controlType = CheckControl(e.Element("control_type"), "control_type"),
+                        collisionType = this.GetCollisionType(e.Element("collisionType")),
+                        numberOfPackagesToEnd = CheckNumberElement<ulong>(e.Element("number_of_packages_to_end"), 1000000, 10, 50000, "number_of_packages_to_end")
+                        
+                    }).ToList();
         }
 
 
         public bool NextTransmission()
         {
-            List<TransmissionData> transmissionLists =  (from e in XDocument.Load(fileName).Root.Elements("transmission")
-                                where (int)e.Element("id") == this.currentId
-                                select new TransmissionData
-                                {
-                                    interferenceLevel = CheckNumberElement<int>(e.Element("interference_level"), 10000, 0, 50, "interference_level"),
-                                    sizeOfFrame = CheckNumberElement<int>(e.Element("size_of_frame"), 1024, 4, 32, "size_of_frame"),
-                                    numbersOfFrameInPackage = CheckNumberElement<int>(e.Element("numbers_of_frames_in_package"), 1024, 4, 32, "numbers_of_frames_in_package"),
-                                    numberOfTranssmision = CheckNumberElement<ulong>(e.Element("number_of_transsmisions"), 1024, 1, 32, "number_of_transsmisions"),
-                                    sizeControlPart = CheckNumberElement<int>(e.Element("size_control_part"), 256, 1, 8, "size_control_part"),
-                                    controlType = CheckControl(e.Element("control_type"), "control_type"),
-                                    collisionType = this.GetCollisionType(e),
-                                    numberOfPackagesToEnd = (ulong)e.Element("number_of_packages_to_end"),
-                                    name = "_" + (int)e.Element("id") + "_" + (string)e.Element("transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture)
+            dataIsCorrect = true;
 
-            }).ToList();
-            if (!(transmissionLists.Count < 1))
-                transmissionData = transmissionLists[0];
+            MessageBuilder.AddTitleMessage("++++++++++++++++++++++++++++++");
+            List<TransmissionData> transmissionList = GetTransmissionByID(this.currentId);
+            this.currentId++;
+            if (!(transmissionList.Count < 1))
+                transmissionData = transmissionList[0];
             else
                 return false;
-
-            MessageBuilder.AddTitleMessage("++++" + transmissionData.name + "++++");
+            if (!dataIsCorrect)
+            {
+                MessageBuilder.AddErrorMessage("!!!!! Cannot start transmission test !!!!!");
+                MessageBuilder.WriteMessageToFile("[FAILED]_" + transmissionData.name);
+                MessageBuilder.ClearMessage();
+                return NextTransmission();
+            }
 
             MenuHandler.MenuCollision = Helpers.MenuCollisionFactory(transmissionData.collisionType.Name);
 
-
+            MessageBuilder.AddInfoMessage(" ");
             SetPackageSettings();
-            currentId++;
+            MessageBuilder.AddInfoMessage("Transmission data is ready to tests: " + transmissionData.name);
             return true;
         }
 
@@ -192,13 +195,14 @@ namespace PackageDetection.ConfigurationModule
             {
                 MenuHandler.Collision = MenuHandler.MenuCollision.CreateCollision();
                 MenuHandler.StartTransmission(transmissionData.name);
-                //menuCollision.GetMenuHandler().StartTranssmision(setConfigurationByFile);
-                //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             }
             catch (FormatException)
             {
-                //BC = null;
-                //MessageBox.Show("Wprowadz dane");
+                MessageBuilder.AddErrorMessage("Error when trying to start transmission");
+                if (transmissionData.name != null)
+                    MessageBuilder.WriteMessageToFile(transmissionData.name);
+                else
+                    MessageBuilder.WriteMessageToFile("undefined_errors");
             }
         }
 
@@ -212,7 +216,82 @@ namespace PackageDetection.ConfigurationModule
             MenuHandler.MenuCollision.SetComponentsByDictionary(d);
         }
 
+
+
+        private string CheckControl(XElement reader, string name)
+        {
+            bool isCorrect = true;
+            string returnValue = ParityBitControl.NAME;
+            if (reader == null)
+            {
+                MessageBuilder.AddErrorMessage(name + " has not been set.");
+            }
+            else
+            {
+                try
+                {
+                    string tempValue = reader.Value.ToLower();
+                    if (tempValue.Equals(CheckSumControl.NAME) || tempValue.Equals(ParityBitControl.NAME) || tempValue.Equals(CRCControl.NAME))
+                        returnValue = tempValue;
+                    else
+                    {
+                        MessageBuilder.AddErrorMessage(reader.Name + " - the set control type (" + reader.Value + ") doesnt exist ( available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                            ", " + CRCControl.NAME + ").");
+                        isCorrect = false;
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBuilder.AddErrorMessage(reader.Name + " - Wrong value(" + reader.Value + "). Available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                            ", " + CRCControl.NAME + ").");
+                    isCorrect = false;
+                }
+            }
+            if (!isCorrect)
+                MessageBuilder.AddWarnMessage("The default value has been set(" + returnValue + ")");
+            return returnValue;
+        }
+
+        private string CheckName(XElement reader, string name)
+        {
+            bool isCorrect = true;
+            string returnValue = "Default" + (new Random()).Next(0, 100000);
+            if (reader == null)
+            {
+                MessageBuilder.AddWarnMessage(name + " has not been set.");
+                isCorrect = false;
+            }
+            else
+            {
+                try
+                {
+                    string tempValue = reader.Value;
+                    if (tempValue.Length > 150)
+                    {
+                        MessageBuilder.AddWarnMessage(name + " is too long. The default value has been set(" + returnValue + ")");
+                        isCorrect = false;
+                    }
+                    else
+                        returnValue = tempValue;
+                }
+                catch (FormatException)
+                {
+                    MessageBuilder.AddWarnMessage(reader.Name + " - Wrong value(" + reader.Value + "). The default value has been set(" + returnValue + ")");
+                    isCorrect = false;
+                }
+            }
+            if (!isCorrect)
+                MessageBuilder.AddWarnMessage("The default value has been set(" + returnValue + ")");
+            return returnValue;
+        }
+
     }
+
+
+
+
+
+
 }
 //moja klasa, to jest dobra baza
 //pieniadze sa prywatne, a stringi łososiokształtne

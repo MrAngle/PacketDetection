@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PackageDetection.ConfigurationModule.TransmissionDataClass.Data;
+using PackageDetection.MessageBuilderPackage;
+using Projekt_Kolko;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,14 +31,16 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
         {
             this.name = NAME;
             this.args = (
-                from p in reader.Elements("collisionType")
+                from p in reader.DescendantsAndSelf()
                 select new Dictionary<string, int>
                 {
-                    { FIRST_INDEX,          (int)p.Element(FIRST_INDEX) },
-                    { FIRST_FRAME,          (int)p.Element(FIRST_FRAME) },
-                    { IS_RANDOM_CHECKBOX,   (int)p.Element(IS_RANDOM_CHECKBOX)}
+                    { FIRST_INDEX,          CheckNumberElement<int>(p.Element(FIRST_INDEX), 100000, 0, 0, FIRST_INDEX)},
+                    { FIRST_FRAME,          CheckNumberElement<int>(p.Element(FIRST_FRAME), 100000, 0, 0,  FIRST_FRAME)},
+                    { IS_RANDOM_CHECKBOX,   CheckNumberElement<int>(p.Element(IS_RANDOM_CHECKBOX), 1, 0, 0, IS_RANDOM_CHECKBOX)}
                 }).ElementAt(0);
         }
+
+        
 
     }
 }

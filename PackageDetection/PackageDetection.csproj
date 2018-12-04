@@ -57,6 +57,7 @@
     <Compile Include="ConfigurationModule\TransmissionByFile.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\Data\BitsCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\CollisionData.cs" />
+    <Compile Include="ConfigurationModule\TransmissionDataClass\Data\CollisionDataException.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\Data\RandomCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\Data\SineCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\TransmissionData.cs" />

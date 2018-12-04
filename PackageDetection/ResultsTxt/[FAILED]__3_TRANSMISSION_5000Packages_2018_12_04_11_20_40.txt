@@ -1,0 +1,18 @@
+---------++++++++++++++++++++++++++++++---------
+
+
+
+[ERROR] : interference_level - Wrong value(122s). Available values: 0- 10000.
+
+[WARN] : interference_level: The default value has been set(50)
+
+[ERROR] : number_of_transsmisions - Wrong value(32as). Available values: 1- 1024.
+
+[WARN] : number_of_transsmisions: The default value has been set(32)
+
+[ERROR] : collisionType.name: wrong name has been set (random_collisiodsn)
+
+[ERROR] : Collision type: collisionType.name: wrong name has been set (random_collisiodsn)
+
+[ERROR] : !!!!! Cannot start transmission test !!!!!
+

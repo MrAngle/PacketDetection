@@ -1,5 +1,6 @@
 ﻿using Menu_GUI;
 using PackageDetection.ConfigurationModule.TransmissionDataClass;
+using PackageDetection.MessageBuilderPackage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,6 +151,47 @@ namespace Projekt_Kolko
             return null;
             //return new CollisionTypeData(ref resultWindow, ref pSettings);
 
+        }
+
+        public static T ConvertValue<T, U>(U value) where U : IConvertible
+        {
+            return (T)Convert.ChangeType(value, typeof(T));
+        }
+
+
+        public static T CheckNumberElement<T>(T checkedNumber, T maxNumber, T minNumber, T defaultValue, string name)
+        {
+            bool isCorrect = true;
+            T returnValue = (T)Convert.ChangeType(defaultValue, typeof(T));
+            //XElement value = reader.Element("interference_level");
+            if (checkedNumber == null)
+            {
+                MessageBuilder.AddErrorMessage(name + " has not been set.");
+                isCorrect = false;
+            }
+            else
+            {
+                dynamic tempValue;
+                try
+                {
+                    tempValue = checkedNumber;
+                    if (tempValue >= minNumber && tempValue <= maxNumber)
+                        returnValue = (T)tempValue;
+                    else
+                    {
+                        MessageBuilder.AddErrorMessage(name + " - the set numbere(" + checkedNumber + ") is not in the range <" + minNumber + ", " + maxNumber +">.");
+                        isCorrect = false;
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBuilder.AddErrorMessage(name + " - Wrong value(" + checkedNumber + "). Available values: <" + minNumber + ", " + maxNumber + ">.");
+                    isCorrect = false;
+                }
+            }
+            if (!isCorrect)
+                MessageBuilder.AddWarnMessage("The default value has been set(" + defaultValue + ")");
+            return returnValue;
         }
     }
 }

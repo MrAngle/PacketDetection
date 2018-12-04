@@ -29,12 +29,14 @@ namespace PackageDetection.ConfigurationModule.TransmissionDataClass
         {
             this.name = NAME;
             this.args = (
-                from p in reader.Elements("collisionType")
+                from p in reader.DescendantsAndSelf()
                 select new Dictionary<string, int>
                 {
-                    { X_Start,          (int)p.Element(X_Start) },
-                    { X_End,            (int)p.Element(X_End) }
+                    { X_Start,          CheckNumberElement<int>(p.Element(X_Start), 1000, -1000, 0, X_Start) },
+                    { X_End,            CheckNumberElement<int>(p.Element(X_End), 1000, -1000, 1, X_End) }
                 }).ElementAt(0);
         }
+
+
     }
 }
