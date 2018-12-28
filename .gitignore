@@ -70,6 +70,7 @@ obj/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
+*/.vs/
 Ankh.NoLoad
 
 #Tooling
@@ -85,3 +86,6 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+# Results
+*/ResultsTxt
