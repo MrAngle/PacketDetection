@@ -36,19 +36,39 @@ namespace PackageDetection.Menu_GUI
         private static void InitTransmission()
         {
             //PSettings.NewTranssmision = new TransmissionType();
-            collision = menuCollision.CreateCollision();
-            NewTranssmision = PSettings.CreateTransmission();
-            NewTranssmision.Collision_type = collision;
-            PSettings.EnabledButtons(false);
-            menuCollision.EnabledButtons(false);
+            
+            try
+            {
+                collision = menuCollision.CreateCollision();
+                NewTranssmision = PSettings.CreateTransmission();
+                NewTranssmision.Collision_type = collision;
+                PSettings.EnabledButtons(false);
+                menuCollision.EnabledButtons(false);
+            }
+            catch
+            {
+                MessageBox.Show("Wprowadz dane");
+            }
+            
+            
         }
 
-        public static void StartTransmission()
+        public static bool StartTransmission()
         {
-            
+
             //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
-            InitTransmission();
-            Start_transsmision(Results);
+            try
+            {
+                InitTransmission();
+                Start_transsmision(Results);
+            }
+            catch
+            {
+                MessageBox.Show("Nie można uruchomić symulacji");
+                return false;
+            }
+            return true;
+            
         }
 
         public static void StartTransmission(string fileName)
@@ -91,9 +111,13 @@ namespace PackageDetection.Menu_GUI
         public static void StopTransmission()
         {
             Stop();
-            PSettings.EnabledButtons(true);
-            if(menuCollision != null)
-                menuCollision.EnabledButtons(true);
+            if (PSettings != null)
+            {
+                PSettings.EnabledButtons(true);
+                if (menuCollision != null)
+                    menuCollision.EnabledButtons(true);
+            }
+            
         }
         #endregion
 

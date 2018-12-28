@@ -38,7 +38,7 @@ namespace PackageDetection.ConfigurationModule
             CollisionData cd = null;
             try
             {
-                if (reader == null) throw new CollisionDataException("collisionType: has not been set.");
+                if (reader == null || reader.Element("name") == null) throw new CollisionDataException("collisionType: has not been set.");
 
                 string collisionName = ((string)reader.Element("name")).ToLower();
                 if((cd = Helpers.CollisionDataFactory(collisionName)) == null) throw new CollisionDataException("collisionType.name: wrong name has been set ("+ collisionName +")");

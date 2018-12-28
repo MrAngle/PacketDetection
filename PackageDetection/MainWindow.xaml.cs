@@ -87,9 +87,12 @@ namespace PackageDetection
 
         private void Button_Start(object sender, RoutedEventArgs e)
         {
-            _read_from_file_button.IsEnabled = false;
-            _start_button.IsEnabled = false;
-            MenuHandler.StartTransmission();
+            
+            if(MenuHandler.StartTransmission())
+            {
+                _read_from_file_button.IsEnabled = false;
+                _start_button.IsEnabled = false;
+            }
         }
 
         private void Button_Stop(object sender, RoutedEventArgs e)
