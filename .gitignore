@@ -7,7 +7,7 @@
 *.o
 *.so
 
-ResultsTxt/
+*/ResultsTxt/
 
 # Packages #
 ############
@@ -73,9 +73,7 @@ obj/
 [Dd]ebug*/
 [Rr]elease*/
 
-
 .vs/
-
 
 
 Ankh.NoLoad
@@ -95,4 +93,5 @@ _ReSharper*/
 ~$*
 
 # Results
+ResultsTxt/
 

@@ -51,12 +51,14 @@
     <Compile Include="CheckSum.cs" />
     <Compile Include="CRCControlTest.cs" />
     <Compile Include="InfiniteNumberTest.cs" />
+    <Compile Include="PackageTest.cs" />
     <Compile Include="ParityBitControlTest.cs" />
     <Compile Include="RandomCollision.cs" />
     <Compile Include="TestGroupOfBitsCollision.cs" />
     <Compile Include="TestGroupOfBitsCollisionPacket.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PackageSimpleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

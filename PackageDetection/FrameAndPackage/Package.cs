@@ -89,7 +89,7 @@ namespace Projekt_Kolko
         /// <param name="controlType">Typ kontroli ( domyslnie ustawiony na ParityBitControl )</param>
         /// <param name="sizeOfControlPart">Okresla dlugosc czesci kontrolnej w bitach</param>
         /// <param name="random">#NIE DZIALA# Domyslnie tworzy losowe elementy w ramkach. </param>
-        public void GenerateFrameList(int numberOfFrames, int size, IControl _controlType = null, int sizeOfControlPart = Helpers.FLEXIBLE, bool random = true)
+        public void GenerateFrameList(int numberOfFrames, int frameSize, IControl _controlType = null, int sizeOfControlPart = Helpers.FLEXIBLE, bool random = true)
         {
             if (_controlType == null)
             {
@@ -98,7 +98,7 @@ namespace Projekt_Kolko
             DeleteFrames();
             for (int i = 0; i < numberOfFrames; i++)
             {
-                AddFrame(new Frame.Builder().RandomFrame(size).SetControlType(_controlType, sizeOfControlPart).Create());
+                AddFrame(new Frame.Builder().RandomFrame(frameSize).SetControlType(_controlType, sizeOfControlPart).Create());
             }
             this.SetControlType(_controlType);
             this.SetControlPartByType(sizeOfControlPart);
