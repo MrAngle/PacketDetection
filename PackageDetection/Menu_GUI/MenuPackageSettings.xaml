@@ -34,16 +34,16 @@
         </Grid.ColumnDefinitions>
 
 
-        
-        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Poziom zaklocen :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bitow w ramce :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+
+        <TextBlock x:Name="_TextInterferenceLVL" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Poziom zaklocen :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bajtów w ramce :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba ramek w pakiecie :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba transmisji :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bitow czesci kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bajtów części kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="CRC/Bit Parzystosci/Suma Kontrolna :" Height="31" Margin="0,0,0,0" Grid.RowSpan="2" Width="220"/>
 
-        
-        <TextBox x:Name="_InterferenceLVL" Grid.Row="1" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+        <TextBox x:Name="_InterferenceLVL" Grid.Row="1" TextChanged="DataInBoxInterference_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="_BitsInFrame" Grid.Row="2" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="_FramesInPackage" Grid.Row="3" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="_NumberOfTransmission" Grid.Row="4" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>

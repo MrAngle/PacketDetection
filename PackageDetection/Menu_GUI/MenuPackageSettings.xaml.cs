@@ -31,12 +31,6 @@ namespace Menu_GUI
             InitializeComponent();
         }
 
-
-
-        
-
-      
-
         public TransmissionType CreateTransmission()
         {
             int toInt(string str) // zamiana na Int
@@ -54,10 +48,12 @@ namespace Menu_GUI
                 contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu TODO: zeby obslugiwalo to jakos sensownie
 
             int intLvl = toInt(_InterferenceLVL.Text);
-            int sizeOfFra = toInt(_BitsInFrame.Text);
+            int sizeOfFra = toInt(_BitsInFrame.Text) * 8;
             int numFraInPac = toInt(_FramesInPackage.Text);
-            int sizeOfControl = toInt(_BitsControlPart.Text);
+            int sizeOfControl = toInt(_BitsControlPart.Text) * 8;
 
+            Console.WriteLine("sizeOfFra : " + sizeOfFra);
+            Console.WriteLine("sizeOfControl : " + sizeOfControl);
 
             return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
         }
@@ -101,6 +97,12 @@ namespace Menu_GUI
         {
             TextBox n = (TextBox)sender;
             n.Text = Data_verification.Check(n.Text, 10000, 0, 5);
+        }
+
+        private void DataInBoxInterference_(object sender, TextChangedEventArgs e)
+        {
+            TextBox n = (TextBox)sender;
+            n.Text = Data_verification.Check(n.Text, 1000, 0, 5);
         }
 
         // wybor konkretnej grupy bitow do zamiany | wylaczenie losowego wyboru bitow

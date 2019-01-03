@@ -12,7 +12,6 @@ namespace PackageDetection.Menu_GUI
 {
     public class MenuHandler
     {
-
         private static ResultsWindow Results = new ResultsWindow();
         private static MenuPackageSettings PSettings = new MenuPackageSettings();
         private static IMenuCollision menuCollision;
@@ -23,7 +22,16 @@ namespace PackageDetection.Menu_GUI
 
         public static ulong NumberOfPackagesToEnd { get => numberOfPackagesToEnd; set => numberOfPackagesToEnd = value; }
         public static ICollision Collision { get => collision; set => collision = value; }
-        public static IMenuCollision MenuCollision { get => menuCollision; set => menuCollision = value; }
+        public static IMenuCollision MenuCollision { get => menuCollision;
+            set
+            {
+                menuCollision = value;
+                if(value.GetType() == typeof(MenuBitsCollision))
+                    PSettings._TextInterferenceLVL.Text = "Liczba bitów do przekłamania";
+                else
+                    PSettings._TextInterferenceLVL.Text = "Poziom zakłóceń";
+            }
+        }
         public static TransmissionType NewTranssmision { get => newTranssmision; set => newTranssmision = value; }
 
         public static void InitMenuHandler(ref System.Windows.Controls.Frame resultWindow, ref System.Windows.Controls.Frame pSettings)
@@ -35,8 +43,6 @@ namespace PackageDetection.Menu_GUI
 
         private static void InitTransmission()
         {
-            //PSettings.NewTranssmision = new TransmissionType();
-            
             try
             {
                 collision = menuCollision.CreateCollision();
@@ -55,8 +61,6 @@ namespace PackageDetection.Menu_GUI
 
         public static bool StartTransmission()
         {
-
-            //menuHandler.GetMenuPackageSettings().Start_transsmision(BC, menuHandler.GetResultsWindow(), menuHandler.NumberOfPackagesToEnd);
             try
             {
                 InitTransmission();

@@ -40,7 +40,7 @@
 
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Pakiety:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Liczba pakietow bez bledu :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Liczba pakietow bez bledu" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Liczba wykrytych blednych pakietow :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
         <TextBlock Grid.Column="1" Grid.Row="4" Text="Liczba niewykrytych blednych pakietow :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="20" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
         <TextBlock Grid.Column="1" Grid.Row="5" Text="Liczba wykrytych bledow, przy poprawnych danych: " HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" FontSize="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>

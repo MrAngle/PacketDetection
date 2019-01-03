@@ -73,10 +73,6 @@ namespace PackageDetection
             MenuHandler.MenuCollision = Helpers.MenuCollisionFactory(menuCollisionType);
 
             MainWindow._menu_collision.Content = MenuHandler.MenuCollision;
-            //menuCollision.SetResultsPage(ref Results_frame);
-            //menuCollision.SetPackageSettingsPage(ref menu_package);
-
-
         }
 
         //przycisk Wyjdz

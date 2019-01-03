@@ -81,12 +81,16 @@ namespace UnitTests
         public void PackageTestCheckSum3()
         {
             // 10(dec) = 1010 (bin)
-            Frame nfra1 = new Frame.Builder().SetFrame(lst1).SetControlType(new CheckSumControl(), 4).Create();
+            Frame nfra1 = new Frame.Builder().SetFrame(lst1).SetControlType(new CheckSumControl(), 6).Create();
             Package pak = new Package();
             pak.AddFrame(nfra1);
             pak.AddFrame(nfra1);
             pak.SetControlType(new CheckSumControl());
             pak.SetControlPartByType(1230);
+
+            pak.ShowFrames();
+            pak.ShowControlPart();
+
 
             Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 20);
         }

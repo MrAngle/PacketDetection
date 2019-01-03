@@ -16,17 +16,61 @@ namespace UnitTestProject
         [TestMethod]
         public void PackIsChanged()
         {
-            //BitsCollision BC = new BitsCollision.Builder.
+            BitsCollision BC = new BitsCollision.Builder().SetBasedOnPackage(true, 1).ChangeGroupOfBits(lst0.Count).Create();
 
-            //Frame nfra1 = new Frame.Builder().SetFrame(lst1).SetControlType(new BitsCollision(), 4).Create();
-            //Package pak = new Package();
-            //pak.AddFrame(nfra1);
-            //pak.AddFrame(nfra1);
-            //pak.SetControlType(new CRCControl());
-            //pak.SetControlPartByType(4);
-            //pak.ShowControlPart();
+            Frame nfra1 = new Frame.Builder().SetFrame(lst1).SetControlType(new ParityBitControl(), 1).Create();
+            Frame nfra2 = new Frame.Builder().SetFrame(lst0).SetControlType(new ParityBitControl(), 1).Create();
 
-            //Assert.AreEqual(pak.GetControlPart().GetCount(), 4);
+            Package pak = new Package();
+
+            pak.AddFrame(nfra1);
+            pak.AddFrame(nfra2);
+            pak.AddFrame(nfra1);
+            pak.AddFrame(nfra2);
+
+            pak.SetControlType(new ParityBitControl());
+            pak.SetControlPartByType(1);
+
+            pak.ShowFrames();
+            pak.ShowControlPart();
+
+
+            BC.DoCollision(pak, 2);
+
+            pak.ShowFrames();
+            pak.ShowControlPart();
+
+            Assert.AreEqual(pak.IsChanged(), true);
+        }
+
+        [TestMethod]
+        public void PackIsChanged2()
+        {
+            BitsCollision BC = new BitsCollision.Builder().SetBasedOnPackage(true, 1).ChangeGroupOfBits(lst0.Count).Create();
+
+            Frame nfra1 = new Frame.Builder().SetFrame(lst1).SetControlType(new ParityBitControl(), 1).Create();
+            Frame nfra2 = new Frame.Builder().SetFrame(lst0).SetControlType(new ParityBitControl(), 1).Create();
+
+            Package pak = new Package();
+
+            pak.AddFrame(nfra1);
+            pak.AddFrame(nfra2);
+            pak.AddFrame(nfra1);
+            pak.AddFrame(nfra2);
+
+            pak.SetControlType(new ParityBitControl());
+            pak.SetControlPartByType(1);
+
+            pak.ShowFrames();
+            pak.ShowControlPart();
+
+
+            BC.DoCollision(pak, 2);
+
+            pak.ShowFrames();
+            pak.ShowControlPart();
+
+            Assert.AreEqual(pak.IsChanged(), true);
         }
     }
 }
