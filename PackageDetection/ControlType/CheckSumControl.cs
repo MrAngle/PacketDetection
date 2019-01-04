@@ -39,7 +39,7 @@ namespace Projekt_Kolko
             int sum = 0; 
             foreach (var item in nPackage.GetFrames()) 
             {
-                sum += (int)item.GetControlPart().GetControlPartInDec(); // sumuje czesci kontrolne wszystkich ramek
+                sum += (int)item.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)); // sumuje czesci kontrolne wszystkich ramek
             }
             List<byte> CheckSum = Helpers.ConvertDecToByteList(sum);   // tworzy czesc kontrolna na podstawie wyliczonej sumy
             //Console.WriteLine(CheckSum);
@@ -78,21 +78,42 @@ namespace Projekt_Kolko
         /// <returns></returns>
         public byte CollisionDetection(Frame nFrame)
         {
-            ulong results = (ulong)nFrame.GetInformationPart().Sum(x => Convert.ToInt32(x));        // Obliczamy sume z czesci informacyjnej
+            // moze byc int, bo maksymalna liczba jedynek w sytuacji gdy jest 10 000 * 10 000 * 8 = 800 000 000
+            int results = (int)nFrame.GetInformationPart().Sum(x => Convert.ToInt32(x));        // Obliczamy sume z czesci informacyjnej
+            List<byte> CheckSum = Helpers.ConvertDecToByteList(results);              // tworzy czesc kontrolna na 
+
+            if (nFrame.GetControlPart().GetCount() < CheckSum.Count)        // sprawdza czy czesc kontrolna ma miec okreslona dlugosc        
+                SetSizeOfList(ref CheckSum, nFrame.GetControlPart().GetCount()); // ? ustawia czesc kontrolna na konkretna dlugosc
+
+            results = CheckSum.Sum(x => Convert.ToInt32(x));
 
             // Okreslanie wynikow uzyskanych przez weryfikacje danych
-            return DeterminateResults(results, nFrame.IsChanged(), nFrame.GetControlPart().GetControlPartInDec()); 
+            return DeterminateResults((ulong)results, nFrame.IsChanged(), (ulong)nFrame.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)) ); 
         }
 
         public byte CollisionDetection(Package nPackage)
         {
-            ulong results = 0;                                                      // Tworzymy zmienna pomocnicza
+            int results = 0;                                                      // Tworzymy zmienna pomocnicza
             foreach (var item in nPackage.GetFrames())                              // Dodajemy wszysktie czesci kontrolne ramek
             {
-                results += (ulong)item.GetControlPart().GetControlPartInDec();     // Porownujemy sume z czescia kontrolna pakietu
-            }       
+                results += (int)item.GetControlPart().GetList().Sum(x => Convert.ToInt32(x));     // Porownujemy sume z czescia kontrolna pakietu
+            }
+
+            Console.WriteLine(results);
+
+            List<byte> CheckSum = Helpers.ConvertDecToByteList(results);              // tworzy czesc kontrolna na 
+
+            if (nPackage.GetControlPart().GetCount() < CheckSum.Count)        // sprawdza czy czesc kontrolna ma miec okreslona dlugosc        
+                SetSizeOfList(ref CheckSum, nPackage.GetControlPart().GetCount()); // ? ustawia czesc kontrolna na konkretna dlugosc
+
+            results = CheckSum.Sum(x => Convert.ToInt32(x));
+
+            Console.WriteLine(CheckSum.Sum(x => Convert.ToInt32(x)));
+            Console.WriteLine((ulong)nPackage.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)));
+
+
             // Okreslanie wynikow uzyskanych przez weryfikacje danych
-            return DeterminateResults(results, nPackage.IsChanged(), nPackage.GetControlPart().GetControlPartInDec());
+            return DeterminateResults((ulong)results, nPackage.IsChanged(), (ulong)nPackage.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)));
         }
 
         private byte DeterminateResults(ulong sum, bool changed, ulong object_sum)

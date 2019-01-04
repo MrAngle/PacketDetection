@@ -42,7 +42,7 @@ namespace Projekt_Kolko
         public byte CollisionDetection(Frame nFrame)
         {
             //Zlicza jedynki z infoParty i controlPart
-            ulong count = (ulong)nFrame.GetInformationPart().Count(b => b == 1) + nFrame.GetControlPart().GetControlPartInDec(); 
+            ulong count = (ulong)nFrame.GetInformationPart().Count(b => b == 1) + nFrame.GetControlPart().GetControlPartInDec();
 
             return DeterminateResults(count, nFrame.IsChanged());
         }
@@ -50,8 +50,6 @@ namespace Projekt_Kolko
         public byte CollisionDetection(Package nPakiet)
         {
             ulong count = nPakiet.GetControlPart().GetControlPartInDec();
-
-            //Console.WriteLine("Count przed dodaniem ramek: " + count);          // Do usuniecia!
 
             foreach (var frame in nPakiet.GetFrames())                          //Zlicza jedynki z infoParty calego pakietu
             {

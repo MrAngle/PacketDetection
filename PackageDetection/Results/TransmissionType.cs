@@ -94,11 +94,15 @@ namespace Projekt_Kolko
                 Package pak = new Package();
                 pak.GenerateFrameList(numbers_of_frame_in_package, size_of_frame, control_type, size_control_part);
                 Collision_type.DoCollision(pak, this.interference_level);
-                ResultsSelectorPackage(pak.CheckPackage());
                 foreach (var item in pak.GetFrames())
                 {
                     ResultsSelectorFrame(item.CheckFrame());
                 }
+                if (frame_results[(int)Data.Detected] > 0)
+                    ResultsSelectorPackage((byte)Data.Detected);
+                else
+                    ResultsSelectorPackage(pak.CheckPackage());
+                
                 pak.DeleteFrames();
                 pak = null;
                 //GC.Collect();

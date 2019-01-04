@@ -163,6 +163,7 @@ namespace Projekt_Kolko
         {
             //Console.Write("Information part : ");
             Show(frame_holder);
+            Console.WriteLine();
         }
         public void ShowControlPart()
         {
@@ -180,6 +181,7 @@ namespace Projekt_Kolko
             {
                 Console.WriteLine("Odwolanie do nieistniejacego obiektu");
             }
+            Console.WriteLine();
         }
         #endregion
 

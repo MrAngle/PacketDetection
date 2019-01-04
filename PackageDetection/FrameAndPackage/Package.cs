@@ -252,6 +252,7 @@ namespace Projekt_Kolko
             {
                 Console.WriteLine("Odwolanie do nieistniejacego obiektu");
             }
+            Console.WriteLine();
         }
         /// <summary>
         /// Wyświetla wszystkie ramki w postaci binarnej
@@ -266,6 +267,7 @@ namespace Projekt_Kolko
                 item.ShowControlPart();
                 Console.Write(" ");
             }
+            Console.WriteLine();
         }
         #endregion
 
