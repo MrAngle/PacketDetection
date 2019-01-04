@@ -102,7 +102,7 @@ namespace UnitTests
             pak.SetControlType(new CheckSumControl());
             pak.SetControlPartByType(4);
 
-            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 10);
+            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 12);
         }
         [TestMethod]
         public void PackageTestCheckSum2()
@@ -115,7 +115,7 @@ namespace UnitTests
             pak.SetControlType(new CheckSumControl());
             pak.SetControlPartByType(4);
 
-            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 4);
+            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 8);
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace UnitTests
             pak.ShowControlPart();
 
 
-            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 20);
+            Assert.AreEqual(Convert.ToInt32(Helpers.GetPartInDec(pak.GetControlPart().GetList())), 24);
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace UnitTests
         {
             Package pak = new Package();
             pak.GenerateFrameList(100, 10, new CheckSumControl(), 2);
-            Assert.AreEqual(pak.CheckPackage(), 3); // szansa na wystąpienie przypadku ze to niezadziała 0.0000000001%\
+            Assert.AreEqual(pak.CheckPackage(), 0); // szansa na wystąpienie przypadku ze to niezadziała 0.0000000001%\
                                                     // wystąpienie bledu wynika z z tego ze na 1000 +czesc kontrolna bitach 
                                                     // musi wystapic 998 zer. Błąd odnosi sie jedynie do testu
 

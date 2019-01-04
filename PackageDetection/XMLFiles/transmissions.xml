@@ -71,7 +71,7 @@
       <_firstframe>12</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>5000</number_of_packages_to_end>
+    <number_of_packages_to_end>1</number_of_packages_to_end>
   </transmission>
 
 
@@ -91,7 +91,7 @@
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>5000</number_of_packages_to_end>
+    <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   <transmission>
@@ -109,7 +109,7 @@
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>5000</number_of_packages_to_end>
+    <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   <transmission>
@@ -127,7 +127,7 @@
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>5000</number_of_packages_to_end>
+    <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   
@@ -150,7 +150,7 @@
       <_XStart>0</_XStart>
       <_XEnd>22</_XEnd>
     </collisionType>
-  <number_of_packages_to_end>5000</number_of_packages_to_end>
+  <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   <transmission>
@@ -167,7 +167,7 @@
       <_XStart>0</_XStart>
       <_XEnd>22</_XEnd>
     </collisionType>
-    <number_of_packages_to_end>5000</number_of_packages_to_end>
+    <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   <transmission>
@@ -184,7 +184,7 @@
       <_XStart>0</_XStart>
       <_XEnd>22</_XEnd>
     </collisionType>
-  <number_of_packages_to_end>5000</number_of_packages_to_end>
+  <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   

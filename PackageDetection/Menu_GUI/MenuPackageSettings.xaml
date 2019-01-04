@@ -40,7 +40,8 @@
         <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba ramek w pakiecie :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba transmisji :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bajtów części kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="CRC/Bit Parzystosci/Suma Bajtów :" Height="31" Margin="0,0,0,0" Grid.RowSpan="2" Width="220"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba ramek do zakończenia :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="CRC/Bit Parzystosci/Suma Bajtów :" Height="31" Margin="0,0,0,0" Grid.RowSpan="2" Width="220"/>
 
 
         <TextBox x:Name="_InterferenceLVL" Grid.Row="1" TextChanged="DataInBoxInterference_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
@@ -48,10 +49,12 @@
         <TextBox x:Name="_FramesInPackage" Grid.Row="3" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="_NumberOfTransmission" Grid.Row="4" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="_BitsControlPart" Grid.Row="5" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="_FramesToEnd" Grid.Row="6" TextChanged="DataInBox_" Grid.Column="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
-        <CheckBox x:Name="_CRC" Checked="ClickCheckCRC_" Grid.Row="6" Grid.Column="3" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
-        <CheckBox x:Name="_ParityBit" Checked="ClickCheckParityBit_" Grid.Row="6" Grid.Column="4" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
-        <CheckBox x:Name="_CheckSum" Checked="ClickCheckCheckSum_" Grid.Row="6" Grid.Column="5" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+
+        <CheckBox x:Name="_CRC" Checked="ClickCheckCRC_" Grid.Row="7" Grid.Column="3" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+        <CheckBox x:Name="_ParityBit" Checked="ClickCheckParityBit_" Grid.Row="7" Grid.Column="4" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
+        <CheckBox x:Name="_CheckSum" Checked="ClickCheckCheckSum_" Grid.Row="7" Grid.Column="5" Content=""  HorizontalAlignment="Left" Margin="0,0,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-0.304,0.105"/>
 
     </Grid>
 </Page>

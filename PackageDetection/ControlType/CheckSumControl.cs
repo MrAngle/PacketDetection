@@ -39,6 +39,7 @@ namespace Projekt_Kolko
             int sum = 0; 
             foreach (var item in nPackage.GetFrames()) 
             {
+                sum += (int)item.GetInformationPart().Sum(x => Convert.ToInt32(x));
                 sum += (int)item.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)); // sumuje czesci kontrolne wszystkich ramek
             }
             List<byte> CheckSum = Helpers.ConvertDecToByteList(sum);   // tworzy czesc kontrolna na podstawie wyliczonej sumy
@@ -96,10 +97,9 @@ namespace Projekt_Kolko
             int results = 0;                                                      // Tworzymy zmienna pomocnicza
             foreach (var item in nPackage.GetFrames())                              // Dodajemy wszysktie czesci kontrolne ramek
             {
+                results += (int)item.GetInformationPart().Sum(x => Convert.ToInt32(x));
                 results += (int)item.GetControlPart().GetList().Sum(x => Convert.ToInt32(x));     // Porownujemy sume z czescia kontrolna pakietu
             }
-
-            Console.WriteLine(results);
 
             List<byte> CheckSum = Helpers.ConvertDecToByteList(results);              // tworzy czesc kontrolna na 
 
@@ -108,8 +108,6 @@ namespace Projekt_Kolko
 
             results = CheckSum.Sum(x => Convert.ToInt32(x));
 
-            Console.WriteLine(CheckSum.Sum(x => Convert.ToInt32(x)));
-            Console.WriteLine((ulong)nPackage.GetControlPart().GetList().Sum(x => Convert.ToInt32(x)));
 
 
             // Okreslanie wynikow uzyskanych przez weryfikacje danych
