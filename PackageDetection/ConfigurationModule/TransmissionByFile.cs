@@ -17,14 +17,11 @@ namespace PackageDetection.ConfigurationModule
 {
     public class TransmissionByFile
     {
-        //MenuHandler menuHandler;
         TransmissionData transmissionData;
         int currentId;
         string fileName;
         bool dataIsCorrect;
 
-        //System.Windows.Controls.Frame pSettings;
-        //System.Windows.Controls.Frame resultWindow;
 
         public TransmissionByFile(string fileName)
         {
@@ -57,28 +54,6 @@ namespace PackageDetection.ConfigurationModule
             }
             return cd;
         }
-
-//                    else
-//            {
-//                dynamic tempValue;
-//                try
-//                {
-//                    tempValue = ConvertValue<T, string>(reader.Value);
-//                    if (tempValue > minNumber && tempValue<maxNumber)
-//                        returnValue = (T) tempValue;
-//                    else
-//                    {
-//                        MessageBuilder.AddErrorMessage(reader.Name + " - the set number is not in the range (" + minNumber + "- " + maxNumber + ").");
-//                        isCorrect = false;
-//                    }
-//}
-//                catch(FormatException)
-//                {
-//                    MessageBuilder.AddErrorMessage(reader.Name + " - Wrong value("+ reader.Value+ "). Available values: " + minNumber + "- " + maxNumber + ".");
-//                    isCorrect = false;
-//                } 
-//            }
-      
 
         private T CheckNumberElement<T>(XElement reader, T maxNumber, T minNumber, T defaultValue, string name)
         {
@@ -175,10 +150,7 @@ namespace PackageDetection.ConfigurationModule
             MenuHandler.GetMenuPackageSettings().SetControlType(transmissionData.controlType);
 
             MessageBuilder.AddInfoMessage("Set number of packages to end : " + transmissionData.numberOfPackagesToEnd);
-            MenuHandler.NumberOfPackagesToEnd = transmissionData.numberOfPackagesToEnd;
-
-            //menuCollision.GetMenuHandler().GetResultsWindow.F
-
+            MenuHandler.GetMenuPackageSettings().SetPackageToEnd(transmissionData.numberOfPackagesToEnd);
 
             MenuHandler.MenuCollision.SetComponentsByDictionary(transmissionData.collisionType.Args);
         }
@@ -215,8 +187,6 @@ namespace PackageDetection.ConfigurationModule
         {
             MenuHandler.MenuCollision.SetComponentsByDictionary(d);
         }
-
-
 
         private string CheckControl(XElement reader, string name)
         {
@@ -286,12 +256,4 @@ namespace PackageDetection.ConfigurationModule
         }
 
     }
-
-
-
-
-
-
 }
-//moja klasa, to jest dobra baza
-//pieniadze sa prywatne, a stringi łososiokształtne

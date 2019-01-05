@@ -18,9 +18,9 @@ namespace PackageDetection.Menu_GUI
         private static ICollision collision;
         private static TransmissionType newTranssmision;
 
-        private static ulong numberOfPackagesToEnd;
+        //private static ulong numberOfPackagesToEnd;
 
-        public static ulong NumberOfPackagesToEnd { get => numberOfPackagesToEnd; set => numberOfPackagesToEnd = value; }
+        //public static ulong NumberOfPackagesToEnd { get => numberOfPackagesToEnd; set => numberOfPackagesToEnd = value; }
         public static ICollision Collision { get => collision; set => collision = value; }
         public static IMenuCollision MenuCollision { get => menuCollision;
             set
@@ -38,7 +38,7 @@ namespace PackageDetection.Menu_GUI
         {
             SetResultsPage(ref resultWindow);
             SetPackageSettingsPage(ref pSettings);
-            NumberOfPackagesToEnd = 0;
+            //NumberOfPackagesToEnd = 0;
         }
 
         private static void InitTransmission()
@@ -75,11 +75,22 @@ namespace PackageDetection.Menu_GUI
             
         }
 
-        public static void StartTransmission(string fileName)
+        public static bool StartTransmission(string fileName, bool setConfigurationByFile = true)
         {
-            InitTransmission();
-            NewTranssmision.FileName = fileName;
-            Start_transsmision(Results, numberOfPackagesToEnd);
+            try
+            {
+                InitTransmission();
+                //numberOfPackagesToEnd = 1000;
+                //Console.WriteLine("numberOfPackagesToEnd : " + numberOfPackagesToEnd);
+                NewTranssmision.FileName = fileName;
+                Start_transsmision(Results, setConfigurationByFile);
+            }
+            catch
+            {
+                MessageBox.Show("Nie można uruchomić symulacji");
+                return false;
+            }
+            return true;
         }
 
 
@@ -131,7 +142,7 @@ namespace PackageDetection.Menu_GUI
                 NewTranssmision.Active = false;
         }
 
-        public static void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
+        public static void Start_transsmision(ResultsWindow Results, bool setConfigurationByFile = true)
         {
 
             try
@@ -140,7 +151,7 @@ namespace PackageDetection.Menu_GUI
                 if (NewTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
                 {
                     NewTranssmision.Active = true;
-                    NewTranssmision.UserStop(numberOfPackagesToEnd);
+                    NewTranssmision.UserStop(setConfigurationByFile);
                 }
 
             }

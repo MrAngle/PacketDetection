@@ -24,7 +24,8 @@ namespace Projekt_Kolko
         int size_of_frame = 10;
         int numbers_of_frame_in_package = 10;
         int size_control_part = 4;
-        bool setConfigurationByFile = false;
+        ulong numberOfPackageToEnd = 10;
+        //bool setConfigurationByFile = false;
         string fileName = "test";
 
         ResultsStorage ResultsS = new ResultsStorage(); // przechowuje wyniki
@@ -34,7 +35,7 @@ namespace Projekt_Kolko
         public bool Active { get => active; set => active = value; }
         public BackgroundWorker Worker { get => worker; set => worker = value; }
         public AutoResetEvent ResetEvent { get => _resetEvent; set => _resetEvent = value; }
-        public string FileName { get => fileName; set { fileName = value; setConfigurationByFile = true; }  }
+        public string FileName { get => fileName; set { fileName = value;  }  }
         public ICollision Collision_type { get => collision_type; set => collision_type = value; }
 
         public const int DATALENGHT = 5;
@@ -67,7 +68,7 @@ namespace Projekt_Kolko
 
         public TransmissionType(ulong _number_of_transsmision, IControl control_type,
             int interference_level = 1000,
-            int size_of_frame = 10, int numbers_of_frame_in_package = 10, int size_control_part = Helpers.FLEXIBLE)
+            int size_of_frame = 10, int numbers_of_frame_in_package = 10,ulong numberOfPackageToEnd = 10, int size_control_part = Helpers.FLEXIBLE)
         {
             this._number_of_transsmision = _number_of_transsmision;
             this.control_type = control_type;
@@ -75,8 +76,7 @@ namespace Projekt_Kolko
             this.size_of_frame = size_of_frame;
             this.numbers_of_frame_in_package = numbers_of_frame_in_package;
             this.size_control_part = size_control_part;
-            this.setConfigurationByFile = false;
-            //Console.WriteLine("TWORZE"+ setConfigurationByFile);
+            this.numberOfPackageToEnd = numberOfPackageToEnd;
         }
 
 
@@ -105,36 +105,31 @@ namespace Projekt_Kolko
                 
                 pak.DeleteFrames();
                 pak = null;
-                //GC.Collect();
             }
             this.package_results[(int)Data.number_of_transmission] = _number_of_transsmision;
             this.frame_results[(int)Data.number_of_transmission] = _number_of_transsmision * (ulong)numbers_of_frame_in_package;
             ResultsS.AddResults(package_results, frame_results);
             ResultsS.ShowResults(ref RWindow);
-            //Task.Delay(100000);
-
-
-
         }
 
 
         [STAThread]
-        public void UserStop(ulong numberOfPackagesToEnd = 0)
+        public void UserStop(bool setConfigurationByFile = true)
         {
             //Console.WriteLine("jestem tutaj");
             worker = new BackgroundWorker
             {
                 WorkerReportsProgress = true
             };
-            if (numberOfPackagesToEnd <= 0)
-                worker.DoWork += DoWorkAllTime;
-            else
-                worker.DoWork += DoWorkPackagesLimit;
+            //if (numberOfPackagesToEnd <= 0)
+            //    worker.DoWork += DoWorkAllTime;
+            //else
+            worker.DoWork += DoWorkPackagesLimit;
 
             if(setConfigurationByFile)
                 worker.RunWorkerCompleted += (obj, e) => FinishExecution();
 
-            worker.RunWorkerAsync(numberOfPackagesToEnd);
+            worker.RunWorkerAsync();
             
         }
 
@@ -159,10 +154,11 @@ namespace Projekt_Kolko
         [STAThread]
         public void DoWorkPackagesLimit(object sender, DoWorkEventArgs e)
         {
-            ulong numberOfPackagesToEnd = (ulong)e.Argument;
+            //ulong numberOfPackagesToEnd = (ulong)e.Argument;
+            Console.WriteLine("pakieto do konca "  + numberOfPackageToEnd);
 
             MessageBuilder.AddMainTitleMessage("START TRANSMISSIONS");
-            while (numberOfPackagesToEnd >= ResultsS.P_results[(int)Data.number_of_transmission] && Active != false)
+            while (numberOfPackageToEnd >= ResultsS.P_results[(int)Data.number_of_transmission] && Active != false)
                 this.Normal();
 
             AddResultInfoToMessageBuilder();

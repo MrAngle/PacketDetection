@@ -71,7 +71,7 @@
       <_firstframe>12</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
-    <number_of_packages_to_end>1</number_of_packages_to_end>
+    <number_of_packages_to_end>50</number_of_packages_to_end>
   </transmission>
 
 

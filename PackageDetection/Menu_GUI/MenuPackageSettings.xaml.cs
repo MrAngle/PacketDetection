@@ -42,54 +42,21 @@ namespace Menu_GUI
                 contType = new CRCControl();
             else if (_CheckSum.IsChecked == true)
                 contType = new CheckSumControl();
-            else if (_ParityBit.IsChecked == true)
+            else 
                 contType = new ParityBitControl();
-            else
-                contType = new ParityBitControl(); // zabezpiecznie przed niezaznaczniem zadnego checkboxu TODO: zeby obslugiwalo to jakos sensownie
+
 
             int intLvl = toInt(_InterferenceLVL.Text);
             int sizeOfFra = toInt(_BitsInFrame.Text) * 8;
             int numFraInPac = toInt(_FramesInPackage.Text);
             int sizeOfControl = toInt(_BitsControlPart.Text) * 8;
+            ulong numberOfPackageToEnd = Convert.ToUInt64(_PackageToEnd.Text);
 
             Console.WriteLine("sizeOfFra : " + sizeOfFra);
             Console.WriteLine("sizeOfControl : " + sizeOfControl);
 
-            return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, sizeOfControl);
+            return new TransmissionType(numOfT, contType, intLvl, sizeOfFra, numFraInPac, numberOfPackageToEnd, sizeOfControl);
         }
-
-        //public void LoadDataToTransmission()
-        //{
-        //    newTranssmision = CreateTransmission();
-        //}
-        //public void SetCollisionType(ICollision collision)
-        //{
-        //    newTranssmision.Collision_type = collision;
-        //}
-
-        //public void SetResultFileName(string fileName)
-        //{
-        //    newTranssmision.FileName = fileName;
-        //}
-
-        //public void Start_transsmision(ResultsWindow Results, ulong numberOfPackagesToEnd = 0)
-        //{
-
-        //    try
-        //    {
-        //        newTranssmision.SetResultsPage(ref Results); //tu moze byc blad
-        //        if (newTranssmision.Active == false) //zabezpiecznie przed wielokrotnym nacisnieciem start
-        //        {
-        //            newTranssmision.Active = true;
-        //            newTranssmision.UserStop(numberOfPackagesToEnd);
-        //        }
-
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        MessageBox.Show("Wprowadz dane");
-        //    }
-        //}
 
         //Ochrona przed wpisywaniem niepoparwnych danych
         #region DataInBox And Checkbox
@@ -103,6 +70,12 @@ namespace Menu_GUI
         {
             TextBox n = (TextBox)sender;
             n.Text = Data_verification.Check(n.Text, 1000, 0, 5);
+        }
+
+        private void DataInBoxPackagesToEnd_(object sender, TextChangedEventArgs e)
+        {
+            TextBox n = (TextBox)sender;
+            n.Text = Data_verification.Check(n.Text, 9999999999, 0, 10);
         }
 
         // wybor konkretnej grupy bitow do zamiany | wylaczenie losowego wyboru bitow
@@ -189,6 +162,11 @@ namespace Menu_GUI
             _BitsControlPart.Text = str.ToString();
         }
 
+        public void SetPackageToEnd(ulong str)
+        {
+            _PackageToEnd.Text = str.ToString();
+        }
+
         public void SetControlType(string controlName)
         {
             controlName = controlName.ToLower();
@@ -220,7 +198,8 @@ namespace Menu_GUI
             _InterferenceLVL.IsEnabled = enable;
             _NumberOfTransmission.IsEnabled = enable;
             _ParityBit.IsEnabled = enable;
-           
+            _PackageToEnd.IsEnabled = enable;
+
         }
     }
 }

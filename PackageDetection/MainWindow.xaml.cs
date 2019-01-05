@@ -84,7 +84,7 @@ namespace PackageDetection
         private void Button_Start(object sender, RoutedEventArgs e)
         {
             
-            if(MenuHandler.StartTransmission())
+            if(MenuHandler.StartTransmission("testuje", false))
             {
                 _read_from_file_button.IsEnabled = false;
                 _start_button.IsEnabled = false;
