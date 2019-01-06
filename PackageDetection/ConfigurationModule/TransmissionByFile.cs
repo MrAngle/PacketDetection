@@ -94,7 +94,7 @@ namespace PackageDetection.ConfigurationModule
                         sizeControlPart = CheckNumberElement<int>(e.Element("size_control_part"), 256, 1, 8, "size_control_part"),
                         controlType = CheckControl(e.Element("control_type"), "control_type"),
                         collisionType = this.GetCollisionType(e.Element("collisionType")),
-                        numberOfPackagesToEnd = CheckNumberElement<ulong>(e.Element("number_of_packages_to_end"), 1000000, 10, 50000, "number_of_packages_to_end")
+                        numberOfPackagesToEnd = CheckNumberElement<ulong>(e.Element("number_of_packages_to_end"), 999999999, 1, 5000, "number_of_packages_to_end")
                         
                     }).ToList();
         }

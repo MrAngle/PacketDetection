@@ -75,7 +75,7 @@ namespace Menu_GUI
         private void DataInBoxPackagesToEnd_(object sender, TextChangedEventArgs e)
         {
             TextBox n = (TextBox)sender;
-            n.Text = Data_verification.Check(n.Text, 9999999999, 0, 10);
+            n.Text = Data_verification.Check(n.Text, 999999999, 0, 9);
         }
 
         // wybor konkretnej grupy bitow do zamiany | wylaczenie losowego wyboru bitow

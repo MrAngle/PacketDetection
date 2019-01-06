@@ -40,18 +40,18 @@
 
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Pakiety:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Liczba pakietow bez bledu" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Liczba wykrytych blednych pakietow :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Liczba niewykrytych blednych pakietow :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="20" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Liczba wykrytych bledow, przy poprawnych danych: " HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" FontSize="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Liczba transmisji - " HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" FontSize="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Liczba pakietów bez błedu:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Liczba odrzuconych pakietów:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Liczba niewykrytych błednych pakietow:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="20" Grid.ColumnSpan="2"  Grid.RowSpan="2"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Liczba odrzuconych pakietów przy poprawnych danych:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" FontSize="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Liczba przesłanych pakietów:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="500" FontSize="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
 
         <TextBlock Grid.Column="1" Grid.Row="7" Text="Ramki :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Liczba ramek bez bledu :  " HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Liczba wykrytych blednych ramek :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="10" Text="Liczba niewykrytych blednych ramek :" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="11" Text="Liczba wykrytych bledow, przy poprawnych danych:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="490" FontSize="20" Grid.RowSpan="2" Grid.ColumnSpan="2" />
-        <TextBlock Grid.Column="1" Grid.Row="12" Text="Liczba transmisji -" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Liczba ramek bez bledu:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Liczba odrzuconych ramek:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="Liczba niewykrytych błednych ramek:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20"/>
+        <TextBlock Grid.Column="1" Grid.Row="11" Text="Liczba odrzuconych ramek przy poprawnych danych:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="490" FontSize="20" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+        <TextBlock Grid.Column="1" Grid.Row="12" Text="Liczba przesłanych ramek:" HorizontalAlignment="Left" Height="55" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="20" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
         <TextBox x:Name="_PnoError" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="355" FontSize="18"/>
         <TextBox x:Name="_PDetected" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="355" FontSize="18"/>
