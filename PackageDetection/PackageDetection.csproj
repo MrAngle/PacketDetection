@@ -61,7 +61,7 @@
     <Compile Include="ConfigurationModule\TransmissionDataClass\Data\RandomCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\Data\SineCollisionData.cs" />
     <Compile Include="ConfigurationModule\TransmissionDataClass\TransmissionData.cs" />
-    <Compile Include="ControlType\CheckSumControl.cs" />
+    <Compile Include="ControlType\ByteSumControl.cs" />
     <Compile Include="ControlType\CRCControl.cs" />
     <Compile Include="ControlType\Enum.cs" />
     <Compile Include="Menu_GUI\Data_verification.cs" />
@@ -161,7 +161,9 @@
     <Folder Include="ResultsTxt\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="XMLFiles\transmissions.xml" />
+    <Resource Include="XMLFiles\transmissions.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

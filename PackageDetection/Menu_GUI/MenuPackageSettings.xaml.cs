@@ -41,7 +41,7 @@ namespace Menu_GUI
             if (_CRC.IsChecked == true)
                 contType = new CRCControl();
             else if (_CheckSum.IsChecked == true)
-                contType = new CheckSumControl();
+                contType = new ByteSumControl();
             else 
                 contType = new ParityBitControl();
 
@@ -49,7 +49,7 @@ namespace Menu_GUI
             int intLvl = toInt(_InterferenceLVL.Text);
             int sizeOfFra = toInt(_BitsInFrame.Text) * 8;
             int numFraInPac = toInt(_FramesInPackage.Text);
-            int sizeOfControl = toInt(_BitsControlPart.Text) * 8;
+            int sizeOfControl = toInt(_BitsControlPart.Text);
             ulong numberOfPackageToEnd = Convert.ToUInt64(_PackageToEnd.Text);
 
             Console.WriteLine("sizeOfFra : " + sizeOfFra);
@@ -129,7 +129,7 @@ namespace Menu_GUI
         //    if (_CRC.IsChecked == true)
         //        contType = new CRCControl();
         //    else if (_CheckSum.IsChecked == true)
-        //        contType = new CheckSumControl();
+        //        contType = new ByteSumControl();
         //    else if (_ParityBit.IsChecked == true)
         //        contType = new ParityBitControl();
 
@@ -172,7 +172,7 @@ namespace Menu_GUI
             controlName = controlName.ToLower();
             switch (controlName)
             {
-                case (CheckSumControl.NAME):
+                case (ByteSumControl.NAME):
                     SetCheckSum_();
                     break;
                 case (ParityBitControl.NAME):

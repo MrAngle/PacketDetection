@@ -66,7 +66,8 @@ namespace Projekt_Kolko
             }
 
 
-            double collision = Math.Abs(arg_a - ((double)interference_level / 10000) * arg_a);
+            //double collision = Math.Abs(arg_a - ((double)interference_level / 1000) * arg_a);
+            double collision = Math.Abs(arg_a - ((double)interference_level / 1000) * arg_a);
             for (int i = 0; i < nFrame.GetInformationPart().Count; i++, x += x_step)
             {
                 if (Math.Abs(Function(x)) > collision) // dla wartosci 
@@ -103,6 +104,7 @@ namespace Projekt_Kolko
                 DoCollision(item, interference_level);
             }
             DoCollisionForControlPart(nPackage.GetControlPart(), interference_level);
+            this.x = x_start;
 
         }
         private void DoCollisionForControlPart(ControlElements ce, int interference_level)

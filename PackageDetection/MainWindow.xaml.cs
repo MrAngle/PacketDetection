@@ -30,9 +30,17 @@ namespace PackageDetection
 
     public partial class MainWindow : Window
     {
-        //private MenuBitsCollision bits_Collision;
-        //private MenuSineCollision sine_Collision;
-        //private MenuRandomCollision random_Collision;
+        //Spytać o poprawność programu
+        //Ustalenie detekcji z poziomu ramki
+        //Wprowadzenie zmian z suma bajtów
+        //Zmiana z rozmiarem ramk i części kontrolnej
+        //Możliwe określenie liczby przetworzonych pakietów z poziomu GUI
+        //Czy usunąc "wykrycie błędu dla poprawnych danych"
+        //Kopiowanie tekstu użytego przeze mnie
+        //Liczba zdjęć
+        //Puszczenie badania
+        //Wysłanie dokumentacji - czy na mail
+        //Źródło screenów programów
 
         //MenuHandler menuHandler;
         //private static IMenuCollision menuCollision;

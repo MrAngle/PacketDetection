@@ -28,6 +28,8 @@ namespace Projekt_Kolko
         //bool setConfigurationByFile = false;
         string fileName = "test";
 
+        bool errorInFrame = false;
+
         ResultsStorage ResultsS = new ResultsStorage(); // przechowuje wyniki
         ResultsWindow RWindow;
 
@@ -91,6 +93,7 @@ namespace Projekt_Kolko
             ClearResults();
             for (ulong i = 0; i < _number_of_transsmision; i++)
             {
+                this.errorInFrame = false;
                 Package pak = new Package();
                 pak.GenerateFrameList(numbers_of_frame_in_package, size_of_frame, control_type, size_control_part);
                 Collision_type.DoCollision(pak, this.interference_level);
@@ -98,7 +101,7 @@ namespace Projekt_Kolko
                 {
                     ResultsSelectorFrame(item.CheckFrame());
                 }
-                if (frame_results[(int)Data.Detected] > 0)
+                if (this.errorInFrame == true)
                     ResultsSelectorPackage((byte)Data.Detected);
                 else
                     ResultsSelectorPackage(pak.CheckPackage());
@@ -158,7 +161,7 @@ namespace Projekt_Kolko
             Console.WriteLine("pakieto do konca "  + numberOfPackageToEnd);
 
             MessageBuilder.AddMainTitleMessage("START TRANSMISSIONS");
-            while (numberOfPackageToEnd >= ResultsS.P_results[(int)Data.number_of_transmission] && Active != false)
+            while (Active != false && numberOfPackageToEnd >= ResultsS.P_results[(int)Data.number_of_transmission])
                 this.Normal();
 
             AddResultInfoToMessageBuilder();
@@ -208,6 +211,7 @@ namespace Projekt_Kolko
                     break;
                 case 1:
                     results[(int)Data.Detected]++;
+                    this.errorInFrame = true;
                     break;
                 case 2:
                     results[(int)Data.unDetected]++;

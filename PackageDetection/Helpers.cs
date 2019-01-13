@@ -140,8 +140,8 @@ namespace Projekt_Kolko
             controlName = controlName.ToLower();
             switch (controlName)
             {
-                case (CheckSumControl.NAME):
-                    return new CheckSumControl();
+                case (ByteSumControl.NAME):
+                    return new ByteSumControl();
                 case (ParityBitControl.NAME):
                     return new ParityBitControl();
                 case (CRCControl.NAME):

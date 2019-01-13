@@ -88,9 +88,9 @@ namespace PackageDetection.ConfigurationModule
                     {
                         name = "_" + CheckNumberElement<int>(e.Element("id"), 99999, 0, 0, "id") + "_" + CheckName(e.Element("transmission_name"), "transmission_name") + "_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss", CultureInfo.InvariantCulture),
                         interferenceLevel = CheckNumberElement<int>(e.Element("interference_level"), 10000, 0, 50, "interference_level"),
-                        sizeOfFrame = CheckNumberElement<int>(e.Element("size_of_frame"), 1024, 4, 32, "size_of_frame"),
-                        numbersOfFrameInPackage = CheckNumberElement<int>(e.Element("numbers_of_frames_in_package"), 1024, 4, 32, "numbers_of_frames_in_package"),
-                        numberOfTranssmision = CheckNumberElement<ulong>(e.Element("number_of_transsmisions"), 1024, 1, 32, "number_of_transsmisions"),
+                        sizeOfFrame = CheckNumberElement<int>(e.Element("size_of_frame"), 1024, 1, 32, "size_of_frame"),
+                        numbersOfFrameInPackage = CheckNumberElement<int>(e.Element("numbers_of_frames_in_package"), 1024, 1, 32, "numbers_of_frames_in_package"),
+                        numberOfTranssmision = CheckNumberElement<ulong>(e.Element("number_of_transsmisions"), 10000, 1, 32, "number_of_transsmisions"),
                         sizeControlPart = CheckNumberElement<int>(e.Element("size_control_part"), 256, 1, 8, "size_control_part"),
                         controlType = CheckControl(e.Element("control_type"), "control_type"),
                         collisionType = this.GetCollisionType(e.Element("collisionType")),
@@ -201,18 +201,18 @@ namespace PackageDetection.ConfigurationModule
                 try
                 {
                     string tempValue = reader.Value.ToLower();
-                    if (tempValue.Equals(CheckSumControl.NAME) || tempValue.Equals(ParityBitControl.NAME) || tempValue.Equals(CRCControl.NAME))
+                    if (tempValue.Equals(ByteSumControl.NAME) || tempValue.Equals(ParityBitControl.NAME) || tempValue.Equals(CRCControl.NAME))
                         returnValue = tempValue;
                     else
                     {
-                        MessageBuilder.AddErrorMessage(reader.Name + " - the set control type (" + reader.Value + ") doesnt exist ( available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                        MessageBuilder.AddErrorMessage(reader.Name + " - the set control type (" + reader.Value + ") doesnt exist ( available values: " + ByteSumControl.NAME + ", " + ParityBitControl.NAME +
                             ", " + CRCControl.NAME + ").");
                         isCorrect = false;
                     }
                 }
                 catch (FormatException)
                 {
-                    MessageBuilder.AddErrorMessage(reader.Name + " - Wrong value(" + reader.Value + "). Available values: " + CheckSumControl.NAME + ", " + ParityBitControl.NAME +
+                    MessageBuilder.AddErrorMessage(reader.Name + " - Wrong value(" + reader.Value + "). Available values: " + ByteSumControl.NAME + ", " + ParityBitControl.NAME +
                             ", " + CRCControl.NAME + ").");
                     isCorrect = false;
                 }

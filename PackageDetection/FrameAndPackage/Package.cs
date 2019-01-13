@@ -98,13 +98,12 @@ namespace Projekt_Kolko
             DeleteFrames();
             for (int i = 0; i < numberOfFrames; i++)
             {
+
                 AddFrame(new Frame.Builder().RandomFrame(frameSize).SetControlType(_controlType, sizeOfControlPart).Create());
+
             }
             this.SetControlType(_controlType);
             this.SetControlPartByType(sizeOfControlPart);
-
-
-
         }
 
         /// <summary>

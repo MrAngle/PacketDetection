@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_Kolko
 {
-    public class CheckSumControl : IControl
+    public class ByteSumControl : IControl
     {
         public const string NAME = "check_sum";
         

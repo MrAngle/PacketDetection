@@ -39,8 +39,8 @@
         <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bajtów w ramce :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba ramek w pakiecie :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba transmisji :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
-        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bajtów części kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
-        <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba pakietów do zakończenia :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba bitów części kontrolnej :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
+        <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="Liczba pakietów do obliczenia :" Height="31" Margin="0,0,0,0" Grid.RowSpan="3" Width="200"/>
         <TextBlock Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  FontSize="13" Text="CRC/Bit Parzystosci/Suma Bajtów :" Height="31" Margin="0,0,0,0" Grid.RowSpan="2" Width="220"/>
 
 

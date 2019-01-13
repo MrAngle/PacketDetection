@@ -56,46 +56,314 @@
     </collisionType>
   </transmission>
   -->
+
   <transmission>
-    <transmission_name>TRANSMISSION_5000Packages_bits_collision</transmission_name>
+    <transmission_name>1TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
     <id>0</id>
-    <interference_level>12</interference_level>
-    <size_of_frame>32</size_of_frame>
-    <numbers_of_frames_in_package>123 12</numbers_of_frames_in_package>
-    <number_of_transsmisions>32</number_of_transsmisions>
-    <size_control_part>12</size_control_part>
-    <control_type>check_suM</control_type>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>check_sum</control_type>
     <collisionType>
-      <name>bits_collision</name>
-      <_firstindex>23</_firstindex>
-      <_firstframe>12</_firstframe>
-      <_israndom>0</_israndom>
+      <name>Random_collision</name>
     </collisionType>
-    <number_of_packages_to_end>50</number_of_packages_to_end>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Bit_Parzystosci</transmission_name>
+    <id>1</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_CRC</transmission_name>
+    <id>2</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>crc</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+  
+  
+  
+  
+
+  
+  <transmission>
+    <transmission_name>2TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>3</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>4</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>4</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>4</size_control_part>
+    <control_type>check_sum</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>5</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>4</size_control_part>
+    <control_type>crc</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  
+  
+  
+  
+  
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>6</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>4</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>check_sum</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>7</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>4</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>8</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>4</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>crc</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
   </transmission>
 
 
 
+
+
+
+
+
+
+
   <transmission>
-    <transmission_name>TRANSMISSION_5000Packages_bits_collision</transmission_name>
-    <id>1</id>
-    <interference_level>257</interference_level>
-    <size_of_frame>32</size_of_frame>
-    <numbers_of_frames_in_package>12</numbers_of_frames_in_package>
-    <number_of_transsmisions>32</number_of_transsmisions>
-    <size_control_part>2</size_control_part>
-    <control_type>check_suM</control_type>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>9</id>
+    <interference_level>4</interference_level>
+    <size_of_frame>16</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
     <collisionType>
       <name>bits_collision</name>
       <_firstindex>0</_firstindex>
       <_firstframe>0</_firstframe>
       <_israndom>0</_israndom>
     </collisionType>
+    <number_of_packages_to_end>500000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>10</id>
+    <interference_level>5</interference_level>
+    <size_of_frame>16</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>bits_collision</name>
+      <_firstindex>0</_firstindex>
+      <_firstframe>0</_firstframe>
+      <_israndom>0</_israndom>
+    </collisionType>
+    <number_of_packages_to_end>500000</number_of_packages_to_end>
+  </transmission>
+
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>11</id>
+    <interference_level>4</interference_level>
+    <size_of_frame>16</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>check_sum</control_type>
+    <collisionType>
+      <name>bits_collision</name>
+      <_firstindex>0</_firstindex>
+      <_firstframe>0</_firstframe>
+      <_israndom>0</_israndom>
+    </collisionType>
+    <number_of_packages_to_end>500000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>12</id>
+    <interference_level>7</interference_level>
+    <size_of_frame>16</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>check_sum</control_type>
+    <collisionType>
+      <name>bits_collision</name>
+      <_firstindex>0</_firstindex>
+      <_firstframe>0</_firstframe>
+      <_israndom>0</_israndom>
+    </collisionType>
+    <number_of_packages_to_end>500000</number_of_packages_to_end>
+  </transmission>
+
+
+
+
+
+
+
+
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Suma_Bajtów</transmission_name>
+    <id>0</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>check_sum</control_type>
+    <collisionType>
+      <name>sine_collision</name>
+      <_XStart>0</_XStart>
+      <_XEnd>100</_XEnd>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_Bit_Parzystosci</transmission_name>
+    <id>1</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>sine_collision</name>
+      <_XStart>0</_XStart>
+      <_XEnd>100</_XEnd>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+  <transmission>
+    <transmission_name>TRANSMISSION_10000000Packages_Random_collision_CRC</transmission_name>
+    <id>2</id>
+    <interference_level>555</interference_level>
+    <size_of_frame>4</size_of_frame>
+    <numbers_of_frames_in_package>16</numbers_of_frames_in_package>
+    <number_of_transsmisions>10000</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>crc</control_type>
+    <collisionType>
+      <name>sine_collision</name>
+      <_XStart>0</_XStart>
+      <_XEnd>100</_XEnd>
+    </collisionType>
+    <number_of_packages_to_end>5000000</number_of_packages_to_end>
+  </transmission>
+
+
+
+  <!--<transmission>
+    <transmission_name>TRANSMISSION_2000Packages_bits_collision</transmission_name>
+    <id>1</id>
+    <interference_level>400</interference_level>
+    <size_of_frame>123 12</size_of_frame>
+    <numbers_of_frames_in_package>8</numbers_of_frames_in_package>
+    <number_of_transsmisions>32</number_of_transsmisions>
+    <size_control_part>8</size_control_part>
+    <control_type>parity_bit</control_type>
+    <collisionType>
+      <name>Random_collision</name>
+    </collisionType>
     <number_of_packages_to_end>20000</number_of_packages_to_end>
   </transmission>
   
   <transmission>
-    <transmission_name>TRANSMISSION_5000Packages_bits_collision</transmission_name>
+    <transmission_name>TRANSMISSION_20000Packages_bits_collision</transmission_name>
     <id>2</id>
     <interference_level>51</interference_level>
     <size_of_frame>32</size_of_frame>
@@ -235,7 +503,7 @@
       <name>Random_collision</name>
     </collisionType>
   <number_of_packages_to_end>10000</number_of_packages_to_end>
-  </transmission>
+  </transmission>-->
   
   
   <!--

@@ -54,18 +54,11 @@ namespace Projekt_Kolko
         {
             for (int i = 0; i < information_part.Count - size; i++)
             {
-                if(information_part[i] == 1) // OPERACJA XOR ( algorytm dzialania CRC )
+                if(information_part[i] == 1) // Przechodzi do klejnego bitu, jeśli aktualny jest równy 0
                 {
                     for (int j = 0; j < CRC_divider.Count; j++)
                     {
-                        if(information_part[i+j] == CRC_divider[j]) // OPERACJA XOR
-                        {
-                            information_part[i + j] = 0;
-                        }
-                        else
-                        {
-                            information_part[i + j] = 1;
-                        }
+                        information_part[i + j] = Convert.ToByte(information_part[i + j] != CRC_divider[j]); // OPERACJA XOR
                     }
                 }
             }
