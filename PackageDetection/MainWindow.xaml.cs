@@ -30,17 +30,7 @@ namespace PackageDetection
 
     public partial class MainWindow : Window
     {
-        //Spytać o poprawność programu
-        //Ustalenie detekcji z poziomu ramki
-        //Wprowadzenie zmian z suma bajtów
-        //Zmiana z rozmiarem ramk i części kontrolnej
-        //Możliwe określenie liczby przetworzonych pakietów z poziomu GUI
-        //Czy usunąc "wykrycie błędu dla poprawnych danych"
-        //Kopiowanie tekstu użytego przeze mnie
-        //Liczba zdjęć
-        //Puszczenie badania
-        //Wysłanie dokumentacji - czy na mail
-        //Źródło screenów programów
+        private const string CONFIGURATION_FILE_PATH = @"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml";
 
         //MenuHandler menuHandler;
         //private static IMenuCollision menuCollision;
@@ -53,6 +43,7 @@ namespace PackageDetection
             InitializeComponent();
             MainWindow._menu_collision = menu_collision;
             MenuHandler.InitMenuHandler(ref Results_frame, ref menu_package);
+            InitializeNewCollisionPage(Helpers.RANDOM_COLLISION);
         }
 
         private void Click_bitsCollision(object sender, RoutedEventArgs e)
@@ -133,7 +124,7 @@ namespace PackageDetection
             _read_from_file_button.IsEnabled = false;
             //Console.WriteLine();
 
-            transmissionByFile = new TransmissionByFile(@"C:\Users\lipin\source\repos\PackageDetection\PackageDetection\XMLFiles\transmissions.xml");
+            transmissionByFile = new TransmissionByFile(CONFIGURATION_FILE_PATH);
             if (MenuHandler.NewTranssmision != null )
                 MenuHandler.NewTranssmision.Active = true;
             CreateTransmissions(sender, e);   

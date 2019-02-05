@@ -26,8 +26,10 @@ namespace PackageDetection.Menu_GUI
             set
             {
                 menuCollision = value;
-                if(value.GetType() == typeof(MenuBitsCollision))
+                if (value.GetType() == typeof(MenuBitsCollision))
                     PSettings._TextInterferenceLVL.Text = "Liczba bitów do przekłamania";
+                else if (value.GetType() == typeof(MenuRandomCollision))
+                    PSettings._TextInterferenceLVL.Text = "Szansa na przekłamanie(‰)";
                 else
                     PSettings._TextInterferenceLVL.Text = "Poziom zakłóceń";
             }
